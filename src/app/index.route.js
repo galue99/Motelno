@@ -17,6 +17,11 @@
         controller: 'MainController',
         controllerAs: 'main'
       })
+      .when('/createEvent', {
+        templateUrl: 'app/main/create.html',
+        controller: 'MainController',
+        controllerAs: 'main'
+      })
       .otherwise({
         redirectTo: '/'
       });
