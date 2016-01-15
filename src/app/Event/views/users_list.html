@@ -1,11 +1,11 @@
 <section class="content-header">
   <h1>
     Admin Motelno7
-    <small>{{title}}</small>
+    <small>{{mainUserList.title}}</small>
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">{{title}}</li>
+    <li class="active">{{mainUserList.title}}</li>
   </ol>
 </section>
 <section class="content">
@@ -20,7 +20,7 @@
     <div class="col-lg-12 col-xs-12">
       <!-- small box -->
       <div class="pull-right">
-        <button class="btn btn-block btn-primary btn-flat">Send Invitation</button>
+        <button class="btn btn-block btn-primary btn-flat"><i class="fa fa-envelope"></i> Send Invitation</button>
         <br>
       </div>
     </div><!-- ./col -->
@@ -33,7 +33,7 @@
       <div class="box box-primary">
         <div class="box-header">
           <i class="ion ion-clipboard"></i>
-          <h3 class="box-title">Users List</h3>
+          <h3 class="box-title">Users List Event No. {{mainUserList.param1}}</h3>
           <div class="box-tools pull-right">
             <a href="">Uncheck All</a>  |
             <a href="">Check All</a>

@@ -1,11 +1,11 @@
-<section class="content-header">
+<section class="content-header" >
   <h1>
     Admin Motelno7
-    <small>{{title}}</small>
+    <small>{{main.title}}</small>
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">{{title}}</li>
+    <li class="active">{{main.title}}</li>
   </ol>
 </section>
 <section class="content">
@@ -48,64 +48,16 @@
                 <th>Confirmed</th>
                 <th>Details</th>
               </tr>
-              <tr>
-                <td>1.</td>
-                <td>Update software</td>
+              <tr data-ng-repeat="event in main.events">
+                <td>{{ event.id }}.</td>
+                <td>{{event.name}}</td>
                 <td>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  <p>{{event.description}}</p>
                 </td>
                 <td><span class="badge bg-red">150</span></td>
                 <td><span class="badge bg-green">55</span></td>
                 <td>
-                  <button class="btn btn-block btn-primary btn-flat">Details</button>
-                </td>
-              </tr>
-              <tr>
-                <td>2.</td>
-                <td>Clean database</td>
-                <td>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </td>
-                <td><span class="badge bg-red">150</span></td>
-                <td><span class="badge bg-green">55</span></td>
-                <td>
-                  <button class="btn btn-block btn-primary btn-flat">Details</button>
-                </td>
-              </tr>
-              <tr>
-                <td>3.</td>
-                <td>Cron job running</td>
-                <td>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </td>
-                <td><span class="badge bg-red">150</span></td>
-                <td><span class="badge bg-green">55</span></td>
-                <td>
-                  <a class="btn btn-block btn-primary btn-flat" ng-href="/details/1234">Details</a>
-                </td>
-              </tr>
-              <tr>
-                <td>4.</td>
-                <td>Fix and squish bugs</td>
-                <td>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </td>
-                <td><span class="badge bg-red">150</span></td>
-                <td><span class="badge bg-green">55</span></td>
-                <td>
-                  <button class="btn btn-block btn-primary btn-flat">Details</button>
-                </td>
-              </tr>
-              <tr>
-                <td>5.</td>
-                <td>Fix and squish bugs</td>
-                <td>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </td>
-                <td><span class="badge bg-red">150</span></td>
-                <td><span class="badge bg-green">55</span></td>
-                <td>
-                  <button class="btn btn-block btn-primary btn-flat">Details</button>
+                  <a href="/event/details/{{event.id}}" class="btn btn-block btn-primary btn-flat">Details</a>
                 </td>
               </tr>
               </tbody></table>

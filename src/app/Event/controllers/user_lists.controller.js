@@ -6,26 +6,19 @@
 
   angular
     .module('motelNo')
-    .controller('UserListController', UserListController);
+    .controller('UserListController', function(EventService, $routeParams){
 
-  /** @ngInject */
-  function UserListController($timeout, toastr, $scope, $log, $http, EventService) {
-    /*var postEvents = $http.get('http://192.168.0.100:8001/Event/')
-     postEvents.then(function(result) {
-     $scope.results = result.data;
-     $log.info($scope.results);
+      var vm = this;
+      vm.title = "User List";
+      vm.param1 = $routeParams.id;
 
-     });*/
-    $scope.title = 'Users List';
-    var result = {descriptions: "Nestor Nestor",
-      isActivate: false,
-      max_partipants: 300,
-      name: "Nestor" };
-    //$scope.data = {name:'Prueba',description:'Prueba Prueba Prueba',max_partipants:200,isActivate:false};
-    //EventService.save(result);
+      /* Services for obtein all Events */
 
+      EventService.UserEvents.get({id: vm.param1},function(data) {
+        vm.events = data.results;
+      });
 
+    });
 
-  }
 
 })();

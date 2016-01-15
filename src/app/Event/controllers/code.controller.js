@@ -6,26 +6,15 @@
 
   angular
     .module('motelNo')
-    .controller('CodeController', CodeController);
+    .controller('CodeController', function($routeParams){
 
-  /** @ngInject */
-  function CodeController($timeout, toastr, $scope, $log, $http, EventService) {
-    /*var postEvents = $http.get('http://192.168.0.100:8001/Event/')
-     postEvents.then(function(result) {
-     $scope.results = result.data;
-     $log.info($scope.results);
+      var vm = this;
 
-     });*/
-    $scope.title = 'Generate Code';
-    var result = {descriptions: "Nestor Nestor",
-      isActivate: false,
-      max_partipants: 300,
-      name: "Nestor" };
-    //$scope.data = {name:'Prueba',description:'Prueba Prueba Prueba',max_partipants:200,isActivate:false};
-    //EventService.save(result);
+      vm.param1 = $routeParams.id;
+
+      vm.title = 'Generate Code';
 
 
-
-  }
+    });
 
 })();

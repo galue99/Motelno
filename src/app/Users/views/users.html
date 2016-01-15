@@ -1,11 +1,11 @@
 <section class="content-header">
   <h1>
     Admin Motelno7
-    <small>{{title}}</small>
+    <small>{{mainUser.title}}</small>
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">{{title}}</li>
+    <li class="active">{{mainUser.title}}</li>
   </ol>
 </section>
 <section class="content">
@@ -19,11 +19,52 @@
   <div class="row">
     <div class="col-lg-12 col-xs-12">
       <!-- small box -->
+      <div class="pull-left">
+        <button class="btn btn-block btn-primary btn-flat" data-ng-click="mainUser.toogleUserForm()"><i class="fa fa-user-plus"></i> Add User</button>
+      </div>
       <div class="pull-right">
-        <button class="btn btn-block btn-primary btn-flat"><i class="fa fa-user-plus"></i> Add User</button>
-        <br>
+        <p><b>Date and Time: {{ mainUser.showDate() | date : 'MM/dd/yyyy'}} {{ mainUser.showDate() | date : 'h:mma'}}</b></p>
       </div>
     </div><!-- ./col -->
+    <div class="row" data-ng-show="mainUser.userForm">
+      <section class="col-lg-12 connectedSortable">
+        <div class="col-lg-12">
+          <div class="box box-primary">
+            <div class="box-header">
+              <i class="fa fa-user-plus"></i>
+              <h3 class="box-title">Create User</h3>
+              <div class="box-tools pull-right">
+              </div>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+              <form role="form">
+                <!-- text input -->
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <label>Email:</label>
+                      <input type="text" class="form-control" placeholder="Email:">
+                    </div>
+                    <div class="col-xs-12">
+                      <label>Name:</label>
+                      <input type="text" class="form-control" placeholder="Name">
+                    </div>
+                    <br><br>
+                    <div class="col-xs-12">
+                      <br><br>
+                      <div class="pull-right">
+                        <input type="submit" value="Save" class="btn btn-danger">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div><!-- /.box-body -->
+          </div>
+        </div>
+      </section>
+    </div>
+
   </div><!-- /.row -->
   <!-- Main row -->
   <div class="row">
@@ -46,59 +87,15 @@
                 <th>Name</th>
                 <th width="15%">Actions</th>
               </tr>
-              <tr>
-                <td>1.</td>
-                <td>Update software</td>
+              <tr data-ng-repeat="participant in mainUser.participants">
+                <td>{{participant.id}}.</td>
+                <td>{{participant.email}}</td>
                 <td>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  <p>{{participant.name}}.</p>
                 </td>
                 <td>
                   <a href="">Edit</a>  |
-                  <a href="">Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <td>2.</td>
-                <td>Clean database</td>
-                <td>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </td>
-                <td>
-                  <a href="">Edit</a>  |
-                  <a href="">Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <td>3.</td>
-                <td>Cron job running</td>
-                <td>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </td>
-                <td>
-                  <a href="">Edit</a>  |
-                  <a href="">Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <td>4.</td>
-                <td>Fix and squish bugs</td>
-                <td>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </td>
-                <td>
-                  <a href="">Edit</a>  |
-                  <a href="">Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <td>5.</td>
-                <td>Fix and squish bugs</td>
-                <td>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </td>
-                <td>
-                  <a href="">Edit</a>  |
-                  <a href="">Delete</a>
+                  <a href="" data-ng-click="mainUser.deleteUser(participant.id)">Delete</a>
                 </td>
               </tr>
               </tbody></table>

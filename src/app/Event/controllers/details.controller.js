@@ -6,19 +6,26 @@
 
   angular
     .module('motelNo')
-    .controller('DetailController', DetailController);
+    .controller('DetailController', function($scope, $routeParams, $log, EventService){
 
-  /** @ngInject */
-  function DetailController($timeout, toastr, $scope, $log, $http, EventService, $routeParams) {
+      var vm = this;
+      $scope.labels = ["Users Confirmed", "Users Pendent"];
+      $scope.data = [300, 500];
 
-    $scope.labels = ["Users Confirmed", "Users Pendent"];
-    $scope.data = [300, 500];
+      vm.param1 = $routeParams.id;
 
-    var param1 = $routeParams.id;
+      vm.title = 'Details';
 
-    console.log(param1);
-    $scope.title = 'Details';
+      EventService.Event.get({id:vm.param1},function(data) {
+        vm.details = (data);
+        $log.info(data);
+      });
 
-  }
+      vm.showDate = function () {
+        vm.date = 0;
+        vm.date = Date.now();
+        return vm.date;
+      };
 
+    });
 })();

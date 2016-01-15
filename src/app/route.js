@@ -18,7 +18,7 @@
         controller: 'MainController',
         controllerAs: 'main'
       })
-      .when('/details/:id', {
+      .when('/event/details/:id', {
         templateUrl: 'app/Event/views/details.html',
         controller: 'DetailController',
         controllerAs: 'detailEvent'
@@ -28,7 +28,7 @@
         controller: 'CreateController',
         controllerAs: 'createEvent'
       })
-      .when('/user_list/', {
+      .when('/event/user_list/:id', {
         templateUrl: 'app/Event/views/users_list.html',
         controller: 'UserListController',
         controllerAs: 'mainUserList'
@@ -38,7 +38,7 @@
         controller: 'EditController',
         controllerAs: 'editEvent'
       })
-      .when('/generate_code/:id', {
+      .when('/event/generate_code/:id', {
         templateUrl: 'app/Event/views/generate_code.html',
         controller: 'CodeController',
         controllerAs: 'geneCode'
@@ -53,7 +53,7 @@
         controller: 'CreateUserController',
         controllerAs: 'createUser'
       })
-      .when('/editUsers/:id', {
+      .when('/user/editUsers/:id', {
         templateUrl: 'app/Users/views/edit.html',
         controller: 'EditUserController',
         controllerAs: 'editUser'

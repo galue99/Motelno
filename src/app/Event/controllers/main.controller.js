@@ -3,26 +3,20 @@
 
   angular
     .module('motelNo')
-    .controller('MainController', MainController);
+    .controller('MainController', function(EventService, $log){
 
-  /** @ngInject */
-  function MainController($timeout, $scope, $log, $http, EventService) {
-    /*var postEvents = $http.get('http://192.168.0.100:8001/Event/')
-    postEvents.then(function(result) {
-      $scope.results = result.data;
-      $log.info($scope.results);
+      var vm = this;
+      vm.title = "Events";
 
-    });*/
-    $scope.title = 'Events';
-    var result = {descriptions: "Nestor Nestor",
-                  isActivate: false,
-                  max_partipants: 300,
-                  name: "Nestor" };
-    //$scope.data = {name:'Prueba',description:'Prueba Prueba Prueba',max_partipants:200,isActivate:false};
-    //EventService.save(result);
+      /* Services for obtein all Events */
 
+      EventService.Event.get({fileName: 'services.json'},function(data) {
+        vm.events = data.results;
+      });
 
+      /*EventService.get(function(data) {
+        $log.info(data);
+      });*/
 
-  }
-
+    })
 })();

@@ -6,26 +6,32 @@
 
   angular
     .module('motelNo')
-    .controller('UserController', UserController);
+    .controller('UserController', function(EventService, $log){
 
-  /** @ngInject */
-  function UserController($timeout, toastr, $scope, $log, $http, EventService) {
-    /*var postEvents = $http.get('http://192.168.0.100:8001/Event/')
-     postEvents.then(function(result) {
-     $scope.results = result.data;
-     $log.info($scope.results);
+      var vm = this;
+      vm.title = "Users"
+      vm.userForm = false;
 
-     });*/
-    $scope.title = 'Users List';
-    var result = {descriptions: "Nestor Nestor",
-      isActivate: false,
-      max_partipants: 300,
-      name: "Nestor" };
-    //$scope.data = {name:'Prueba',description:'Prueba Prueba Prueba',max_partipants:200,isActivate:false};
-    //EventService.save(result);
+      /* Services for obtein all Events */
 
+      EventService.Participant.get({fileName: 'services.json'},function(data) {
+        vm.participants = data.results;
+      });
 
+      vm.deleteUser = function(id){
+        $log.info(id);
+      }
 
-  }
+      vm.toogleUserForm = function () {
+        vm.userForm = !vm.userForm;
+      };
+
+      vm.showDate = function () {
+        vm.date = 0;
+        vm.date = Date.now();
+        return vm.date;
+      };
+
+    });
 
 })();
