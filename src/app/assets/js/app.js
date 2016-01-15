@@ -15,7 +15,6 @@
 if (typeof jQuery === "undefined") {
   throw new Error("AdminLTE requires jQuery");
 }
-$("[name='my-checkbox']").bootstrapSwitch();
 /* AdminLTE
  *
  * @type Object
