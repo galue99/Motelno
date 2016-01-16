@@ -31,8 +31,24 @@
   <!-- Main row -->
   <div class="row">
     <!-- Left col -->
+    <section class="col-lg-12 connectedSortable" data-ng-show="mainUser.result">
+      <div data-ng-if="mainUser.result" class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4>	<i class="icon fa fa-check"></i> Alert!</h4>
+        Success alert preview. This alert is dismissable.
+      </div>
+    </section>
+    <section class="col-lg-12 connectedSortable" data-ng-if="mainUser.results">
+      <div data-ng-if="!mainUser.result" class="alert alert-warning alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4>	<i class="icon fa fa-check"></i> Alert!</h4>
+        Success alert preview. This alert is dismissable.
+      </div>
+    </section>
+
     <section class="col-lg-12 connectedSortable" data-ng-show="mainUser.userForm">
       <!-- TO DO List -->
+
       <div class="box box-primary">
         <div class="box-header">
           <i class="fa fa-user-plus"></i>
@@ -40,30 +56,30 @@
           <div class="box-tools pull-right">
           </div>
         </div><!-- /.box-header -->
-        <form name="userForm" ng-submit="mainUser.submitForm(userForm.$valid)" novalidate>
+        <form name="userForm" novalidate>
           <div class="box-body">
-              <!-- text input -->
+            <!-- text input -->
             <div class="row">
               <div>
                 <div class="form-group"
-                     ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine && submitted }">
+                     ng-class="{ 'has-error' : userForm.email.$invalid && !mainUser.userForm.email.$pristine && submitted }">
                   <div class="col-xs-6">
                     <label>Email:</label>
                     <input type="text" data-ng-model="mainUser.user.email"
                            name="email" class="form-control" placeholder="Email:" required>
-                    <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">You name is required.</p>
+                    <p ng-show="userForm.email.$error.required && submitted" class="help-block">You email is required.</p>
 
                   </div>
                 </div>
               </div>
               <div>
                 <div class="form-group"
-                     ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine && submitted }">
+                     ng-class="{ 'has-error' : userForm.name.$invalid && !mainUser.userForm.name.$pristine && submitted  }">
                   <div class="col-xs-6">
                     <label>Name:</label>
                     <input type="text" data-ng-model="mainUser.user.name"
                            name="name"  class="form-control" placeholder="Name" required>
-                    <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
+                    <p ng-show="userForm.email.$error.required && submitted" class="help-block">You name is required.</p>
                   </div>
                 </div>
               </div>
@@ -72,7 +88,7 @@
           <div class="box-footer clearfix no-border">
             <div class="pull-right">
               <button data-ng-click="mainUser.toogleUserForm()" class="btn btn-danger">Cancel</button>
-              <button type="submit" class="btn btn-success">Submit</button>
+              <a type="submit" role="button" class="btn btn-success" ng-click="mainUser.submitForm(userForm)">Submit</a>
             </div>
           </div>
         </form>
@@ -93,13 +109,14 @@
         <div class="box-body">
           <div class="table-responsive">
             <table class="table">
-              <tbody><tr>
+              <tbody>
+              <tr>
                 <th style="width: 10px">#</th>
                 <th>Email</th>
                 <th>Name</th>
                 <th width="15%">Actions</th>
               </tr>
-              <tr data-ng-repeat="participant in mainUser.participants">
+              <tr data-ng-repeat="participant in mainUser.participants" current-page="currentPage" pagination-id="incidentClosedPagination">
                 <td>{{participant.id}}.</td>
                 <td>{{participant.email}}</td>
                 <td>
@@ -110,7 +127,8 @@
                   <a href="" data-ng-click="mainUser.deleteUser(participant.id)">Delete</a>
                 </td>
               </tr>
-              </tbody></table>
+              </tbody>
+            </table>
           </div>
         </div><!-- /.box-body -->
         <div class="box-footer clearfix no-border">
@@ -119,13 +137,7 @@
       </div><!-- /.box -->
       <div class="col-lg-7 align-center">
         <div class="box-tools">
-          <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
-          </ul>
+          <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/bower_components/angular-utils-pagination/dirPagination.tpl.html" pagination-id="incidentClosedPagination"></dir-pagination-controls>
         </div>
       </div>
     </section><!-- /.Left col -->

@@ -6,6 +6,6 @@
     .module('motelNo')
     .constant('malarkey', malarkey)
     .constant('moment', moment)
-    .constant('base_url', 'http://localhost:8000/');
+    .constant('base_url', 'http://192.168.0.100:8001/');
 
 })();

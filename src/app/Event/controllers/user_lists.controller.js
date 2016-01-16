@@ -6,7 +6,7 @@
 
   angular
     .module('motelNo')
-    .controller('UserListController', function(EventService, $routeParams){
+    .controller('UserListController', function(EventService, $routeParams, $log){
 
       var vm = this;
       vm.title = "User List";
@@ -14,8 +14,9 @@
 
       /* Services for obtein all Events */
 
-      EventService.UserEvents.get({id: vm.param1},function(data) {
+      EventService.Participant.get({id: vm.param1},function(data) {
         vm.events = data.results;
+        $log.info(data);
       });
 
     });

@@ -16,15 +16,28 @@
 
       vm.title = 'Details';
 
+
+
       EventService.Event.get({id:vm.param1},function(data) {
         vm.details = (data);
         $log.info(data);
+
+
       });
 
       vm.showDate = function () {
         vm.date = 0;
         vm.date = Date.now();
         return vm.date;
+      };
+
+
+      vm.submitForm = function (form) {
+        $scope.submitted = true;
+        $log.info(form);
+        if (form.$valid) {
+            $log.info('asdasd');
+        }
       };
 
     });
