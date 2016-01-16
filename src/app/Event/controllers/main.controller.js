@@ -12,6 +12,7 @@
 
       EventService.Event.get({fileName: 'services.json'},function(data) {
         vm.events = data.results;
+        $log.info(data);
       });
 
       /*EventService.get(function(data) {

@@ -32,6 +32,16 @@
         return vm.date;
       };
 
+      vm.submitForm = function (isValid) {
+        if (isValid) {
+          $log.info(vm.user);
+          EventService.Participant.save(vm.user,function(data) {
+
+          });
+
+        }
+      };
+
     });
 
 })();
