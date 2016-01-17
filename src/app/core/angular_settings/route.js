@@ -65,6 +65,8 @@
       })
       .otherwise({
         redirectTo: '/'
+        //$urlRouterProvider.otherwise('/login');
+
       });
   }
 

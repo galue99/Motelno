@@ -18,7 +18,8 @@
     "angular-chart.js": "~0.8.8",
     "bootstrap-switch":"~3.3.2",
     "fastclick": "~1.0.6",
-    "angular-momentjs": "~0.1.9"
+    "angular-momentjs": "~0.1.9",
+    "satellizer":"0.13.4"
 
   },
   "devDependencies": {
