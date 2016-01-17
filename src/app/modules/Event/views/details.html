@@ -1,0 +1,197 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Admin Motelno7
+      <small>{{detailEvent.title}}</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">{{detailEvent.title}}</li>
+    </ol>
+  </section>
+  <section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+      <div class="col-lg-12 col-xs-12">
+        <!-- small box -->
+      </div><!-- ./col -->
+    </div><!-- /.row -->
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+      <div class="col-lg-12 col-xs-12">
+        <!-- small box -->
+        <div class="pull-left">
+          <button class="btn btn-primary btn-flat" data-ng-click="detailEvent.toogleDetailForm()"><i class="fa fa-edit"></i> Edit Event</button>
+          <button class="btn btn-danger btn-flat" data-ng-click="detailEvent.toogleDeleteForm()"><i class="fa fa-remove"></i> Delete Event</button>
+          <br><br>
+        </div>
+        <div class="pull-right">
+          <p><b>Date and Time: {{ detailEvent.showDate() | date : 'dd/MM/yyyy'}} {{ detailEvent.showDate() | date : 'h:mma'}}</b></p>
+          <br><br>
+        </div>
+      </div><!-- ./col -->
+    </div><!-- /.row -->
+    <div class="row">
+      <section class="col-lg-12 connectedSortable" data-ng-show="detailEvent.detailDelete">
+        <div class="box box-primary">
+          <div class="box-header">
+            <i class="fa fa-user-times"></i>
+            <h3 class="box-title">Delete Event No. {{detailEvent.param1}}</h3>
+            <div class="box-tools pull-right">
+            </div>
+          </div><!-- /.box-header -->
+          <div class="box-body">
+            <!-- text input -->
+            <div class="row">
+              <div>
+                <div class="form-group"
+                     ng-class="{ 'has-error' : eventForm.name.$invalid && !main.eventForm.name.$pristine && submitted }">
+                  <div class="col-xs-12">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      Aliquam deserunt, doloremque ea, error illo ipsum, itaque laudantium magnam necessitatibus
+                      nihil officia perspiciatis possimus quibusdam quisquam vero. Aliquid consectetur et iure.</p>
+                  </div>
+                </div>
+              </div>
+            </div><!-- /.box-body -->
+            <div class="box-footer clearfix no-border">
+              <div class="text-center">
+                <button data-ng-click="cancelDelete()" class="btn btn-danger">Cancel</button>
+                <a type="submit" role="button" class="btn btn-success" ng-click="detailEvent.submitDeleteForm(eventForm)">Confirm</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+
+    <div class="row">
+      <div data-ng-if="detailEvent.result">
+        <alert-message element="detailEvent.result"></alert-message>
+      </div>
+      <section class="col-lg-12 connectedSortable" data-ng-show="detailEvent.detailForm">
+        <!-- TO DO List -->
+
+        <div class="box box-primary">
+          <div class="box-header">
+            <i class="fa fa-user-plus"></i>
+            <h3 class="box-title">Edit Event No. {{detailEvent.param1}}</h3>
+            <div class="box-tools pull-right">
+            </div>
+          </div><!-- /.box-header -->
+          <form name="eventForm" novalidate>
+            <div class="box-body">
+              <!-- text input -->
+              <div class="row">
+                <div>
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : eventForm.name.$invalid && !main.eventForm.name.$pristine && submitted }">
+                    <div class="col-xs-6">
+                      <label>Name:</label>
+                      <input type="text" data-ng-model="detailEvent.details.name"
+                             name="name" class="form-control" placeholder="Name:" required>
+                      <p ng-show="eventForm.name.$error.required && submitted" class="help-block">You name is required.</p>
+
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : eventForm.max_participant.$invalid && !main.eventForm.max_participant.$pristine && submitted  }">
+                    <div class="col-xs-6">
+                      <label>Number of Guests:</label>
+                      <input type="text" data-ng-model="detailEvent.details.max_participant"
+                             name="max_participant"  class="form-control" placeholder="Number of Guests:" required >
+
+                      <p ng-show="eventForm.max_participant.$error.required && submitted" class="help-block">You Number of Guests is required.</p>
+                    </div>
+                  </div>
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : eventForm.description.$invalid && !main.eventForm.description.$pristine && submitted  }">
+                    <div class="col-xs-12">
+                      <label>Description:</label>
+                    <textarea class="form-control" placeholder="Description:"
+                              data-ng-model="detailEvent.details.description" name="description" required>
+                                            </textarea>
+                      <p ng-show="eventForm.description.$error.required && submitted" class="help-block">You Description is required.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- /.box-body -->
+            <div class="box-footer clearfix no-border">
+              <div class="pull-right">
+                <button data-ng-click="detailEvent.toogleDetailForm()" class="btn btn-danger">Cancel</button>
+                <a type="submit" role="button" class="btn btn-success" ng-click="detailEvent.submitForm(eventForm)">Submit</a>
+              </div>
+            </div>
+          </form>
+        </div><!-- /.box -->
+      </section>
+    </div>
+    <!-- Main row -->
+    <div class="row">
+      <!-- Left col -->
+      <section class="col-lg-8 col-xs-8 connectedSortable">
+        <!-- TO DO List -->
+        <div class="box box-primary">
+          <div class="box-header">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Detail Event No. {{detailEvent.param1}}</h3>
+            <div class="box-tools pull-right">
+            </div>
+          </div><!-- /.box-header -->
+          <div class="box-body">
+            <p><b>Name:</b> {{detailEvent.details.name}}</p>
+            <p><b>Description:</b> {{detailEvent.details.description}}</p>
+            <p><b>Number of Guest:</b> <span class="badge bg-green">{{detailEvent.details.max_participant}}</span></p>
+            <p><b>Confirmed User:</b> <span class="badge bg-green">150</span></p>
+            <p><b>Pending User:</b> <span class="badge bg-red">55</span></p>
+            <p><b>Activated:</b>   <input type="checkbox" name="my-checkbox" checked data-size="mini" data-ng-value="false"></p>
+          </div><!-- /.box-body -->
+          <div class="box-footer clearfix no-border">
+            <div class="pull-right">
+              <a href="/event/user_list/{{detailEvent.param1}}" class="btn btn-info btn-flat"><i class="fa fa-users"></i> User List</a>
+              <a href="/event/generate_code/{{detailEvent.param1}}" class="btn btn-warning btn-flat"><i class="fa fa-cogs"></i> Generate Code</a>
+              <br><br>
+            </div>
+            <!-- <button class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button> -->
+          </div>
+        </div><!-- /.box -->
+      </section><!-- /.Left col -->
+      <section class="col-lg-4 col-xs-4 connectedSortable">
+        <!-- TO DO List -->
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Users</h3>
+          </div><!-- /.box-header -->
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="chart-responsive">
+                  <canvas id="doughnut" class="chart chart-doughnut"
+                          chart-data="data" chart-labels="labels">
+                  </canvas>
+                </div><!-- ./chart-responsive -->
+              </div><!-- /.col -->
+              <div class="col-md-12">
+                <ul class="chart-legend clearfix">
+                  <li><i class="fa fa-circle-o text-green"></i> Users Confirmed</li>
+                  <li><i class="fa fa-circle-o text-red"></i> Users Pending</li>
+                </ul>
+              </div><!-- /.col -->
+            </div><!-- /.row -->
+          </div><!-- /.box-body -->
+          <div class="box-footer no-padding">
+            <ul class="nav nav-pills nav-stacked">
+              <li><a href="#">Users Pending <span class="pull-right text-red"> 12%</span></a></li>
+              <li><a href="#">Users Confirmed <span class="pull-right text-green"> 4%</span></a></li>
+            </ul>
+          </div><!-- /.footer -->
+        </div><!-- /.box --><!-- /.box -->
+      </section><!-- /.Left col -->
+    </div><!-- /.row (main row) -->
+  </section>
+</div>

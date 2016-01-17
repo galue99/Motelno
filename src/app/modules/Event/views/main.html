@@ -1,0 +1,149 @@
+<div class="content-wrapper">
+  <section class="content-header" >
+    <h1>
+      Admin Motelno7
+      <small>{{main.title}}</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">{{main.title}}</li>
+    </ol>
+  </section>
+  <section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+      <div class="col-lg-12 col-xs-12">
+        <!-- small box -->
+      </div><!-- ./col -->
+    </div><!-- /.row -->
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+      <div class="col-lg-12 col-xs-12">
+        <!-- small box -->
+        <div class="pull-left">
+          <button class="btn btn-block btn-primary btn-flat" data-ng-click="main.toogleEventForm()"><i class="fa fa-user-plus"></i> Add Event</button>
+        </div>
+        <div class="pull-right">
+          <p><b>Date and Time: {{ main.showDate() | date : 'MM/dd/yyyy'}} {{ main.showDate() | date : 'h:mma'}}</b></p>
+        </div>
+        <br><br>
+      </div><!-- ./col -->
+    </div><!-- /.row -->
+    <!-- Main row -->
+    <div class="row">
+      <div data-ng-if="main.result">
+        <alert-message element="main.result"></alert-message>
+      </div>
+      <section class="col-lg-12 connectedSortable" data-ng-show="main.eventForm">
+        <!-- TO DO List -->
+        <div class="box box-primary">
+          <div class="box-header">
+            <i class="fa fa-user-plus"></i>
+            <h3 class="box-title">Create Event</h3>
+            <div class="box-tools pull-right">
+            </div>
+          </div><!-- /.box-header -->
+          <form name="eventForm" novalidate>
+            <div class="box-body">
+              <!-- text input -->
+              <div class="row">
+                <div>
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : eventForm.name.$invalid && !main.eventForm.name.$pristine && submitted }">
+                    <div class="col-xs-6">
+                      <label>Name:</label>
+                      <input type="text" data-ng-model="main.event.name"
+                             name="name" class="form-control" placeholder="Name:" required>
+                      <p ng-show="eventForm.name.$error.required && submitted" class="help-block">You name is required.</p>
+
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : eventForm.max_participant.$invalid && !main.eventForm.max_participant.$pristine && submitted  }">
+                    <div class="col-xs-6">
+                      <label>Number of Guests:</label>
+                      <input type="text" data-ng-model="main.event.max_participant"
+                             name="max_participant"  class="form-control" placeholder="Number of Guests:" required>
+
+                      <p ng-show="eventForm.max_participant.$error.required && submitted" class="help-block">You Number of Guests is required.</p>
+                    </div>
+                  </div>
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : eventForm.description.$invalid && !main.eventForm.description.$pristine && submitted  }">
+                    <div class="col-xs-12">
+                      <label>Description:</label>
+                    <textarea class="form-control" placeholder="Descripción:" id="description"
+                              data-ng-model="main.event.description" name="description" required>
+                                            </textarea>
+                      <p ng-show="eventForm.description.$error.required && submitted" class="help-block">You Description is required.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- /.box-body -->
+            <div class="box-footer clearfix no-border">
+              <div class="pull-right">
+                <a role="button" data-ng-click="main.cancel()" class="btn btn-danger">Cancel</a>
+                <a type="submit" role="button" class="btn btn-success" ng-click="main.submitForm(eventForm)">Submit</a>
+              </div>
+            </div>
+          </form>
+        </div><!-- /.box -->
+      </section><!-- /.Left col -->
+      <!-- Left col -->
+      <section class="col-lg-12 connectedSortable">
+        <!-- TO DO List -->
+        <div class="box box-primary">
+          <div class="box-header">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Events</h3>
+            <div class="box-tools pull-right">
+            </div>
+          </div><!-- /.box-header -->
+          <div class="box-body">
+            <div class="table-responsive">
+              <table class="table">
+                <tbody><tr>
+                  <th style="width: 10px">#</th>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Assistents</th>
+                  <th>Confirmed</th>
+                  <th>Details</th>
+                </tr>
+                <tr data-ng-repeat="event in main.events">
+                  <td>{{ event.id }}.</td>
+                  <td>{{event.name}}</td>
+                  <td>
+                    <p>{{event.description}}</p>
+                  </td>
+                  <td><span class="badge bg-red">150</span></td>
+                  <td><span class="badge bg-green">55</span></td>
+                  <td>
+                    <a href="/event/details/{{event.id}}" class="btn btn-block btn-primary btn-flat">Details</a>
+                  </td>
+                </tr>
+                </tbody></table>
+            </div>
+          </div><!-- /.box-body -->
+          <div class="box-footer clearfix no-border">
+            <!-- <button class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button> -->
+          </div>
+        </div><!-- /.box -->
+        <div class="col-lg-7 align-center">
+          <div class="box-tools">
+            <ul class="pagination pagination-sm no-margin pull-right">
+              <li><a href="#">«</a></li>
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">»</a></li>
+            </ul>
+          </div>
+        </div>
+      </section><!-- /.Left col -->
+    </div><!-- /.row (main row) -->
+  </section>
+</div>

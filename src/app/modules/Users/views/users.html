@@ -1,0 +1,145 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Admin Motelno7
+      <small>{{mainUser.title}}</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">{{mainUser.title}}</li>
+    </ol>
+  </section>
+  <section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+      <div class="col-lg-12 col-xs-12">
+        <!-- small box -->
+      </div><!-- ./col -->
+    </div><!-- /.row -->
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+      <div class="col-lg-12 col-xs-12">
+        <!-- small box -->
+        <div class="pull-left">
+          <button class="btn btn-block btn-primary btn-flat" data-ng-click="mainUser.toogleUserForm()"><i class="fa fa-user-plus"></i> Add User</button>
+        </div>
+        <div class="pull-right">
+          <p><b>Date and Time: {{ mainUser.showDate() | date : 'MM/dd/yyyy'}} {{ mainUser.showDate() | date : 'h:mma'}}</b></p>
+        </div>
+        <br><br>
+      </div><!-- ./col -->
+    </div><!-- /.row -->
+    <!-- Main row -->
+    <div class="row">
+      <!-- Left col -->
+      <div data-ng-if="mainUser.result">
+        <alert-message element="mainUser.result"></alert-message>
+      </div>
+
+      <section class="col-lg-12 connectedSortable" data-ng-show="mainUser.userForm">
+        <!-- TO DO List -->
+        <div class="box box-primary">
+          <div class="box-header">
+            <i class="fa fa-user-plus"></i>
+            <h3 class="box-title">Create User</h3>
+            <div class="box-tools pull-right">
+            </div>
+          </div><!-- /.box-header -->
+          <form name="userForm" novalidate>
+            <div class="box-body">
+              <!-- text input -->
+              <div class="row">
+                <div>
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : userForm.email.$invalid && !mainUser.userForm.email.$pristine && submitted }">
+                    <div class="col-xs-6">
+                      <label>Email:</label>
+                      <input type="text" data-ng-model="mainUser.user.email"
+                             name="email" class="form-control" placeholder="Email:" required>
+                      <p ng-show="userForm.email.$error.required && submitted" class="help-block">You email is required.</p>
+
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : userForm.name.$invalid && !mainUser.userForm.name.$pristine && submitted  }">
+                    <div class="col-xs-6">
+                      <label>Name:</label>
+                      <input type="text" data-ng-model="mainUser.user.name"
+                             name="name"  class="form-control" placeholder="Name" required>
+                      <p ng-show="userForm.email.$error.required && submitted" class="help-block">You name is required.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- /.box-body -->
+            <div class="box-footer clearfix no-border">
+              <div class="pull-right">
+                <button data-ng-click="mainUser.toogleUserForm()" class="btn btn-danger">Cancel</button>
+                <a type="submit" role="button" class="btn btn-success" ng-click="mainUser.submitForm(userForm)">Submit</a>
+              </div>
+            </div>
+          </form>
+        </div><!-- /.box -->
+      </section><!-- /.Left col -->
+    </div>
+    <div class="row">
+      <!-- Left col -->
+      <section class="col-lg-12 connectedSortable">
+        <!-- TO DO List -->
+        <div class="box box-primary">
+          <div class="box-header">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Users List</h3>
+            <div class="box-tools pull-right">
+            </div>
+          </div><!-- /.box-header -->
+          <div class="box-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                <th class="text-center">#</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Action</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="contact in mainUser.participants" ng-include="getTemplate(contact)">
+                </tr>
+                </tbody>
+              </table>
+
+              <script type="text/ng-template" id="display">
+                <td class="text-center">{{contact.id}}</td>
+                <td class="text-center">{{contact.name}}</td>
+                <td class="text-center">{{contact.email}}</td>
+                <td class="text-center">
+                  <button ng-click="editContact(contact)" class="btn btn-primary">Edit</button>
+                  <button ng-click="editContact(contact)" class="btn btn-danger">Delete</button>
+                </td>
+              </script>
+              <script type="text/ng-template" id="edit">
+                <td class="text-center">{{contact.id}}</td>
+                <td class="text-center"><input type="text" ng-model="model.selected.name" /></td>
+                <td class="text-center"><input type="text" ng-model="model.selected.email" /></td>
+                <td class="text-center">
+                  <button ng-click="saveContact($index)" class="btn btn-warning">Save</button>
+                  <button ng-click="reset()" class="btn btn-danger">Cancel</button>
+                </td>
+              </script>
+            </div>
+          </div><!-- /.box-body -->
+          <div class="box-footer clearfix no-border">
+            <!-- <button class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button> -->
+          </div>
+        </div><!-- /.box -->
+        <div class="col-lg-7 align-center">
+          <div class="box-tools">
+            <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/bower_components/angular-utils-pagination/dirPagination.tpl.html" pagination-id="incidentClosedPagination"></dir-pagination-controls>
+          </div>
+        </div>
+      </section><!-- /.Left col -->
+    </div><!-- /.row (main row) -->
+  </section>
+</div>

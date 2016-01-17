@@ -1,0 +1,29 @@
+<div class="box box-primary">
+  <div class="box-header">
+    <i class="fa fa-user-plus"></i>
+    <h3 class="box-title">Delete Event No. {{detailEvent.param1}}</h3>
+    <div class="box-tools pull-right">
+    </div>
+  </div><!-- /.box-header -->
+    <div class="box-body">
+      <!-- text input -->
+      <div class="row">
+        <div>
+          <div class="form-group"
+               ng-class="{ 'has-error' : eventForm.name.$invalid && !main.eventForm.name.$pristine && submitted }">
+            <div class="col-xs-12">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Aliquam deserunt, doloremque ea, error illo ipsum, itaque laudantium magnam necessitatibus
+                nihil officia perspiciatis possimus quibusdam quisquam vero. Aliquid consectetur et iure.</p>
+            </div>
+          </div>
+        </div>
+    </div><!-- /.box-body -->
+    <div class="box-footer clearfix no-border">
+      <div class="text-center">
+        <button data-ng-click="cancelDelete()" class="btn btn-danger">Cancel</button>
+        <a type="submit" role="button" class="btn btn-success" ng-click="detailEvent.submitForm(eventForm)">Submit</a>
+      </div>
+    </div>
+</div>
+
