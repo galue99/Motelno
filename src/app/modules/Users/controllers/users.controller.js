@@ -11,7 +11,8 @@
       var vm = this;
       vm.title = "Users"
       vm.userForm = false;
-      var promise_interval, time, seconds;
+      var promise_interval, time, seconds, index;
+
 
       /* Services for obtein all Events */
       EventService.Participant.get({fileName: 'services.json'},function(data) {
@@ -70,45 +71,73 @@
       };
 
 
-      $scope.model = {
-        contacts: [{
-          id: 1,
-          name: "Ben",
-          age: 28
-        }, {
-          id: 2,
-          name: "Sally",
-          age: 24
-        }, {
-          id: 3,
-          name: "John",
-          age: 32
-        }, {
-          id: 4,
-          name: "Jane",
-          age: 40
-        }],
+      vm.model = {
         selected: {}
       };
 
       // gets the template to ng-include for a table row / item
       $scope.getTemplate = function (contact) {
-        if (contact.id === $scope.model.selected.id) return 'edit';
+        if (contact.id === vm.model.selected.id) return 'edit';
         else return 'display';
       };
 
-      $scope.editContact = function (contact) {
-        $scope.model.selected = angular.copy(contact);
+      vm.editContact = function (contact) {
+        vm.model.selected = angular.copy(contact);
       };
 
-      $scope.saveContact = function (idx) {
-        console.log("Saving contact");
-        $scope.model.contacts[idx] = angular.copy($scope.model.selected);
-        $scope.reset();
+      vm.saveContact = function (idx) {
+        vm.participants[idx] = angular.copy(vm.model.selected);
+        EventService.Participant.update({id: vm.participants[idx].id}, vm.participants[idx], function(data) {
+          vm.details = (data);
+          vm.result = data.$resolved;
+          time = $moment({ second: 0 });
+          seconds = 0;
+          promise_interval = $interval(function () {
+            seconds += 1;
+            time.second(seconds);
+            if (seconds === 60) { seconds = 0; }
+            if(time.format('ss') === '04'){
+              vm.result = false;
+              vm.stop();
+            }
+          }, 1000);
+        });
+        vm.reset();
       };
 
-      $scope.reset = function () {
-        $scope.model.selected = {};
+      vm.deleteUser = function(contact){
+
+        EventService.Participant.delete({id:contact.id},function(data) {
+          vm.result = data.$resolved;
+          if(vm.result === true){
+
+            _.each(vm.participants, function (obj) {
+              index = _.findIndex(vm.participants, {id: contact.id, url: contact.url});
+              if (index !== -1) {
+                vm.participants.splice(index, 1);
+              }
+            });
+
+            time = $moment({ second: 0 });
+            seconds = 0;
+            promise_interval = $interval(function () {
+              seconds += 1;
+              time.second(seconds);
+              if (seconds === 60) { seconds = 0; }
+              $log.info(time.format('ss'));
+              if(time.format('ss') === '02'){
+                vm.result = false;
+                vm.stop();
+              }
+            }, 1000);
+
+          }
+
+        });
+      };
+
+      vm.reset = function () {
+        vm.model.selected = {};
       };
 
     });

@@ -35,6 +35,7 @@
         return vm.date;
       };
       $scope.prueba = true;
+
       vm.submitForm = function (form) {
         $log.info(form);
         $scope.submitted = true;
@@ -85,7 +86,6 @@
       };
 
       vm.cancel = function(){
-        //$log.info('asdasd');
         vm.event = {};
         $scope.submitted = false;
         vm.eventForm = !vm.eventForm;
