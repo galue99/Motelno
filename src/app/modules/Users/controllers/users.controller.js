@@ -62,6 +62,7 @@
         if (form.$valid) {
           EventService.Participant.save(vm.user,function(data) {
             vm.result = data.$resolved;
+
             time = $moment({ second: 0 });
             seconds = 0;
             promise_interval = $interval(function () {

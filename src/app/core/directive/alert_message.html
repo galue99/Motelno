@@ -1,8 +1,9 @@
 <section class="col-lg-12 connectedSortable">
-  <div class="alert-dismissable"
-       ng-class="{'alert alert-success': element , 'alert alert-danger': !element}">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <h4>	<i class="icon fa fa-check"></i> Alert!</h4>
-    Success alert preview. This alert is dismissable.
+  <div class="alert alert-bt alert-dismissible" role="alert" data-ng-show="element.success" data-ng-class=" element.success ? 'alert-success' : 'alert-danger'">
+    <i class="fa fa-check" data-ng-if="element.message"></i>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>{{element.message}}</strong>
   </div>
 </section>

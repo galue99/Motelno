@@ -16,3 +16,11 @@
 .spacing-search{
   padding-bottom: 10px;
 }
+
+.margin-message-confirm {
+  margin-top: -38px;
+}
+
+.confirm-h2{
+  color: Red;
+}

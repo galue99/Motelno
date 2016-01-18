@@ -22,7 +22,7 @@
         <!-- small box -->
         <div class="pull-left">
           <button class="btn btn-primary btn-flat" data-ng-click="detailEvent.toogleDetailForm()"><i class="fa fa-edit"></i> Edit Event</button>
-          <button class="btn btn-danger btn-flat" data-ng-click="detailEvent.toogleDeleteForm()"><i class="fa fa-remove"></i> Delete Event</button>
+          <button class="btn btn-danger btn-flat" data-ng-click="detailEvent.toogleDeleteForm()"><i class="fa fa-trash"></i> Delete Event</button>
           <br><br>
         </div>
         <div class="pull-right">
@@ -46,18 +46,18 @@
               <div>
                 <div class="form-group"
                      ng-class="{ 'has-error' : eventForm.name.$invalid && !main.eventForm.name.$pristine && submitted }">
-                  <div class="col-xs-12">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Aliquam deserunt, doloremque ea, error illo ipsum, itaque laudantium magnam necessitatibus
-                      nihil officia perspiciatis possimus quibusdam quisquam vero. Aliquid consectetur et iure.</p>
+                  <div class="col-xs-12 margin-message-confirm">
+                    <div class="text-center">
+                      <h2 class="confirm-h2"><i class="fa fa-exclamation"> </i> Confirm!</h2>
+                    </div>
                   </div>
                 </div>
               </div>
             </div><!-- /.box-body -->
             <div class="box-footer clearfix no-border">
               <div class="text-center">
-                <button data-ng-click="detailEvent.cancelDelete()" class="btn btn-danger">Cancel</button>
-                <a type="submit" role="button" class="btn btn-success" ng-click="detailEvent.submitDeleteForm(eventForm)">Confirm</a>
+                <button data-ng-click="detailEvent.cancelDelete()" class="btn btn-danger"><i class="fa fa-remove"></i>Cancel</button>
+                <a type="submit" role="button" class="btn btn-success" ng-click="detailEvent.submitDeleteForm(eventForm)"><i class="fa fa-check"></i>Confirm</a>
               </div>
             </div>
           </div>
@@ -123,8 +123,8 @@
             </div><!-- /.box-body -->
             <div class="box-footer clearfix no-border">
               <div class="pull-right">
-                <button data-ng-click="detailEvent.toogleDetailForm()" class="btn btn-danger">Cancel</button>
-                <a type="submit" role="button" class="btn btn-success" ng-click="detailEvent.submitForm(eventForm)">Submit</a>
+                <button data-ng-click="detailEvent.toogleDetailForm()" class="btn btn-danger"> <i class="fa fa-remove"></i> Cancel</button>
+                <a type="submit" role="button" class="btn btn-success" ng-click="detailEvent.submitForm(eventForm)"><i class="fa fa-check"></i> Submit</a>
               </div>
             </div>
           </form>

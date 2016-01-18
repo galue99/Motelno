@@ -53,7 +53,10 @@
       /**/
 
       vm.cancelDelete = function(){
-        $log.info('asdasd');
+        vm.detailDelete = !vm.detailDelete;
+        if(vm.detailDelete === true){
+          vm.detailDelete = !vm.detailDelete;
+        }
       };
 
       vm.submitDeleteForm = function(){
@@ -101,6 +104,9 @@
             }, 1000);
             vm.submitted = false;
             vm.detailForm = !vm.detailForm;
+          }, function(error){
+              $log.info(error);
+              vm.result = false;
           });
         }
       };
