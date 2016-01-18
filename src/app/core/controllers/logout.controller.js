@@ -6,14 +6,17 @@
 
   angular
     .module('motelNo')
-    .controller('LogoutCtrl', function($location, $auth, toastr){
+    .controller('LogoutCtrl', function($state, $auth, toastr, $rootScope){
       console.log($auth.isAuthenticated());
+      $rootScope.$emit('body:class:remove', 'hold-transition skin-blue fixed sidebar-mini login-page');
+      $rootScope.$emit('body:class:add', 'hold-transition login-page');
+      $rootScope.menuUser = false;
       if (!$auth.isAuthenticated()) { return; }
 
       $auth.logout()
         .then(function() {
           toastr.info('You have been logged out');
-          $location.path('/');
+          $state.go('main');
         });
 
     });

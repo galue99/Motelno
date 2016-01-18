@@ -6,7 +6,7 @@
 
   angular
     .module('motelNo')
-    .controller('DetailController', function($scope, $rootScope, $routeParams, $log, EventService, $moment, $interval, $window){
+    .controller('DetailController', function($scope, $rootScope, $stateParams, $log, EventService, $moment, $interval, $state){
 
       var vm = this;
       $scope.labels = ["Users Confirmed", "Users Pendent"];
@@ -19,7 +19,7 @@
       }
 
 
-      vm.param1 = $routeParams.id;
+      vm.param1 = $stateParams.id;
       vm.module = 'Event';
       vm.title = 'Details';
       vm.detailForm = false;
@@ -72,7 +72,7 @@
               $log.info(time.format('ss'));
               if(time.format('ss') === '02'){
                 vm.stop();
-                $window.location.href = '/';
+                $state.go('main');
               }
             }, 1000);
 

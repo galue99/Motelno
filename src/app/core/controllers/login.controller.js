@@ -6,7 +6,7 @@
 
     angular
         .module('motelNo')
-        .controller('LoginController', function($rootScope, $auth, $window){
+        .controller('LoginController', function($rootScope, $auth, $location){
             $rootScope.$emit('body:class:add', 'hold-transition login-page');
             $rootScope.menuUser = false;
             var vm = this;
@@ -19,7 +19,7 @@
                 $auth.login(credentials).then(function(data) {
 
                     // If login is successful, redirect to the users state
-                    $window.location.href = '/';
+                  $location.path('/');
 
                 });
             }
