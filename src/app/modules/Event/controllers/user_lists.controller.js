@@ -6,11 +6,11 @@
 
   angular
     .module('motelNo')
-    .controller('UserListController', function(EventService, $routeParams, $log){
+    .controller('UserListController', function(EventService, $stateParams, $log){
 
       var vm = this;
       vm.title = "User List";
-      vm.param1 = $routeParams.id;
+      vm.param1 = $stateParams.id;
 
       /* Services for obtein all Events */
 

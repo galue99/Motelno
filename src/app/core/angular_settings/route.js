@@ -5,67 +5,93 @@
     .module('motelNo')
     .config(routeConfig);
 
-  function routeConfig($routeProvider, $locationProvider) {
+  function routeConfig($stateProvider, $locationProvider, $urlRouterProvider) {
 
     $locationProvider.html5Mode({
       enabled: true,
       requireBase: false
     });
 
-    $routeProvider
-      .when('/login', {
+    function loginRequired($q, $location, $auth) {
+      var deferred = $q.defer();
+      if ($auth.isAuthenticated()) {
+        deferred.resolve();
+      } else {
+        $location.path('/login');
+      }
+      return deferred.promise;
+    }
+    $stateProvider
+      .state('login', {
+        url: '/login',
         templateUrl: 'app/core/login/login.html',
         controller: 'LoginController',
         controllerAs: 'login'
       })
-      .when('/', {
+      .state('logout', {
+        url: '/logout',
+        templateUrl: 'app/core/login/login.html',
+        controller: 'LogoutCtrl',
+        template: null,
+        resolve: {
+          loginRequired: loginRequired
+        }
+      })
+      .state('main', {
+        url: '/',
         templateUrl: 'app/modules/Event/views/main.html',
         controller: 'MainController',
-        controllerAs: 'main'
+        controllerAs: 'main',
+        resolve: {
+          loginRequired: loginRequired
+        }
       })
-      .when('/event/details/:id', {
+      .state('eventDetails', {
+        url: '/event/:id',
         templateUrl: 'app/modules/Event/views/details.html',
         controller: 'DetailController',
-        controllerAs: 'detailEvent'
+        controllerAs: 'detailEvent',
+        resolve: {
+          loginRequired: loginRequired
+        }
       })
-      .when('/createEvent', {
+      .state('/createEvent', {
         templateUrl: 'app/modules/Event/views/create.html',
         controller: 'CreateController',
-        controllerAs: 'createEvent'
+        controllerAs: 'createEvent',
+        resolve: {
+          loginRequired: loginRequired
+        }
       })
-      .when('/event/user_list/:id', {
+      .state('eventUser', {
+        url: '/event/:id',
         templateUrl: 'app/modules/Event/views/users_list.html',
         controller: 'UserListController',
-        controllerAs: 'mainUserList'
+        controllerAs: 'mainUserList',
+        resolve: {
+          loginRequired: loginRequired
+        }
       })
-      .when('/editEvent/:id', {
-        templateUrl: 'app/modules/Event/views/edit.html',
-        controller: 'EditController',
-        controllerAs: 'editEvent'
-      })
-      .when('/event/generate_code/:id', {
+      .state('/event/generate_code/:id', {
         templateUrl: 'app/modules/Event/views/generate_code.html',
         controller: 'CodeController',
-        controllerAs: 'geneCode'
+        controllerAs: 'geneCode',
+        resolve: {
+          loginRequired: loginRequired
+        }
       })
-      .when('/users/', {
+      .state('users', {
+        url: '/users',
         templateUrl: 'app/modules/Users/views/users.html',
         controller: 'UserController',
-        controllerAs: 'mainUser'
+        controllerAs: 'mainUser',
+        resolve: {
+          loginRequired: loginRequired
+        }
       })
-      .when('/createUsers/', {
-        templateUrl: 'app/modules/Users/views/create.html',
-        controller: 'CreateUserController',
-        controllerAs: 'createUser'
-      })
-      .when('/user/editUsers/:id', {
-        templateUrl: 'app/modules/Users/views/edit.html',
-        controller: 'EditUserController',
-        controllerAs: 'editUser'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
+      $urlRouterProvider.otherwise('/');
+
+      console.log('a');
   }
 
 })();
