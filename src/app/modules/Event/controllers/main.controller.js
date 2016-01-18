@@ -17,8 +17,24 @@
       }
 
       $rootScope.menuUser = true;
+      vm.totalPages = 0;
+      vm.currentPage = 1;
 
       /* Services for obtein all Events */
+      vm.getEvents = function(pageNumber){
+
+        EventService.Event.get({fileName: 'services.json', limit: 5,  offset: 50},function(data) {
+            // Old pagination style using http
+            // $http.get('/posts-json?page='+pageNumber).success(function(response) {
+
+          vm.events = data.results;
+          vm.totalPages = data.count;
+          vm.currentPage = data.results;
+
+          });
+
+        };
+
 
       EventService.Event.get({fileName: 'services.json', limit: 5,  offset: 50},function(data) {
         vm.events = data.results;
