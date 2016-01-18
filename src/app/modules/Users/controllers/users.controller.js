@@ -21,7 +21,7 @@
       /* Services for obtein all Users */
       $scope.getPosts = function(pageNumber) {
 
-        if(pageNumber===undefined){
+        if(pageNumber == undefined){
           pageNumber = '1';
         }
 
@@ -42,8 +42,7 @@
           $scope.range = pages;
 
         });
-      }
-
+      };
       vm.deleteUser = function(id){
         $log.info(id);
       };

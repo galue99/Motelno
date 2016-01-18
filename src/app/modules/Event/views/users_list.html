@@ -55,7 +55,6 @@
                   <th>Name</th>
                   <th>Confirmed</th>
                 </tr>
-                <!--<tr data-ng-repeat="user in mainUserList.users">-->
                   <tr dir-paginate="user in mainUserList.users | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="userPagination">
                   <td>{{user.id}}</td>
                   <td>{{user.email}}</td>

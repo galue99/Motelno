@@ -6,7 +6,7 @@
 
   angular
     .module('motelNo')
-    .controller('LogoutController', function($state, $auth, toastr, $rootScope){
+    .controller('LogoutController', function($state, $auth, toastr){
 
       if (!$auth.isAuthenticated()) { return; }
 

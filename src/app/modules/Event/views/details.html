@@ -148,13 +148,13 @@
             <p><b>Description:</b> {{detailEvent.details.description}}</p>
             <p><b>Number of Guest:</b> <span class="badge bg-green">{{detailEvent.details.max_participant}}</span></p>
             <p><b>Confirmed User:</b> <span class="badge bg-green">150</span></p>
-            <p><b>Pending User:</b> <span class="badge bg-red">55</span></p>
+            <p><b>Pending Guests (Waiting List):</b> <span class="badge bg-red">55</span></p>
             <p><b>Code Generate:</b> <span class="badge bg-red">{{detailEvent.create.code}}</span></p>
             <p><b>Activated:</b>   <input type="checkbox" name="my-checkbox" checked data-size="mini" data-ng-value="false"></p>
           </div><!-- /.box-body -->
           <div class="box-footer clearfix no-border">
             <div class="pull-right">
-              <a ui-sref="eventUser({id:detailEvent.param1})" class="btn btn-info btn-flat"><i class="fa fa-users"></i> User List</a>
+              <a ui-sref="eventUser({id:detailEvent.param1})" class="btn btn-info btn-flat"><i class="fa fa-users"></i> Guests List</a>
               <a  class="btn btn-warning btn-flat" data-ng-click="detailEvent.toogleCodeForm()"><i class="fa fa-cogs"></i> Generate Code</a>
               <br><br>
             </div>

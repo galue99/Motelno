@@ -9,6 +9,10 @@
       vm.title = "Events";
       var promise_interval, time, seconds;
 
+      $rootScope.menuUser = true;
+
+      $log.info($rootScope.menuUser);
+
       $scope.totalPages = 0;
       $scope.currentPage = 1;
 
