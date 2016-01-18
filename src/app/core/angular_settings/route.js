@@ -18,6 +18,11 @@
         controller: 'LoginController',
         controllerAs: 'login'
       })
+      .when('/logout', {
+        url: '/logout',
+        template: null,
+        controller: 'LogoutCtrl'
+      })
       .when('/', {
         templateUrl: 'app/modules/Event/views/main.html',
         controller: 'MainController',
