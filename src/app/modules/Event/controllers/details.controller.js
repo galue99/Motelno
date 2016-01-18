@@ -9,12 +9,12 @@
     .controller('DetailController', function($scope, $rootScope, $stateParams, $log, EventService, $moment, $interval, $state){
 
       var vm = this;
-      $scope.labels = ["Users Confirmed", "Users Pendent"];
-      $scope.data = [300, 500];
+      vm.labels = ["Users Confirmed", "Users Pendent"];
+      vm.data = [300, 500];
 
       $rootScope.$emit('body:class:remove', 'hold-transition login-page');
       $rootScope.$emit('body:class:add', 'hold-transition skin-blue fixed sidebar-mini');
-      if($rootScope.menuUser === false || $rootScope.menuUser === undefined ){
+      if($rootScope.menuUser === false || $rootScope.menuUser == undefined ){
         $rootScope.menuUser = true;
       }
 
@@ -54,9 +54,9 @@
 
       /**/
 
-      $scope.cancelDelete = function(){
+      vm.cancelDelete = function(){
         $log.info('asdasd');
-      }
+      };
 
       vm.submitDeleteForm = function(){
         EventService.Event.delete({id:vm.param1},function(data) {
@@ -80,12 +80,12 @@
 
         });
 
-      }
+      };
 
       vm.submitForm = function (form) {
-        $scope.submitted = true;
+        vm.submitted = true;
         if (form.$valid) {
-          EventService.Event.update({id:vm.details.id},vm.details,function(data) {
+          EventService.Event.update({id:vm.param1},vm.details,function(data) {
             vm.details = (data);
             vm.result = data.$resolved;
 
@@ -101,7 +101,7 @@
                 vm.stop();
               }
             }, 1000);
-            $scope.submitted = false;
+            vm.submitted = false;
             vm.detailForm = !vm.detailForm;
           });
         }
@@ -109,7 +109,7 @@
 
       vm.prueba = function (){
         $log.info('sd');
-      }
+      };
 
       vm.stop = function () {
         $interval.cancel(promise_interval);

@@ -49,35 +49,35 @@
               <div class="row">
                 <div>
                   <div class="form-group"
-                       ng-class="{ 'has-error' : eventForm.name.$invalid && !main.eventForm.name.$pristine && submitted }">
+                       ng-class="{ 'has-error' : eventForm.name.$invalid && !main.eventForm.name.$pristine && main.submitted }">
                     <div class="col-xs-6">
                       <label>Name:</label>
                       <input type="text" data-ng-model="main.event.name"
                              name="name" class="form-control" placeholder="Name:" required>
-                      <p ng-show="eventForm.name.$error.required && submitted" class="help-block">You name is required.</p>
+                      <p ng-show="eventForm.name.$error.required && main.submitted" class="help-block">You name is required.</p>
 
                     </div>
                   </div>
                 </div>
                 <div>
                   <div class="form-group"
-                       ng-class="{ 'has-error' : eventForm.max_participant.$invalid && !main.eventForm.max_participant.$pristine && submitted  }">
+                       ng-class="{ 'has-error' : eventForm.max_participant.$invalid && !main.eventForm.max_participant.$pristine && main.submitted  }">
                     <div class="col-xs-6">
                       <label>Number of Guests:</label>
                       <input type="text" data-ng-model="main.event.max_participant"
                              name="max_participant"  class="form-control" placeholder="Number of Guests:" required>
 
-                      <p ng-show="eventForm.max_participant.$error.required && submitted" class="help-block">You Number of Guests is required.</p>
+                      <p ng-show="eventForm.max_participant.$error.required && main.submitted" class="help-block">You Number of Guests is required.</p>
                     </div>
                   </div>
                   <div class="form-group"
-                       ng-class="{ 'has-error' : eventForm.description.$invalid && !main.eventForm.description.$pristine && submitted  }">
+                       ng-class="{ 'has-error' : eventForm.description.$invalid && !main.eventForm.description.$pristine && main.submitted  }">
                     <div class="col-xs-12">
                       <label>Description:</label>
                     <textarea class="form-control" placeholder="Descripción:" id="description"
                               data-ng-model="main.event.description" name="description" required>
                                             </textarea>
-                      <p ng-show="eventForm.description.$error.required && submitted" class="help-block">You Description is required.</p>
+                      <p ng-show="eventForm.description.$error.required && main.submitted" class="help-block">You Description is required.</p>
                     </div>
                   </div>
                 </div>

@@ -56,7 +56,7 @@
             </div><!-- /.box-body -->
             <div class="box-footer clearfix no-border">
               <div class="text-center">
-                <button data-ng-click="cancelDelete()" class="btn btn-danger">Cancel</button>
+                <button data-ng-click="detailEvent.cancelDelete()" class="btn btn-danger">Cancel</button>
                 <a type="submit" role="button" class="btn btn-success" ng-click="detailEvent.submitDeleteForm(eventForm)">Confirm</a>
               </div>
             </div>
@@ -172,7 +172,7 @@
               <div class="col-md-12">
                 <div class="chart-responsive">
                   <canvas id="doughnut" class="chart chart-doughnut"
-                          chart-data="data" chart-labels="labels">
+                          chart-data="detailEvent.data" chart-labels="detailEvent.labels">
                   </canvas>
                 </div><!-- ./chart-responsive -->
               </div><!-- /.col -->

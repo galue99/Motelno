@@ -12,7 +12,7 @@
         scope: {
           element: '='
         },
-        templateUrl: 'app/core/directive/alert_message.html',
+        templateUrl: 'app/core/directive/alert_message.html'
       };
     })
     .directive('footerTemplate', function () {
@@ -46,7 +46,6 @@
           scope.$on('body:class:remove', function(e, name){
             element.removeClass(name);
           });
-          return;
         }
       };
     }])

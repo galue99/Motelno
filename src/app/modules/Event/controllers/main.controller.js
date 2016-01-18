@@ -22,7 +22,6 @@
 
       EventService.Event.get({fileName: 'services.json', limit: 5,  offset: 50},function(data) {
         vm.events = data.results;
-        $log.info(data);
       });
 
       vm.toogleEventForm = function () {
@@ -34,20 +33,16 @@
         vm.date = Date.now();
         return vm.date;
       };
-      $scope.prueba = true;
+      //$scope.prueba = true;
 
       vm.submitForm = function (form) {
         $log.info(form);
-        $scope.submitted = true;
+        vm.submitted = true;
 
         if (form.$valid) {
           vm.event.is_activate = false;
-          $log.info(vm.event);
           EventService.Event.save(vm.event,function(data) {
-            $log.info(data);
             vm.result = data.$resolved;
-
-            $log.info(data);
             vm.eventForm = !vm.eventForm;
             if(vm.result === true){
               time = $moment({ second: 0 });
@@ -62,7 +57,7 @@
                 }
               }, 1000);
               vm.event = {};
-              $scope.submitted = false;
+              vm.submitted = false;
               vm.eventForm = !vm.eventForm;
             }else{
               vm.results = true;
@@ -79,7 +74,7 @@
               }, 1000);
             }
             vm.user = {};
-            $scope.submitted = false;
+            vm.submitted = false;
             vm.eventForm = !vm.eventForm;
           });
         }
@@ -87,9 +82,9 @@
 
       vm.cancel = function(){
         vm.event = {};
-        $scope.submitted = false;
+        vm.submitted = false;
         vm.eventForm = !vm.eventForm;
-      }
+      };
 
       vm.stop = function () {
         $interval.cancel(promise_interval);

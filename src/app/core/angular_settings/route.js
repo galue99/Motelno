@@ -31,8 +31,9 @@
       .state('logout', {
         url: '/logout',
         templateUrl: 'app/core/login/login.html',
-        controller: 'LogoutCtrl',
+        controller: 'LogoutController',
         template: null,
+        controllerAs: 'logout',
         resolve: {
           loginRequired: loginRequired
         }
@@ -55,27 +56,11 @@
           loginRequired: loginRequired
         }
       })
-      .state('/createEvent', {
-        templateUrl: 'app/modules/Event/views/create.html',
-        controller: 'CreateController',
-        controllerAs: 'createEvent',
-        resolve: {
-          loginRequired: loginRequired
-        }
-      })
       .state('eventUser', {
         url: '/event/:id',
         templateUrl: 'app/modules/Event/views/users_list.html',
         controller: 'UserListController',
         controllerAs: 'mainUserList',
-        resolve: {
-          loginRequired: loginRequired
-        }
-      })
-      .state('/event/generate_code/:id', {
-        templateUrl: 'app/modules/Event/views/generate_code.html',
-        controller: 'CodeController',
-        controllerAs: 'geneCode',
         resolve: {
           loginRequired: loginRequired
         }
@@ -88,10 +73,8 @@
         resolve: {
           loginRequired: loginRequired
         }
-      })
+      });
       $urlRouterProvider.otherwise('/');
-
-      console.log('a');
   }
 
 })();

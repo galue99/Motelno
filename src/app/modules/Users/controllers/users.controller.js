@@ -9,26 +9,24 @@
     .controller('UserController', function(EventService, $log, $rootScope,$scope, $moment, $interval){
 
       var vm = this;
-      vm.title = "Users"
+      vm.title = "Users";
       vm.userForm = false;
       var promise_interval, time, seconds, index;
-
 
       /* Services for obtein all Events */
       EventService.Participant.get({fileName: 'services.json'},function(data) {
         vm.participants = data.results;
-        $log.info(data);
       });
 
       $rootScope.$emit('body:class:remove', 'hold-transition login-page');
       $rootScope.$emit('body:class:add', 'hold-transition skin-blue fixed sidebar-mini');
-      if($rootScope.menuUser === false || $rootScope.menuUser === undefined ){
+      if($rootScope.menuUser === false || $rootScope.menuUser == undefined ){
         $rootScope.menuUser = true;
       }
 
       vm.deleteUser = function(id){
         $log.info(id);
-      }
+      };
 
       vm.toogleUserForm = function () {
         vm.userForm = !vm.userForm;
@@ -41,10 +39,9 @@
       };
 
       vm.submitForm = function (form) {
-        $scope.submitted = true;
+        vm.submitted = true;
         if (form.$valid) {
           EventService.Participant.save(vm.user,function(data) {
-            $log.info(data);
             vm.result = data.$resolved;
             time = $moment({ second: 0 });
             seconds = 0;
@@ -52,7 +49,6 @@
               seconds += 1;
               time.second(seconds);
               if (seconds === 60) { seconds = 0; }
-              $log.info(time.format('ss'));
               if(time.format('ss') === '04'){
                 vm.result = false;
                 vm.stop();
@@ -60,7 +56,7 @@
             }, 1000);
 
             vm.user = {};
-            $scope.submitted = false;
+            vm.submitted = false;
             vm.userForm = !vm.userForm;
           });
         }
@@ -76,7 +72,7 @@
       };
 
       // gets the template to ng-include for a table row / item
-      $scope.getTemplate = function (contact) {
+      vm.getTemplate = function (contact) {
         if (contact.id === vm.model.selected.id) return 'edit';
         else return 'display';
       };
@@ -111,7 +107,7 @@
           vm.result = data.$resolved;
           if(vm.result === true){
 
-            _.each(vm.participants, function (obj) {
+            _.each(vm.participants, function () {
               index = _.findIndex(vm.participants, {id: contact.id, url: contact.url});
               if (index !== -1) {
                 vm.participants.splice(index, 1);

@@ -6,8 +6,8 @@
 
   angular
     .module('motelNo')
-    .controller('LogoutCtrl', function($state, $auth, toastr, $rootScope){
-      console.log($auth.isAuthenticated());
+    .controller('LogoutController', function($state, $auth, toastr, $rootScope){
+
       $rootScope.$emit('body:class:remove', 'hold-transition skin-blue fixed sidebar-mini login-page');
       $rootScope.$emit('body:class:add', 'hold-transition login-page');
       $rootScope.menuUser = false;
