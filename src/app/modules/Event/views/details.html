@@ -92,7 +92,7 @@
                       <label>Name:</label>
                       <input type="text" data-ng-model="detailEvent.details.name"
                              name="name" class="form-control" placeholder="Name:" required>
-                      <p ng-show="eventForm.name.$error.required && submitted" class="help-block">You name is required.</p>
+                      <p ng-show="eventForm.name.$error.required && detailEvent.submitted" class="help-block">You name is required.</p>
 
                     </div>
                   </div>
@@ -105,7 +105,7 @@
                       <input type="text" data-ng-model="detailEvent.details.max_participant"
                              name="max_participant"  class="form-control" placeholder="Number of Guests:" required >
 
-                      <p ng-show="eventForm.max_participant.$error.required && submitted" class="help-block">You Number of Guests is required.</p>
+                      <p ng-show="eventForm.max_participant.$error.required && detailEvent.submitted" class="help-block">You Number of Guests is required.</p>
                     </div>
                   </div>
                   <div class="form-group"
@@ -115,7 +115,7 @@
                     <textarea class="form-control" placeholder="Description:"
                               data-ng-model="detailEvent.details.description" name="description" required>
                                             </textarea>
-                      <p ng-show="eventForm.description.$error.required && submitted" class="help-block">You Description is required.</p>
+                      <p ng-show="eventForm.description.$error.required && detailEvent.submitted" class="help-block">You Description is required.</p>
                     </div>
                   </div>
                 </div>
@@ -134,7 +134,7 @@
     <!-- Main row -->
     <div class="row">
       <!-- Left col -->
-      <section class="col-lg-8 col-xs-8 connectedSortable">
+      <section class="col-lg-8 col-xs-12 connectedSortable">
         <!-- TO DO List -->
         <div class="box box-primary">
           <div class="box-header">
@@ -149,22 +149,24 @@
             <p><b>Number of Guest:</b> <span class="badge bg-green">{{detailEvent.details.max_participant}}</span></p>
             <p><b>Confirmed User:</b> <span class="badge bg-green">150</span></p>
             <p><b>Pending User:</b> <span class="badge bg-red">55</span></p>
+            <p><b>Code Generate:</b> <span class="badge bg-red">{{detailEvent.create.code}}</span></p>
             <p><b>Activated:</b>   <input type="checkbox" name="my-checkbox" checked data-size="mini" data-ng-value="false"></p>
           </div><!-- /.box-body -->
           <div class="box-footer clearfix no-border">
             <div class="pull-right">
               <a ui-sref="eventUser({id:detailEvent.param1})" class="btn btn-info btn-flat"><i class="fa fa-users"></i> User List</a>
-              <a href="/event/generate_code/{{detailEvent.param1}}" class="btn btn-warning btn-flat"><i class="fa fa-cogs"></i> Generate Code</a>
+              <a  class="btn btn-warning btn-flat" data-ng-click="detailEvent.toogleCodeForm()"><i class="fa fa-cogs"></i> Generate Code</a>
               <br><br>
             </div>
             <!-- <button class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button> -->
           </div>
         </div><!-- /.box -->
       </section><!-- /.Left col -->
-      <section class="col-lg-4 col-xs-4 connectedSortable">
+      <section class="col-lg-4 col-xs-12 connectedSortable">
         <!-- TO DO List -->
         <div class="box box-primary">
           <div class="box-header with-border">
+            <i class="fa fa-users"></i>
             <h3 class="box-title">Users</h3>
           </div><!-- /.box-header -->
           <div class="box-body">
@@ -191,6 +193,51 @@
             </ul>
           </div><!-- /.footer -->
         </div><!-- /.box --><!-- /.box -->
+      </section><!-- /.Left col -->
+      <section class="col-lg-12 col-xs-12 connectedSortable" data-ng-show="detailEvent.codeForm">
+        <!-- TO DO List -->
+        <form name="formCode" novalidate>
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <i class="fa fa-cogs"></i>
+              <h3 class="box-title">Generate Code</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <label for="address">Create Code:</label>
+                  <div class="input-group"
+                       data-ng-class="{ 'has-error': formCode.code.$invalid && !detailEvent.formCode.eventForm.code.$pristine && submitted  }">
+                    <input types="text" name="code" ng-model="detailEvent.create.code" class="form-control" required />
+                    <span class="input-group-btn">
+                      <button class="btn btn-success" type="button" tooltip="Create Code" data-ng-click="detailEvent.randString()">
+                        <i class="fa fa-magic"></i> Create Code
+                      </button>
+                    </span>
+                  </div>
+                  <p ng-show="formCode.code.$error.required && detailEvent.submitted" class="help-block">You Code is required.</p>
+                </div>
+                <div>
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : formCode.description.$invalid && !detailEvent.formCode.description.$pristine && submitted }">                    <div class="col-lg-12">
+                      <label>Description:</label>
+                    <textarea class="form-control" placeholder="Description:"
+                              data-ng-model="detailEvent.create.description" name="description" required>
+                                            </textarea>
+                      <p ng-show="formCode.description.$error.required && detailEvent.submitted" class="help-block">You Description is required.</p>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- /.row -->
+            </div><!-- /.box-body -->
+            <div class="box-footer clearfix no-border">
+              <div class="pull-right">
+                <a type="submit" role="button" class="btn btn-success" ng-click="detailEvent.submitFormCode(formCode)"> <i class="fa  fa-check"></i> Submit</a>
+
+              </div>
+            </div><!-- /.footer -->
+          </div><!-- /.box --><!-- /.box -->
+        </form>
       </section><!-- /.Left col -->
     </div><!-- /.row (main row) -->
   </section>

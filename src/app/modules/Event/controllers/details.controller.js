@@ -24,6 +24,7 @@
       vm.title = 'Details';
       vm.detailForm = false;
       vm.detailDelete = false;
+      vm.codeForm = false;
       var promise_interval, time, seconds;
 
       EventService.Event.get({id:vm.param1},function(data) {
@@ -44,6 +45,10 @@
           vm.detailForm = !vm.detailForm;
         }
 
+      };
+
+      vm.toogleCodeForm = function () {
+        vm.codeForm = !vm.codeForm;
       };
 
       vm.showDate = function () {
@@ -113,6 +118,23 @@
 
       vm.stop = function () {
         $interval.cancel(promise_interval);
+      };
+
+      vm.submitFormCode = function(form){
+        vm.submitted = true;
+        if(form.$valid){
+          $log.info(vm.create);
+        }
+      }
+
+      vm.randString = function(){
+        var s = "";
+        while(s.length<20&&20>0){
+          var r = Math.random();
+          s+= (r<0.1?Math.floor(r*100):String.fromCharCode(Math.floor(r*26) + (r>0.5?97:65)));
+        }
+        vm.create = {};
+        vm.create.code = s;
       };
 
     });
