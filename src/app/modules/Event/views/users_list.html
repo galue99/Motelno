@@ -35,121 +35,55 @@
           <div class="box-header">
             <i class="ion ion-clipboard"></i>
             <h3 class="box-title">Users List Event No. {{mainUserList.param1}}</h3>
-            <div class="box-tools pull-right">
-              <a href="">Uncheck All</a>  |
-              <a href="">Check All</a>
+            <div class="col-xs-12">
+              <div class="box-tools pull-right">
+                <a href="">Uncheck All</a>  |
+                <a href="">Check All</a>
+              </div>
             </div>
           </div><!-- /.box-header -->
           <div class="box-body">
             <div class="table-responsive">
-              <table class="table">
+                <div class="col-lg-4 col-xs-12 pull-right spacing-search">
+                  <label for="search">Search:</label>
+                  <input ng-model="q" id="search" class="form-control" placeholder="Search: Email">
+                </div>
+              <table class="table" data-ng-init="getPosts()">
                 <tbody><tr>
-                  <th style="width: 10px">#</th>
+                  <th style="width: 10px">id</th>
                   <th>Email</th>
                   <th>Name</th>
                   <th>Confirmed</th>
                 </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>Update software</td>
+                <!--<tr data-ng-repeat="user in mainUserList.users">-->
+                  <tr dir-paginate="user in mainUserList.users | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="userPagination">
+                  <td>{{user.id}}</td>
+                  <td>{{user.email}}</td>
                   <td>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p>{{user.name}}.</p>
                   </td>
                   <td>
                     <div class="form-group">
                       <div class="radio">
                         <label>
-                          <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" disabled>
-                          Confirmed
-                        </label>
-                      </div>
-                    </div>                </td>
-                </tr>
-                <tr>
-                  <td>2.</td>
-                  <td>Clean database</td>
-                  <td>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                  </td>
-                  <td>
-                    <div class="form-group">
-                      <div class="radio">
-                        <label>
-                          <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" disabled>
+                          <input type="checkbox"  name="{{user.id}}" id="optionsRadios1" value="option1" checked="" disabled>
                           Confirmed
                         </label>
                       </div>
                     </div>
                   </td>
                 </tr>
-                <tr>
-                  <td>3.</td>
-                  <td>Cron job running</td>
-                  <td>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                  </td>
-                  <td>
-                    <div class="form-group">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox" class="flat-red" checked="" >
-                          Send Invitation
-                        </label>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>4.</td>
-                  <td>Fix and squish bugs</td>
-                  <td>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                  </td>
-                  <td>
-                    <div class="form-group">
-                      <div class="radio">
-                        <label>
-                          <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" disabled>
-                          Confirmed
-                        </label>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>5.</td>
-                  <td>Fix and squish bugs</td>
-                  <td>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                  </td>
-                  <td>
-                    <div class="form-group">
-                      <div class="radio">
-                        <label>
-                          <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" disabled>
-                          Confirmed
-                        </label>
-                      </div>
-                    </div>                </td>
-                </tr>
-                </tbody></table>
+                </tbody>
+              </table>
             </div>
           </div><!-- /.box-body -->
           <div class="box-footer clearfix no-border">
-            <!-- <button class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button> -->
+            <div class="text-center">
+              <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/bower_components/angular-utils-pagination/dirPagination.tpl.html" pagination-id="userPagination"></dir-pagination-controls>
+              <!--<posts-pagination></posts-pagination>-->
           </div>
         </div><!-- /.box -->
-        <div class="col-lg-7 align-center">
-          <div class="box-tools">
-            <ul class="pagination pagination-sm no-margin pull-right">
-              <li><a href="#">«</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">»</a></li>
-            </ul>
-          </div>
-        </div>
+      </div>
       </section><!-- /.Left col -->
     </div><!-- /.row (main row) -->
   </section>

@@ -9,36 +9,45 @@
       vm.title = "Events";
       var promise_interval, time, seconds;
 
-      $rootScope.$emit('body:class:remove', 'hold-transition login-page');
-      $rootScope.$emit('body:class:add', 'hold-transition skin-blue fixed sidebar-mini');
+      $scope.totalPages = 0;
+      $scope.currentPage = 1;
 
-      if($rootScope.menuUser === false){
-        $rootScope.menuUser = true;
-      }
+      $scope.totalPages = 0;
+      $scope.currentPage = 1;
 
-      $rootScope.menuUser = true;
-      vm.totalPages = 0;
-      vm.currentPage = 1;
+      // Pagination Range
 
       /* Services for obtein all Events */
-      vm.getEvents = function(pageNumber){
+      $scope.getPosts = function(pageNumber) {
 
-        EventService.Event.get({fileName: 'services.json', limit: 5,  offset: 50},function(data) {
-            // Old pagination style using http
-            // $http.get('/posts-json?page='+pageNumber).success(function(response) {
+        if(pageNumber===undefined){
+          pageNumber = '1';
+        }
+
+        EventService.Event.get({fileName: 'services.json', page: pageNumber}, function (data) {
 
           vm.events = data.results;
-          vm.totalPages = data.count;
-          vm.currentPage = data.results;
+          $scope.totalPages = 10;
+          $scope.currentPage = pageNumber;
 
-          });
+          $log.info(data);
 
-        };
+          var pages = [];
+
+          for (var i = 1; i <= $scope.totalPages; i++) {
+            pages.push(i);
+          }
+
+          $scope.range = pages;
+
+        });
+      }
 
 
-      EventService.Event.get({fileName: 'services.json', limit: 5,  offset: 50},function(data) {
-        vm.events = data.results;
-      });
+
+      /*EventService.Event.get({fileName: 'services.json', limit: 5,  offset: 50},function(data) {
+       vm.events = data.results;
+       });*/
 
       vm.toogleEventForm = function () {
         vm.eventForm = !vm.eventForm;
@@ -51,10 +60,9 @@
       };
       //$scope.prueba = true;
 
+      /* Form Submit Event */
       vm.submitForm = function (form) {
-        $log.info(form);
         vm.submitted = true;
-
         if (form.$valid) {
           vm.event.is_activate = false;
           EventService.Event.save(vm.event,function(data) {
@@ -75,19 +83,6 @@
               vm.event = {};
               vm.submitted = false;
               vm.eventForm = !vm.eventForm;
-            }else{
-              vm.results = true;
-              time = $moment({ second: 0 });
-              seconds = 0;
-              promise_interval = $interval(function () {
-                seconds += 1;
-                time.second(seconds);
-                if (seconds === 60) { seconds = 0; }
-                if(time.format('ss') === '04'){
-                  vm.result = false;
-                  vm.stop();
-                }
-              }, 1000);
             }
             vm.user = {};
             vm.submitted = false;
@@ -96,12 +91,14 @@
         }
       };
 
+      /* Function Cancel form Event */
       vm.cancel = function(){
         vm.event = {};
         vm.submitted = false;
         vm.eventForm = !vm.eventForm;
       };
 
+      /* Function Stop Time */
       vm.stop = function () {
         $interval.cancel(promise_interval);
       };

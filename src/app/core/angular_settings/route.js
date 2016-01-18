@@ -12,11 +12,20 @@
       requireBase: false
     });
 
-    function loginRequired($q, $location, $auth) {
+    function loginRequired($q, $location, $auth, $rootScope) {
       var deferred = $q.defer();
       if ($auth.isAuthenticated()) {
+        $rootScope.$emit('body:class:remove', 'hold-transition login-page');
+        $rootScope.$emit('body:class:add', 'hold-transition skin-blue fixed sidebar-mini');
+        $rootScope.menuUser = true;
+
         deferred.resolve();
       } else {
+
+        $rootScope.$emit('body:class:remove', 'hold-transition skin-blue fixed sidebar-mini login-page');
+        $rootScope.$emit('body:class:add', 'hold-transition login-page');
+        $rootScope.menuUser = false;
+
         $location.path('/login');
       }
       return deferred.promise;
@@ -48,7 +57,7 @@
         }
       })
       .state('eventDetails', {
-        url: '/event/:id',
+        url: '/event/detail/:id',
         templateUrl: 'app/modules/Event/views/details.html',
         controller: 'DetailController',
         controllerAs: 'detailEvent',
@@ -57,7 +66,7 @@
         }
       })
       .state('eventUser', {
-        url: '/event/:id',
+        url: '/event/user_list/:id',
         templateUrl: 'app/modules/Event/views/users_list.html',
         controller: 'UserListController',
         controllerAs: 'mainUserList',

@@ -8,9 +8,6 @@
     .module('motelNo')
     .controller('LogoutController', function($state, $auth, toastr, $rootScope){
 
-      $rootScope.$emit('body:class:remove', 'hold-transition skin-blue fixed sidebar-mini login-page');
-      $rootScope.$emit('body:class:add', 'hold-transition login-page');
-      $rootScope.menuUser = false;
       if (!$auth.isAuthenticated()) { return; }
 
       $auth.logout()

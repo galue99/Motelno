@@ -7,8 +7,7 @@
   angular
     .module('motelNo')
     .controller('LoginController', function($rootScope, $auth, $location){
-      $rootScope.$emit('body:class:add', 'hold-transition login-page');
-      $rootScope.menuUser = false;
+
       var vm = this;
       vm.login = function() {
         var credentials = {

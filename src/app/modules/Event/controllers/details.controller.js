@@ -12,13 +12,6 @@
       vm.labels = ["Users Confirmed", "Users Pendent"];
       vm.data = [300, 500];
 
-      $rootScope.$emit('body:class:remove', 'hold-transition login-page');
-      $rootScope.$emit('body:class:add', 'hold-transition skin-blue fixed sidebar-mini');
-      if($rootScope.menuUser === false || $rootScope.menuUser == undefined ){
-        $rootScope.menuUser = true;
-      }
-
-
       vm.param1 = $stateParams.id;
       vm.module = 'Event';
       vm.title = 'Details';

@@ -104,8 +104,9 @@
           </div><!-- /.box-header -->
           <div class="box-body">
             <div class="table-responsive">
-              <table class="table">
-                <tbody><tr>
+              <table class="table" data-ng-init="getPosts()">
+                <tbody>
+                <tr>
                   <th style="width: 10px">#</th>
                   <th>Name</th>
                   <th>Description</th>
@@ -114,7 +115,7 @@
                   <th>Details</th>
                 </tr>
                 <tr data-ng-repeat="event in main.events">
-                  <td>{{ event.id }}.</td>
+                  <td>{{event.id }}.</td>
                   <td>{{event.name}}</td>
                   <td>
                     <p>{{event.description}}</p>
@@ -129,20 +130,11 @@
             </div>
           </div><!-- /.box-body -->
           <div class="box-footer clearfix no-border">
-            <!-- <button class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button> -->
+            <div class="text-center">
+              <posts-pagination></posts-pagination>
+            </div>
           </div>
         </div><!-- /.box -->
-        <div class="col-lg-7 align-center">
-          <div class="box-tools">
-            <ul class="pagination pagination-sm no-margin pull-right">
-              <li><a href="#">«</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">»</a></li>
-            </ul>
-          </div>
-        </div>
       </section><!-- /.Left col -->
     </div><!-- /.row (main row) -->
   </section>

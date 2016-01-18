@@ -13,15 +13,35 @@
       vm.userForm = false;
       var promise_interval, time, seconds, index;
 
-      /* Services for obtein all Events */
-      EventService.Participant.get({fileName: 'services.json'},function(data) {
-        vm.participants = data.results;
-      });
+      $scope.totalPages = 0;
+      $scope.currentPage = 1;
 
-      $rootScope.$emit('body:class:remove', 'hold-transition login-page');
-      $rootScope.$emit('body:class:add', 'hold-transition skin-blue fixed sidebar-mini');
-      if($rootScope.menuUser === false || $rootScope.menuUser == undefined ){
-        $rootScope.menuUser = true;
+      // Pagination Range
+
+      /* Services for obtein all Users */
+      $scope.getPosts = function(pageNumber) {
+
+        if(pageNumber===undefined){
+          pageNumber = '1';
+        }
+
+        EventService.Participant.get({fileName: 'services.json', page: pageNumber}, function (data) {
+
+          vm.participants = data.results;
+          $scope.totalPages = 10;
+          $scope.currentPage = pageNumber;
+
+          $log.info(data);
+
+          var pages = [];
+
+          for (var i = 1; i <= $scope.totalPages; i++) {
+            pages.push(i);
+          }
+
+          $scope.range = pages;
+
+        });
       }
 
       vm.deleteUser = function(id){
