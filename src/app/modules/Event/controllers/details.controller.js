@@ -126,7 +126,7 @@
         vm.submitted = true;
         if(form.$valid){
 
-          EventService.CodeEvent.save(vm.details,function(data) {
+          EventService.CodeEvent.get({id:9},function(data) {
             $log.info(data);
           });
         }

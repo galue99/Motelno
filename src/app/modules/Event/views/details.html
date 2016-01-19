@@ -248,6 +248,39 @@
           </div><!-- /.footer -->
         </div><!-- /.box --><!-- /.box -->
       </section><!-- /.Left col -->
+      <section class="col-lg-12 col-xs-12 connectedSortable">
+        <!-- TO DO List -->
+        <form name="formCode" novalidate>
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <i class="fa fa-cogs"></i>
+              <h3 class="box-title">List Code</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                <div class="col-lg-12">
+                <div class="table-responsive">
+                  <table class="table">
+                    <tr>
+                      <th>Code</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr data-ng-repeat="code in detailEvent.details.Codes">
+                      <td>{{code.code}}</td>
+                      <td>{{code.description}}</td>
+                    </tr>
+                  </table>
+                </div>
+                </div>
+              </div><!-- /.row -->
+            </div><!-- /.box-body -->
+            <div class="box-footer clearfix no-border">
+              <div class="pull-right">
+              </div>
+            </div><!-- /.footer -->
+          </div><!-- /.box --><!-- /.box -->
+        </form>
+      </section>
       <section class="col-lg-12 col-xs-12 connectedSortable" data-ng-show="detailEvent.codeForm">
         <!-- TO DO List -->
         <form name="formCode" novalidate>
