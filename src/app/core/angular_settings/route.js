@@ -82,6 +82,15 @@
         resolve: {
           loginRequired: loginRequired
         }
+      })
+      .state('admin', {
+        url: '/adminImage',
+        templateUrl: 'app/modules/Admin/views/main.html',
+        controller: 'AdminController',
+        controllerAs: 'mainAdmin',
+        resolve: {
+          loginRequired: loginRequired
+        }
       });
       $urlRouterProvider.otherwise('/');
   }
