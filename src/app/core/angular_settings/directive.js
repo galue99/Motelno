@@ -8,7 +8,8 @@
     .directive('sidebarTemplate', sidebarTemplate)
     .directive('headerTemplate', headerTemplate)
     .directive('postsPagination', postsPagination)
-    .directive('body', body);
+    .directive('body', body)
+    .directive('onlyNumber', onlyNumber);
 
   /** @ngInject */
   function alertMessage() {
@@ -22,6 +23,23 @@
 
     return directive;
 
+  }
+  function onlyNumber() {
+    var directive = {
+      restrict: 'A',
+      require: 'ngModel',
+      link: function (scope, element, attrs, modelCtrl) {
+        modelCtrl.$parsers.push(function (inputValue) {
+          if (inputValue === undefined){ return ''; }
+          var transformedInput = inputValue.replace(/[^0-9]+/g, '');
+          if (transformedInput !== inputValue) {
+            modelCtrl.$setViewValue(transformedInput);
+            modelCtrl.$render();
+          }
+        });
+      }
+    };
+    return directive;
   }
 
   /** @ngInject */

@@ -22,6 +22,7 @@
 
       EventService.Event.get({id:vm.param1},function(data) {
         vm.details = (data);
+        vm.copyDetails =  angular.copy(data);
       });
 
       vm.toogleDetailForm = function () {
@@ -53,7 +54,17 @@
       /**/
 
       vm.cancelDelete = function(){
-        $log.info('asdasd');
+
+        if(vm.detailDelete === true){
+          vm.detailDelete = !vm.detailDelete;
+        }
+      };
+
+      vm.cancelEdit = function(){
+        vm.copyDetails =  angular.copy(vm.details);
+        if(vm.detailForm === true){
+          vm.detailForm = !vm.detailForm;
+        }
       };
 
       vm.submitDeleteForm = function(){
@@ -67,7 +78,6 @@
               seconds += 1;
               time.second(seconds);
               if (seconds === 60) { seconds = 0; }
-              $log.info(time.format('ss'));
               if(time.format('ss') === '02'){
                 vm.stop();
                 $state.go('main');
@@ -83,10 +93,9 @@
       vm.submitForm = function (form) {
         vm.submitted = true;
         if (form.$valid) {
-          EventService.Event.update({id:vm.param1},vm.details,function(data) {
+          EventService.Event.update({id:vm.param1},vm.copyDetails,function(data) {
             vm.details = (data);
             vm.result = data.$resolved;
-
             time = $moment({ second: 0 });
             seconds = 0;
             promise_interval = $interval(function () {
@@ -116,7 +125,10 @@
       vm.submitFormCode = function(form){
         vm.submitted = true;
         if(form.$valid){
-          $log.info(vm.create);
+
+          EventService.CodeEvent.save(vm.details,function(data) {
+            $log.info(data);
+          });
         }
       }
 

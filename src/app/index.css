@@ -12,7 +12,10 @@
 .thumbnail img.pull-right {
   width: 50px;
 }
-
+.help-block{
+  color:red!important;
+}
 .spacing-search{
   padding-bottom: 10px;
 }
+

@@ -107,5 +107,5 @@
         $interval.cancel(promise_interval);
       };
 
-    })
+    });
 })();
