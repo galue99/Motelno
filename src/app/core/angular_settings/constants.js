@@ -7,6 +7,6 @@
     .constant('malarkey', malarkey)
     .constant('moment', moment)
     .constant('LOGIN_URL', 'token-auth')
-    .constant('base_url', 'http://192.168.0.100:8001/');
+    .constant('base_url', 'http://127.0.0.1:8000/');
 
 })();

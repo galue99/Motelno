@@ -26,6 +26,7 @@
         $rootScope.$emit('body:class:add', 'hold-transition login-page');
         $rootScope.menuUser = false;
 
+
         $location.path('/login');
       }
       return deferred.promise;
