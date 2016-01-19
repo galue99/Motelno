@@ -20,7 +20,7 @@
 
       /* Services for obtein all Events */
 
-        EventService.Event.get({fileName: 'services.json', id: vm.param1}, function (data) {
+        EventService.Event.get({id: vm.param1}, function (data) {
           vm.users = data.members;
         });
 

@@ -18,10 +18,12 @@
       vm.detailForm = false;
       vm.detailDelete = false;
       vm.codeForm = false;
+      vm.code = {};
       var promise_interval, time, seconds;
 
       EventService.Event.get({id:vm.param1},function(data) {
         vm.details = (data);
+        $log.info(data);
         vm.copyDetails =  angular.copy(data);
       });
 
@@ -125,9 +127,12 @@
       vm.submitFormCode = function(form){
         vm.submitted = true;
         if(form.$valid){
+          vm.code.description = vm.create.description;
+          vm.code.code = vm.create.code;
+          vm.code.event = vm.details.url;
 
-          EventService.CodeEvent.get({id:9},function(data) {
-            $log.info(data);
+          EventService.CodeEvent.save(vm.code,function(data) {
+            vm.result = data.$resolved;
           });
         }
       }

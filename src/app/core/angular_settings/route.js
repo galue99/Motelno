@@ -7,10 +7,10 @@
 
   function routeConfig($stateProvider, $locationProvider, $urlRouterProvider) {
 
-    $locationProvider.html5Mode({
+/*    $locationProvider.html5Mode({
       enabled: true,
       requireBase: false
-    });
+    });*/
 
     function loginRequired($q, $location, $auth, $rootScope) {
       var deferred = $q.defer();

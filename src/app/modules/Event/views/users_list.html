@@ -52,14 +52,14 @@
                 <tbody><tr>
                   <th style="width: 10px">id</th>
                   <th>Email</th>
-                  <th>Name</th>
+                  <th>Code</th>
                   <th>Confirmed</th>
                 </tr>
                   <tr dir-paginate="user in mainUserList.users | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="userPagination">
                   <td>{{user.id}}</td>
                   <td>{{user.email}}</td>
                   <td>
-                    <p>{{user.name}}.</p>
+                    <p>{{user.code}}.</p>
                   </td>
                   <td>
                     <div class="form-group">
