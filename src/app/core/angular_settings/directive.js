@@ -4,6 +4,7 @@
   angular
     .module('motelNo')
     .directive('alertMessage', alertMessage)
+    .directive('alertMessageError', alertMessageError)
     .directive('footerTemplate', footerTemplate)
     .directive('sidebarTemplate', sidebarTemplate)
     .directive('headerTemplate', headerTemplate)
@@ -19,6 +20,18 @@
         element: '='
       },
       templateUrl: 'app/core/directive/alert_message.html'
+    };
+
+    return directive;
+
+  }
+  function alertMessageError() {
+    var directive = {
+      restrict: 'E',
+      scope: {
+        element: '='
+      },
+      templateUrl: 'app/core/directive/alert_message_error.html'
     };
 
     return directive;

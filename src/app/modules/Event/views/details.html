@@ -26,7 +26,7 @@
           <br><br>
         </div>
         <div class="pull-right">
-          <p><b>Date and Time: {{ detailEvent.showDate() | date : 'dd/MM/yyyy'}} {{ detailEvent.showDate() | date : 'h:mma'}}</b></p>
+          <p><b>Date: {{ detailEvent.showDate() | date : 'dd/MM/yyyy'}}</b></p>
           <br><br>
         </div>
       </div><!-- ./col -->
@@ -55,8 +55,8 @@
               </div><!-- /.box-body -->
               <div class="box-footer clearfix no-border">
                 <div class="text-center">
-                  <button data-ng-click="detailEvent.cancelDelete()" class="btn btn-danger">Cancel</button>
-                  <a type="submit" role="button" class="btn btn-success" ng-click="detailEvent.submitDeleteForm(eventForm)">Confirm</a>
+                  <button data-ng-click="detailEvent.cancelDelete()" class="btn btn-danger"><i class="fa fa-remove"></i> Cancel</button>
+                  <a type="submit" role="button" class="btn btn-success" ng-click="detailEvent.submitDeleteForm(eventForm)"><i class="fa fa-check"></i> Confirm</a>
                 </div>
               </div>
             </div>
@@ -108,7 +108,7 @@
                              name="max_participant" ng-pattern="/^(0|[1-9][0-9]*)$/" data-ng-maxlength="10" class="form-control" placeholder="Number of Guests:" required>
 
                       <p class="help-block error-message" ng-show="eventForm.max_participant.$error.required && detailEvent.submitted" class="help-block">You Number of Guests is required.</p>
-                      <p class="help-block error-message" ng-show="eventForm.max_participant.$error.maxlength">* Solo es permitido 10 caracteres</p>
+                      <p class="help-block error-message" ng-show="eventForm.max_participant.$error.maxlength">* Only 10 Characters</p>
                       <p class="help-block error-message" ng-show="eventForm.max_participant.$error.pattern">* Only Numbers</p>
 
                     </div>
@@ -130,8 +130,8 @@
             </div><!-- /.box-body -->
             <div class="box-footer clearfix no-border">
               <div class="pull-right">
-                <a role="button" data-ng-click="detailEvent.cancelEdit()" class="btn btn-danger">Cancel</a>
-                <a type="submit" role="button" class="btn btn-success" ng-click="detailEvent.submitForm(eventForm)">Submit</a>
+                <a role="button" data-ng-click="detailEvent.cancelEdit()" class="btn btn-danger"><i class="fa fa-remove"></i> Cancel</a>
+                <a type="submit" role="button" class="btn btn-success" ng-click="detailEvent.submitForm(eventForm)"><i class="fa fa-check"></i> Submit</a>
               </div>
             </div>
           </form>
@@ -201,7 +201,7 @@
             <p><b>Name:</b> {{detailEvent.details.name}}</p>
             <p><b>Description:</b> {{detailEvent.details.description}}</p>
             <p><b>Number of Guest:</b> <span class="badge bg-green">{{detailEvent.details.max_participant}}</span></p>
-            <p><b>Confirmed User:</b> <span class="badge bg-green">150</span></p>
+            <p><b>Confirmed Guests:</b> <span class="badge bg-green">150</span></p>
             <p><b>Pending Guests (Waiting List):</b> <span class="badge bg-red">55</span></p>
             <p><b>Code Generate:</b> <span class="badge bg-red">{{detailEvent.create.code}}</span></p>
             <p><b>Activated:</b>   <input type="checkbox" name="my-checkbox" checked data-size="mini" data-ng-value="false"></p>
@@ -221,7 +221,7 @@
         <div class="box box-primary">
           <div class="box-header with-border">
             <i class="fa fa-users"></i>
-            <h3 class="box-title">Users</h3>
+            <h3 class="box-title">Guests</h3>
           </div><!-- /.box-header -->
           <div class="box-body">
             <div class="row">
@@ -248,7 +248,7 @@
           </div><!-- /.footer -->
         </div><!-- /.box --><!-- /.box -->
       </section><!-- /.Left col -->
-      <section class="col-lg-12 col-xs-12 connectedSortable">
+      <section class="col-lg-12 col-xs-12 connectedSortable" data-ng-show="!detailEvent.codeForm">
         <!-- TO DO List -->
         <form name="formCode" novalidate>
           <div class="box box-primary">
@@ -296,7 +296,7 @@
                 <div class="col-lg-12">
                   <label for="address">Create Code:</label>
                   <div class="input-group"
-                       data-ng-class="{ 'has-error': formCode.code.$invalid && !detailEvent.formCode.eventForm.code.$pristine && submitted  }">
+                       data-ng-class="{ 'has-error': formCode.code.$invalid && !detailEvent.formCode.eventForm.code.$pristine && detailEvent.submitted  }">
                     <input types="text" name="code" ng-model="detailEvent.create.code" class="form-control" required />
                     <span class="input-group-btn">
                       <button class="btn btn-success" type="button" tooltip="Create Code" data-ng-click="detailEvent.randString()">
@@ -308,12 +308,12 @@
                 </div>
                 <div>
                   <div class="form-group"
-                       ng-class="{ 'has-error' : formCode.description.$invalid && !detailEvent.formCode.description.$pristine && submitted }">                    <div class="col-lg-12">
+                       ng-class="{ 'has-error' : formCode.description.$invalid && !detailEvent.formCode.description.$pristine && detailEvent.submitted }">                    <div class="col-lg-12">
                       <label>Description:</label>
                     <textarea class="form-control" placeholder="Description:"
                               data-ng-model="detailEvent.create.description" name="description" required>
                                             </textarea>
-                      <p ng-show="formCode.description.$error.required && detailEvent.submitted" class="help-block">You Description is required.</p>
+                    <p class="help-block error-message" ng-show="formCode.description.$error.required && detailEvent.submitted" class="help-block">You Description is required.</p>
                     </div>
                   </div>
                 </div>
@@ -321,8 +321,8 @@
             </div><!-- /.box-body -->
             <div class="box-footer clearfix no-border">
               <div class="pull-right">
+                <a data-ng-click="detailEvent.toogleCodeForm()" class="btn btn-danger"> <i class="fa fa-remove"></i> Cancel</a>
                 <a type="submit" role="button" class="btn btn-success" ng-click="detailEvent.submitFormCode(formCode)"> <i class="fa  fa-check"></i> Submit</a>
-
               </div>
             </div><!-- /.footer -->
           </div><!-- /.box --><!-- /.box -->

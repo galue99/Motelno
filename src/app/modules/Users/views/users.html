@@ -26,7 +26,7 @@
           <button class="btn btn-block btn-primary btn-flat" data-ng-click="mainUser.toogleUserForm()"><i class="fa fa-user-plus"></i> Add User</button>
         </div>
         <div class="pull-right">
-          <p><b>Date and Time: {{ mainUser.showDate() | date : 'MM/dd/yyyy'}} {{ mainUser.showDate() | date : 'h:mma'}}</b></p>
+          <p><b>Date: {{ mainUser.showDate() | date : 'MM/dd/yyyy'}}</b></p>
         </div>
         <br><br>
       </div>
@@ -38,6 +38,9 @@
       <!-- Left col -->
       <div data-ng-if="mainUser.result">
         <alert-message element="mainUser.result"></alert-message>
+      </div>
+      <div data-ng-if="mainUser.resultError">
+        <alert-message-error element="mainUser.resultError"></alert-message-error>
       </div>
       <section class="col-lg-12 connectedSortable" data-ng-show="mainUser.userForm">
         <!-- TO DO List -->
@@ -58,8 +61,10 @@
                        ng-class="{ 'has-error' : userForm.email.$invalid && !mainUser.userForm.email.$pristine && mainUser.submitted }">
                     <div class="col-xs-6">
                       <label>Email:</label>
-                      <input type="text" data-ng-model="mainUser.user.email"
-                             name="email" class="form-control" placeholder="Email:" required>
+                      <input type="email" data-ng-model="mainUser.user.email"
+                             name="email" class="form-control" placeholder="Email" data-ng-maxlength="50" required>
+                      <p class="help-block error-message" ng-show="userForm.email.$error.maxlength">* Only 50 Characters</p>
+                      <p class="help-block error-message" ng-show="userForm.email.$error.email">* Email Incorrect</p>
                       <p ng-show="userForm.email.$error.required && mainUser.submitted" class="help-block">You email is required.</p>
                     </div>
                   </div>
@@ -69,9 +74,10 @@
                        ng-class="{ 'has-error' : userForm.name.$invalid && !mainUser.userForm.name.$pristine && mainUser.submitted  }">
                     <div class="col-xs-6">
                       <label>Name:</label>
-                      <input type="text" data-ng-model="mainUser.user.name"
+                      <input type="text" data-ng-model="mainUser.user.name" data-ng-maxlength="50"
                              name="name"  class="form-control" placeholder="Name" required>
-                      <p ng-show="userForm.email.$error.required && mainUser.submitted" class="help-block">You name is required.</p>
+                      <p class="help-block error-message" ng-show="userForm.name.$error.maxlength">* Only 50 Characters</p>
+                      <p ng-show="userForm.name.$error.required && mainUser.submitted" class="help-block">You name is required.</p>
                     </div>
                   </div>
                 </div>
@@ -106,7 +112,7 @@
             <div class="table-responsive">
               <table class="table" data-ng-init="getPosts()">
                 <thead>
-                  <th class="text-center">#</th>
+                  <th class="text-center">#id</th>
                   <th class="text-center">Name</th>
                   <th class="text-center">Email</th>
                   <th class="text-center">Action</th>
@@ -121,8 +127,8 @@
                 <td class="text-center">{{contact.name}}</td>
                 <td class="text-center">{{contact.email}}</td>
                 <td class="text-center">
-                  <button ng-click="mainUser.editContact(contact)" class="btn btn-primary">Edit</button>
-                  <button ng-click="mainUser.deleteUser(contact)" class="btn btn-danger">Delete</button>
+                  <button ng-click="mainUser.editContact(contact)" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
+                  <button ng-click="mainUser.deleteUser(contact)" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
                 </td>
               </script>
               <script type="text/ng-template" id="edit">

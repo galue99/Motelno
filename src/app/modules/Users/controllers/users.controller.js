@@ -43,12 +43,17 @@
 
         });
       };
-      vm.deleteUser = function(id){
-        $log.info(id);
+
+      vm.getUsers = function(){
+        EventService.Participant.get({fileName: 'services.json'}, function (data) {
+          vm.participants = data.results;
+        });
       };
 
       vm.toogleUserForm = function () {
         vm.userForm = !vm.userForm;
+        vm.user = {};
+        vm.submitted = false;
       };
 
       vm.showDate = function () {
@@ -77,6 +82,20 @@
             vm.user = {};
             vm.submitted = false;
             vm.userForm = !vm.userForm;
+          }, function(error){
+            vm.resultError = true;
+
+            time = $moment({ second: 0 });
+            seconds = 0;
+            promise_interval = $interval(function () {
+              seconds += 1;
+              time.second(seconds);
+              if (seconds === 60) { seconds = 0; }
+              if(time.format('ss') === '04'){
+                vm.resultError = false;
+                vm.stop();
+              }
+            }, 1000);
           });
         }
       };
@@ -142,6 +161,7 @@
               $log.info(time.format('ss'));
               if(time.format('ss') === '02'){
                 vm.result = false;
+                vm.getUsers();
                 vm.stop();
               }
             }, 1000);

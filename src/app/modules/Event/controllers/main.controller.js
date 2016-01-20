@@ -45,9 +45,11 @@
           $scope.range = pages;
 
         });
-      }
+      };
 
-
+      EventService.Event.get({is_activate: true}, function (data) {
+        $log.info(data);
+      });
 
       /*EventService.Event.get({fileName: 'services.json', limit: 5,  offset: 50},function(data) {
        vm.events = data.results;

@@ -21,11 +21,15 @@
       vm.code = {};
       var promise_interval, time, seconds;
 
-      EventService.Event.get({id:vm.param1},function(data) {
-        vm.details = (data);
-        $log.info(data);
-        vm.copyDetails =  angular.copy(data);
-      });
+
+      vm.getDetailEvent = function() {
+        EventService.Event.get({id: vm.param1}, function (data) {
+          vm.details = (data);
+          vm.copyDetails = angular.copy(data);
+        });
+      };
+
+      vm.getDetailEvent();
 
       vm.toogleDetailForm = function () {
         vm.detailForm = !vm.detailForm;
@@ -39,6 +43,9 @@
 
         if(vm.detailForm === true){
           vm.detailForm = !vm.detailForm;
+        }
+        if(vm.codeForm === true){
+          vm.codeForm = !vm.codeForm;
         }
 
       };
@@ -133,9 +140,24 @@
 
           EventService.CodeEvent.save(vm.code,function(data) {
             vm.result = data.$resolved;
+            if(vm.result === true){
+              vm.getDetailEvent();
+              time = $moment({ second: 0 });
+              seconds = 0;
+              promise_interval = $interval(function () {
+                seconds += 1;
+                time.second(seconds);
+                if (seconds === 60) { seconds = 0; }
+                $log.info(time.format('ss'));
+                if(time.format('ss') === '04'){
+                  vm.result = false;
+                  vm.stop();
+                }
+              }, 1000);
+            }
           });
         }
-      }
+      };
 
       vm.randString = function(){
         var s = "";
