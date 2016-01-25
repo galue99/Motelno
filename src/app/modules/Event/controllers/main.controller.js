@@ -9,18 +9,10 @@
       vm.title = "Events";
       var promise_interval, time, seconds;
 
-      $rootScope.menuUser = true;
-
-      $log.info($rootScope.menuUser);
-
       $scope.totalPages = 0;
       $scope.currentPage = 1;
 
-      $scope.totalPages = 0;
-      $scope.currentPage = 1;
-
-      // Pagination Range
-
+      /* Start Pagination Range  */
       /* Services for obtein all Events */
       $scope.getPosts = function(pageNumber) {
 
@@ -31,8 +23,8 @@
         EventService.Event.get({fileName: 'services.json', page: pageNumber}, function (data) {
 
           vm.events = data.results;
-          $log.info(data);
-          $scope.totalPages = 10;
+
+          $scope.totalPages = Math.floor(data.count/10);
           $scope.currentPage = pageNumber;
 
           var pages = [];
@@ -45,6 +37,7 @@
 
         });
       };
+      /* End Pagination */
 
       EventService.Event.get({is_activate: true}, function (data) {
         $log.info(data);
@@ -63,7 +56,6 @@
         vm.date = Date.now();
         return vm.date;
       };
-      //$scope.prueba = true;
 
       /* Form Submit Event */
       vm.submitForm = function (form) {
