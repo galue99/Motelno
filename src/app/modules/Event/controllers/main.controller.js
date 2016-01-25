@@ -3,7 +3,7 @@
 
   angular
     .module('motelNo')
-    .controller('MainController', function($rootScope, EventService, $log, $scope, $moment, $interval){
+    .controller('MainController', function($rootScope, EventService, $log, $scope, $moment, $interval, toastr){
 
       var vm = this;
       vm.title = "Events";
@@ -31,10 +31,9 @@
         EventService.Event.get({fileName: 'services.json', page: pageNumber}, function (data) {
 
           vm.events = data.results;
+          $log.info(data);
           $scope.totalPages = 10;
           $scope.currentPage = pageNumber;
-
-          $log.info(data);
 
           var pages = [];
 
@@ -74,25 +73,15 @@
           EventService.Event.save(vm.event,function(data) {
             vm.result = data.$resolved;
             vm.eventForm = !vm.eventForm;
-            if(vm.result === true){
-              time = $moment({ second: 0 });
-              seconds = 0;
-              promise_interval = $interval(function () {
-                seconds += 1;
-                time.second(seconds);
-                if (seconds === 60) { seconds = 0; }
-                if(time.format('ss') === '04'){
-                  vm.result = false;
-                  vm.stop();
-                }
-              }, 1000);
+            if(vm.result){
+              toastr.success('The Event Save with Exits');
               vm.event = {};
               vm.submitted = false;
-              vm.eventForm = !vm.eventForm;
+              vm.eventForm = false;
             }
-            vm.user = {};
-            vm.submitted = false;
-            vm.eventForm = !vm.eventForm;
+
+          },function(error){
+            toastr.error('Error with Save Event');
           });
         }
       };

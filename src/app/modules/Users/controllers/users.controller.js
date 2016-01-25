@@ -1,19 +1,19 @@
 /**
  * Created by edgar on 14/01/16.
  */
+/* angular */
 (function() {
   'use strict';
 
   angular
     .module('motelNo')
-    .controller('UserController', function(EventService, $log, $rootScope,$scope, $moment, $interval){
+    .controller('UserController', function(EventService, $log, $rootScope, $scope, $moment, $interval, toastr){
 
       var vm = this;
       vm.title = "Users";
       vm.userForm = false;
-      var promise_interval, time, seconds, index;
 
-      $scope.totalPages = 0;
+      $scope.totalPages  = 0;
       $scope.currentPage = 1;
 
       // Pagination Range
@@ -65,40 +65,19 @@
       vm.submitForm = function (form) {
         vm.submitted = true;
         if (form.$valid) {
-          EventService.Participant.save(vm.user,function(data) {
+          EventService.Participant.save(vm.user, function (data) {
             vm.result = data.$resolved;
-            time = $moment({ second: 0 });
-            seconds = 0;
-            promise_interval = $interval(function () {
-              seconds += 1;
-              time.second(seconds);
-              if (seconds === 60) { seconds = 0; }
-              if(time.format('ss') === '04'){
-                vm.result = false;
-                vm.stop();
-              }
-            }, 1000);
-
+            toastr.success('The User Save with Exits');
             vm.user = {};
             vm.submitted = false;
-            vm.userForm = !vm.userForm;
-          }, function(error){
+            vm.userForm  = false;
+          }, function (error) {
+            toastr.error('Error with Save User');
             vm.resultError = true;
-
-            time = $moment({ second: 0 });
-            seconds = 0;
-            promise_interval = $interval(function () {
-              seconds += 1;
-              time.second(seconds);
-              if (seconds === 60) { seconds = 0; }
-              if(time.format('ss') === '04'){
-                vm.resultError = false;
-                vm.stop();
-              }
-            }, 1000);
           });
         }
       };
+
 
       vm.stop = function () {
         $interval.cancel(promise_interval);
