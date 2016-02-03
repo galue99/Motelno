@@ -205,25 +205,25 @@
             <p><b>Activated:</b>
               <input
                 bs-switch
-                ng-model="isSelected"
+                ng-model="detailEvent.isSelected"
                 type="radio"
-                switch-active="{{ isActive }}"
-                switch-on-text="{{ onText }}"
-                switch-off-text="{{ offText }}"
-                switch-on-color="{{ onColor }}"
+                switch-active="{{ detailEvent.isActive }}"
+                switch-on-text="{{ detailEvent.onText }}"
+                switch-off-text="{{ detailEvent.offText }}"
+                switch-on-color="{{ detailEvent.onColor }}"
                 switch-off-color="{{ 'danger' }}"
-                switch-animate="{{ animate }}"
-                switch-size="{{ size }}"
+                switch-animate="{{ detailEvent.animate }}"
+                switch-size="{{ detailEvent.size }}"
                 switch-label="{{ label }}"
                 switch-icon="{{ icon }}"
-                switch-radio-off="{{ radioOff }}"
-                switch-label-width="{{ labelWidth }}"
-                switch-handle-width="{{ handleWidth }}"
+                switch-radio-off="{{ detailEvent.radioOff }}"
+                switch-label-width="{{ detailEvent.labelWidth }}"
+                switch-handle-width="{{ detailEvent.handleWidth }}"
                 switch-wrapper="{{ wrapper }}"
                 ng-value="'uno'"
                 ng-true-value="'yep'"
                 ng-false-value="'nope'"
-                switch-inverse="{{ !inverse }}"
+                switch-inverse="{{ false }}"
                 switch-readonly="{{ readonly }}">
             </p>
           </div><!-- /.box-body -->

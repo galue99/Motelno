@@ -3,8 +3,6 @@
 
   angular
     .module('motelNo')
-    .directive('alertMessage', alertMessage)
-    .directive('alertMessageError', alertMessageError)
     .directive('footerTemplate', footerTemplate)
     .directive('sidebarTemplate', sidebarTemplate)
     .directive('headerTemplate', headerTemplate)
@@ -13,37 +11,13 @@
     .directive('onlyNumber', onlyNumber);
 
   /** @ngInject */
-  function alertMessage() {
-    var directive = {
-      restrict: 'E',
-      scope: {
-        element: '='
-      },
-      templateUrl: 'app/core/directive/alert_message.html'
-    };
-
-    return directive;
-
-  }
-  function alertMessageError() {
-    var directive = {
-      restrict: 'E',
-      scope: {
-        element: '='
-      },
-      templateUrl: 'app/core/directive/alert_message_error.html'
-    };
-
-    return directive;
-
-  }
   function onlyNumber() {
     var directive = {
       restrict: 'A',
       require: 'ngModel',
       link: function (scope, element, attrs, modelCtrl) {
         modelCtrl.$parsers.push(function (inputValue) {
-          if (inputValue === undefined){ return ''; }
+          if (inputValue === angular.isUndefined){ return ''; }
           var transformedInput = inputValue.replace(/[^0-9]+/g, '');
           if (transformedInput !== inputValue) {
             modelCtrl.$setViewValue(transformedInput);
@@ -63,11 +37,11 @@
         element: '='
       },
       template: '<footer class="main-footer" data-ng-show="element">' +
-                    '<div class="pull-right hidden-xs">' +
-                    '<b>Version</b> 0.1.0' +
-                    '</div>' +
-                    '<strong>Copyright &copy; 2015-2016 <a href="#">4Geeks</a>.</strong> All rights reserved.' +
-                    '</footer>'
+      '<div class="pull-right hidden-xs">' +
+      '<b>Version</b> 0.1.0' +
+      '</div>' +
+      '<strong>Copyright &copy; 2015-2016 <a href="#">4Geeks</a>.</strong> All rights reserved.' +
+      '</footer>'
     };
 
     return directive;
@@ -82,7 +56,6 @@
       },
       templateUrl: 'app/core/directive/main-sidebar.html'
     };
-
     return directive;
   }
 
@@ -95,7 +68,6 @@
       },
       templateUrl: 'app/core/directive/header.html'
     };
-
     return directive;
   }
 
@@ -103,6 +75,7 @@
   function postsPagination() {
     var directive = {
       restrict: 'E',
+      bindToController: true,
       template: '<ul class="pagination">'+
       '<li ng-show="currentPage != 1"><a href="javascript:void(0)" ng-click="getPosts(1)">&laquo;</a></li>'+
       '<li ng-show="currentPage != 1"><a href="javascript:void(0)" ng-click="getPosts(currentPage-1)">&lsaquo; Prev</a></li>'+

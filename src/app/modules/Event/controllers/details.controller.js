@@ -6,9 +6,10 @@
 
   angular
     .module('motelNo')
-    .controller('DetailController', function($scope, $rootScope, $stateParams, $log, EventService, $moment, $interval, $state){
+    .controller('DetailController', function($scope, $rootScope, $stateParams, $log, EventService, $moment, $interval, $state, toastr){
 
       var vm = this;
+
       vm.labels = ["Users Confirmed", "Users Pendent"];
       vm.data = [300, 500];
 
@@ -19,8 +20,6 @@
       vm.detailDelete = false;
       vm.codeForm = false;
       vm.code = {};
-      var promise_interval, time, seconds;
-
 
       vm.getDetailEvent = function() {
         EventService.Event.get({id: vm.param1}, function (data) {
@@ -81,18 +80,7 @@
           vm.result = data.$resolved;
           if(vm.result === true){
             vm.detailDelete = !vm.detailDelete;
-            time = $moment({ second: 0 });
-            seconds = 0;
-            promise_interval = $interval(function () {
-              seconds += 1;
-              time.second(seconds);
-              if (seconds === 60) { seconds = 0; }
-              if(time.format('ss') === '02'){
-                vm.stop();
-                $state.go('main');
-              }
-            }, 1000);
-
+            toastr.success('The Event Delete with Exits');
           }
 
         });
@@ -105,30 +93,11 @@
           EventService.Event.update({id:vm.param1},vm.copyDetails,function(data) {
             vm.details = (data);
             vm.result = data.$resolved;
-            time = $moment({ second: 0 });
-            seconds = 0;
-            promise_interval = $interval(function () {
-              seconds += 1;
-              time.second(seconds);
-              if (seconds === 60) { seconds = 0; }
-              $log.info(time.format('ss'));
-              if(time.format('ss') === '04'){
-                vm.result = false;
-                vm.stop();
-              }
-            }, 1000);
+            toastr.success('The Event Update with Exits');
             vm.submitted = false;
             vm.detailForm = !vm.detailForm;
           });
         }
-      };
-
-      vm.prueba = function (){
-        $log.info('sd');
-      };
-
-      vm.stop = function () {
-        $interval.cancel(promise_interval);
       };
 
       vm.submitFormCode = function(form){
@@ -142,18 +111,7 @@
             vm.result = data.$resolved;
             if(vm.result === true){
               vm.getDetailEvent();
-              time = $moment({ second: 0 });
-              seconds = 0;
-              promise_interval = $interval(function () {
-                seconds += 1;
-                time.second(seconds);
-                if (seconds === 60) { seconds = 0; }
-                $log.info(time.format('ss'));
-                if(time.format('ss') === '04'){
-                  vm.result = false;
-                  vm.stop();
-                }
-              }, 1000);
+              toastr.success('The Code Save with Exits');
             }
           });
         }
@@ -172,31 +130,31 @@
 
       /* Switch Buttom */
 
-      $scope.isSelected = 'nope';
-      $scope.onText = 'Y';
-      $scope.offText = 'N';
-      $scope.isActive = true;
-      $scope.size = 'normal';
-      $scope.animate = true;
-      $scope.radioOff = true;
-      $scope.handleWidth = "auto";
-      $scope.labelWidth = "auto";
-      $scope.inverse = true;
+      vm.isSelected = 'No';
+      vm.onText = 'Y';
+      vm.offText = 'N';
+      vm.isActive = true;
+      vm.size = 'normal';
+      vm.animate = true;
+      vm.radioOff = true;
+      vm.handleWidth = "auto";
+      vm.labelWidth = "auto";
+      vm.inverse = true;
 
       $scope.$watch('isSelected', function() {
-        $log.info('Selection changed.');
+        $log.info(vm.isSelected);
       });
 
-      $scope.toggle = function() {
-        $scope.isSelected = $scope.isSelected === 'yep' ? 'nope' : 'yep';
+      vm.toggle = function() {
+        vm.isSelected = vm.isSelected === 'Yes' ? 'No' : 'Yes';
       };
 
-      $scope.setUndefined = function() {
-        $scope.isSelected = undefined;
+      vm.setUndefined = function() {
+        vm.isSelected = undefined;
       };
 
-      $scope.toggleActivation = function() {
-        $scope.isActive = !$scope.isActive;
+      vm.toggleActivation = function() {
+        vm.isActive = !vm.isActive;
       };
 
     });

@@ -7,7 +7,6 @@
 
       var vm = this;
       vm.title = "Events";
-      var promise_interval, time, seconds;
 
       $scope.totalPages = 0;
       $scope.currentPage = 1;
@@ -73,7 +72,7 @@
             }
 
           },function(error){
-            toastr.error('Error with Save Event');
+            toastr.error(error);
           });
         }
       };
@@ -83,11 +82,6 @@
         vm.event = {};
         vm.submitted = false;
         vm.eventForm = !vm.eventForm;
-      };
-
-      /* Function Stop Time */
-      vm.stop = function () {
-        $interval.cancel(promise_interval);
       };
 
     });
