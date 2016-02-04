@@ -19,7 +19,7 @@
           pageNumber = '1';
         }
 
-        EventService.Event.get({fileName: 'services.json', page: pageNumber}, function (data) {
+        EventService.Event.get({page: pageNumber}, function (data) {
 
           vm.events = data.results;
 
@@ -44,7 +44,7 @@
       */
 
       vm.getEvent = function(){
-        EventService.Event.get({fileName: 'services.json'}, function (data) {
+        EventService.Event.get({}, function (data) {
           vm.events = data.results;
         });
 
