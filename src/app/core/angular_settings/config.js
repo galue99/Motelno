@@ -6,11 +6,11 @@
       .config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig,$authProvider) {
+  function config($logProvider, toastrConfig, $authProvider) {
     // Enable log
     $logProvider.debugEnabled(true);
-    $authProvider.loginUrl = 'http://127.0.0.1:8000/token-auth';
-    $authProvider.loginUrl = 'http://127.0.0.1:8000/token-auth';
+    $authProvider.loginUrl = 'http://frozen-mountain-22587.herokuapp.com/token-auth';
+    $authProvider.loginUrl = 'http://frozen-mountain-22587.herokuapp.com/token-auth';
     $authProvider.tokenName = 'token';
     $authProvider.tokenPrefix = 'motel7';
     $authProvider.authToken= "Token";

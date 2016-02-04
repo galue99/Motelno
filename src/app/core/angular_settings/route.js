@@ -52,6 +52,7 @@
         templateUrl: 'app/modules/Event/views/main.html',
         controller: 'MainController',
         controllerAs: 'main',
+        activetab: 'event',
         resolve: {
           loginRequired: loginRequired
         }
@@ -70,6 +71,7 @@
         templateUrl: 'app/modules/Event/views/users_list.html',
         controller: 'UserListController',
         controllerAs: 'mainUserList',
+        activetab: 'users',
         resolve: {
           loginRequired: loginRequired
         }

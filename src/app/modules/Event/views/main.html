@@ -21,10 +21,10 @@
       <div class="col-lg-12 col-xs-12">
         <!-- small box -->
         <div class="pull-left">
-          <button class="btn btn-block btn-primary btn-flat" data-ng-click="main.toogleEventForm()"><i class="fa fa-user-plus"></i> Add Event</button>
+          <button class="btn btn-block btn-primary btn-flat" data-ng-click="main.toogleEventForm()"><i class="fa fa-th"></i> Add Event</button>
         </div>
         <div class="pull-right">
-          <p><b>Date: {{ main.showDate() | date : 'MM/dd/yyyy'}}</b></p>
+          <span class="badge bg-blue"><b>Date: {{ main.showDate() | date : 'MM/dd/yyyy'}}</b></span>
         </div>
         <br><br>
       </div><!-- ./col -->
@@ -35,7 +35,7 @@
         <!-- TO DO List -->
         <div class="box box-primary">
           <div class="box-header">
-            <i class="fa fa-user-plus"></i>
+            <i class="fa fa-th"></i>
             <h3 class="box-title">Create Event</h3>
             <div class="box-tools pull-right">
             </div>
@@ -97,48 +97,6 @@
         <div class="box box-primary">
           <div class="box-header">
             <i class="ion ion-clipboard"></i>
-            <h3 class="box-title">Event Active</h3>
-            <div class="box-tools pull-right">
-            </div>
-          </div><!-- /.box-header -->
-          <div class="box-body">
-            <div class="table-responsive">
-              <table class="table" data-ng-init="getPosts()">
-                <tbody>
-                <tr>
-                  <th style="width: 10px">#id</th>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>Assistents</th>
-                  <th>Confirmed</th>
-                  <th>Details</th>
-                </tr>
-                <tr data-ng-repeat="event in main.events" data-ng-if="$first" >
-                  <td>{{event.id }}.</td>
-                  <td>{{event.name}}</td>
-                  <td>
-                    <p>{{event.description}}</p>
-                  </td>
-                  <td><span class="badge bg-red">150</span></td>
-                  <td><span class="badge bg-green">55</span></td>
-                  <td>
-                    <a ui-sref="eventDetails({id:event.id})" class="btn btn-block btn-primary btn-flat">Details</a>
-                  </td>
-                </tr>
-                </tbody></table>
-            </div>
-          </div><!-- /.box-body -->
-          <div class="box-footer clearfix no-border">
-            <div class="text-center">
-            </div>
-          </div>
-        </div><!-- /.box -->
-      </section><!-- /.Left col -->
-      <section class="col-lg-12 connectedSortable">
-        <!-- TO DO List -->
-        <div class="box box-primary">
-          <div class="box-header">
-            <i class="ion ion-clipboard"></i>
             <h3 class="box-title">Events</h3>
             <div class="box-tools pull-right">
             </div>
@@ -148,22 +106,22 @@
               <table class="table" data-ng-init="getPosts()">
                 <tbody>
                 <tr>
-                  <th style="width: 10px">#id</th>
-                  <th>Name</th>
+                  <th style="width: 10px" class="text-center">#id</th>
+                  <th class="text-center">Name</th>
                   <th>Description</th>
-                  <th>Assistents</th>
-                  <th>Confirmed</th>
-                  <th>Details</th>
+                  <th class="text-center">Assistents</th>
+                  <th class="text-center">Confirmed</th>
+                  <th class="text-center">Details</th>
                 </tr>
                 <tr data-ng-repeat="event in main.events">
-                  <td>{{event.id }}.</td>
-                  <td>{{event.name}}</td>
+                  <td class="text-center">{{event.id }}.</td>
+                  <td class="text-center">{{event.name}}</td>
                   <td>
                     <p>{{event.description}}</p>
                   </td>
-                  <td><span class="badge bg-red">150</span></td>
-                  <td><span class="badge bg-green">55</span></td>
-                  <td>
+                  <td class="text-center"><span class="badge bg-red">150</span></td>
+                  <td class="text-center"><span class="badge bg-green">55</span></td>
+                  <td class="text-center">
                     <a ui-sref="eventDetails({id:event.id})" class="btn btn-block btn-primary btn-flat">Details</a>
                   </td>
                 </tr>

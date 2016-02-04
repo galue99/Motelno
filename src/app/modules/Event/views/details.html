@@ -250,22 +250,22 @@
               <div class="col-md-12">
                 <div class="chart-responsive">
                   <canvas id="doughnut" class="chart chart-doughnut"
-                          chart-data="detailEvent.data" chart-labels="detailEvent.labels">
+                          chart-data="detailEvent.data" chart-colours="detailEvent.colors" chart-labels="detailEvent.labels">
                   </canvas>
                 </div><!-- ./chart-responsive -->
               </div><!-- /.col -->
               <div class="col-md-12">
                 <ul class="chart-legend clearfix">
-                  <li><i class="fa fa-circle-o text-green"></i> Users Confirmed</li>
-                  <li><i class="fa fa-circle-o text-red"></i> Users Pending</li>
+                  <li><i class="fa fa-circle-o" style="color:#FF0000"></i> Users Confirmed</li>
+                  <li><i class="fa fa-circle-o" style="color:#008000"></i> Users Pending</li>
                 </ul>
               </div><!-- /.col -->
             </div><!-- /.row -->
           </div><!-- /.box-body -->
           <div class="box-footer no-padding">
             <ul class="nav nav-pills nav-stacked">
-              <li><a href="#">Users Pending <span class="pull-right text-red"> 12%</span></a></li>
-              <li><a href="#">Users Confirmed <span class="pull-right text-green"> 4%</span></a></li>
+              <li><a href="#">Users Pending <span class="pull-right" style="color:#008000"> 12%</span></a></li>
+              <li><a href="#">Users Confirmed <span class="pull-right" style="color:#FF0000"> 4%</span></a></li>
             </ul>
           </div><!-- /.footer -->
         </div><!-- /.box --><!-- /.box -->

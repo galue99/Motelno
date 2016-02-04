@@ -38,9 +38,18 @@
       };
       /* End Pagination */
 
-      EventService.Event.get({is_activate: true}, function (data) {
+     /* EventService.Event.get({is_activate: true}, function (data) {
         $log.info(data);
       });
+      */
+
+      vm.getEvent = function(){
+        EventService.Event.get({fileName: 'services.json'}, function (data) {
+          vm.events = data.results;
+        });
+
+      }
+      vm.getEvent();
 
       /*EventService.Event.get({fileName: 'services.json', limit: 5,  offset: 50},function(data) {
        vm.events = data.results;
@@ -69,6 +78,7 @@
               vm.event = {};
               vm.submitted = false;
               vm.eventForm = false;
+              vm.getEvent();
             }
 
           },function(error){

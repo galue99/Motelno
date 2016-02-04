@@ -9,8 +9,8 @@
     .controller('DetailController', function($scope, $rootScope, $stateParams, $log, EventService, $moment, $interval, $state, toastr){
 
       var vm = this;
-
-      vm.labels = ["Users Confirmed", "Users Pendent"];
+      vm.labels = ["Users Confirmed", "Users Pending"];
+      vm.colors = ['#FF0000', '#008000','#0000FF', '#FFFFFF'];
       vm.data = [300, 500];
 
       vm.param1 = $stateParams.id;
@@ -80,7 +80,8 @@
           vm.result = data.$resolved;
           if(vm.result === true){
             vm.detailDelete = !vm.detailDelete;
-            toastr.success('The Event Delete with Exits');
+            toastr.success('The Event was Deleted with Success');
+            $state.go('main');
           }
 
         });
@@ -93,7 +94,7 @@
           EventService.Event.update({id:vm.param1},vm.copyDetails,function(data) {
             vm.details = (data);
             vm.result = data.$resolved;
-            toastr.success('The Event Update with Exits');
+            toastr.success('The update of the event was a success');
             vm.submitted = false;
             vm.detailForm = !vm.detailForm;
           });
@@ -111,7 +112,7 @@
             vm.result = data.$resolved;
             if(vm.result === true){
               vm.getDetailEvent();
-              toastr.success('The Code Save with Exits');
+              toastr.success('The Code was successfully saved');
             }
           });
         }

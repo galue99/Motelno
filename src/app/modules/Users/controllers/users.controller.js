@@ -13,6 +13,7 @@
       vm.title = "Users";
       vm.userForm = false;
 
+
       $scope.totalPages  = 0;
       $scope.currentPage = 1;
 
@@ -47,6 +48,8 @@
         });
       };
 
+      vm.getUsers();
+
       vm.toogleUserForm = function () {
         vm.userForm = !vm.userForm;
         vm.user = {};
@@ -64,10 +67,11 @@
         if (form.$valid) {
           EventService.Participant.save(vm.user, function (data) {
             vm.result = data.$resolved;
-            toastr.success('The User Save with Exits');
+            toastr.success('The user was successfully saved');
             vm.user = {};
             vm.submitted = false;
             vm.userForm  = false;
+            vm.getUsers();
           }, function (error) {
             toastr.error('Error with Save User');
             vm.resultError = true;
@@ -111,7 +115,7 @@
                 vm.participants.splice(index, 1);
               }
             });
-            toastr.success('The User Delete with Exits');
+            toastr.success('The User was Deleted with Success');
             vm.result = false;
             vm.getUsers();
           }
