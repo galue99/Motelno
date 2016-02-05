@@ -15,8 +15,17 @@
         $scope.errFile = errFiles && errFiles[0];
         if (file) {
           file.upload = Upload.upload({
-            url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-            data: {file: file}
+            url: 'http://localhost:8080/motel-upload/upload.php',
+            method: 'POST',
+            file: file,
+            headers: {'Content-Type': undefined},
+            sendFieldsAs: 'form',
+            fields: {
+              contact: [
+                { name: 'John', email: 'john@example.org' },
+                { name: 'Linda', email: 'linda@example.org' }
+              ]
+            }
           });
 
           file.upload.then(function (response) {
