@@ -12,8 +12,10 @@
       requireBase: false
     });*/
 
+
     function loginRequired($q, $location, $auth, $rootScope) {
       var deferred = $q.defer();
+
       if ($auth.isAuthenticated()) {
         $rootScope.$emit('body:class:remove', 'hold-transition login-page');
         $rootScope.$emit('body:class:add', 'hold-transition skin-blue fixed sidebar-mini');
@@ -21,7 +23,6 @@
 
         deferred.resolve();
       } else {
-
         $rootScope.$emit('body:class:remove', 'hold-transition skin-blue fixed sidebar-mini login-page');
         $rootScope.$emit('body:class:add', 'hold-transition login-page');
         $rootScope.menuUser = false;
@@ -80,6 +81,15 @@
         url: '/users',
         templateUrl: 'app/modules/Users/views/users.html',
         controller: 'UserController',
+        controllerAs: 'mainUser',
+        resolve: {
+          loginRequired: loginRequired
+        }
+      })
+      .state('file', {
+        url: '/file',
+        templateUrl: 'app/modules/File/view/file.html',
+        controller: 'FileController',
         controllerAs: 'mainUser',
         resolve: {
           loginRequired: loginRequired
