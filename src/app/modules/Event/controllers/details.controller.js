@@ -11,7 +11,7 @@
       var vm = this;
       vm.labels = ["Users Confirmed", "Users Pending"];
       vm.colors = ['#FF0000', '#008000','#0000FF', '#FFFFFF'];
-      vm.data = [300, 500];
+
 
       vm.param1 = $stateParams.id;
       vm.module = 'Event';
@@ -24,11 +24,18 @@
       vm.getDetailEvent = function() {
         EventService.Event.get({id: vm.param1}, function (data) {
           vm.details = (data);
+          vm.data = [data.count_members_activo, data.count_members_no_activo];
           vm.copyDetails = angular.copy(data);
         });
       };
 
+     // vm.details.details.count_members_activo
+      //vm.details.details.count_members_no_activo
+
+      //$log.info(vm.details.details.count_members_no_activo);
+
       vm.getDetailEvent();
+      $log.info(vm.details);
 
       vm.toogleDetailForm = function () {
         vm.detailForm = !vm.detailForm;
