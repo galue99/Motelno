@@ -9,8 +9,8 @@
   function config($logProvider, toastrConfig, $authProvider) {
     // Enable log
     $logProvider.debugEnabled(true);
-    $authProvider.loginUrl = 'http://frozen-mountain-22587.herokuapp.com/token-auth';
-    $authProvider.loginUrl = 'http://frozen-mountain-22587.herokuapp.com/token-auth';
+    $authProvider.loginUrl = 'http://motelo7qab.herokuapp.com/token-auth';
+    $authProvider.loginUrl = 'http://motelo7qab.herokuapp.com/token-auth';
     $authProvider.tokenName = 'token';
     $authProvider.tokenPrefix = 'motel7';
     $authProvider.authToken= "Token";
