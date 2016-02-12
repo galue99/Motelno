@@ -321,7 +321,7 @@
                   <label for="address">Create Code:</label>
                   <div class="input-group"
                        data-ng-class="{ 'has-error': formCode.code.$invalid && !detailEvent.formCode.eventForm.code.$pristine && detailEvent.submitted  }">
-                    <input types="text" name="code" ng-model="detailEvent.create.code" class="form-control" required />
+                    <input types="text" name="code" ng-model="detailEvent.create.code" class="form-control" required disabled/>
                     <span class="input-group-btn">
                       <button class="btn btn-success" type="button" tooltip="Create Code" data-ng-click="detailEvent.randString()">
                         <i class="fa fa-magic"></i> Create Code

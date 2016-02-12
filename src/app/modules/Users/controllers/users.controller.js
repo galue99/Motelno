@@ -29,7 +29,13 @@
         EventService.Participant.get({fileName: 'services.json', page: pageNumber}, function (data) {
 
           vm.participants = data.results;
-          $scope.totalPages = Math.floor(data.count/10);
+
+          if( (102/10) % 1 != 0){
+            $scope.totalPages = Math.floor(data.count/10) + 1;
+          }else{
+            $scope.totalPages = Math.floor(data.count/10);
+          }
+
           $scope.currentPage = pageNumber;
           var pages = [];
 
