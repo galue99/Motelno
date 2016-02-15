@@ -12,11 +12,11 @@
       vm.title = "Admin Images";
 
       $scope.uploadPic = function(file, file2, file3) {
+        file.upload = Upload.upload({
+          url: base_url + 'Location',
+          data: {image_information_english: file, image_tonight_english: file2, image_jackdaniels_english: file3, name: 'Admin'}
+        });
 
-          file.upload = Upload.upload({
-            url: base_url + 'Location',
-            data: {image_information_english: file, image_tonight_english: file2, image_jackdaniels_english: file3, name: 'Admin'}
-          });
         file.upload.then(function (response) {
           $timeout(function () {
             file.result = response.data;
