@@ -6,19 +6,26 @@
 
   angular
     .module('motelNo')
-    .controller('FileController', function($scope, Upload, $timeout , base_url){
-    console.log()
+    .controller('FileController', function($scope, Upload, $timeout , base_url, toastr){
+
       var vm = this;
+      vm.title = "Admin Images";
 
-      $scope.uploadPic = function(file) {
-        file.upload = Upload.upload({
-          url:  base_url+'Location',
-          data: {image: file, name: $scope.username},
-        });
+      $scope.uploadPic = function(file, file2, file3) {
 
+          file.upload = Upload.upload({
+            url: base_url + 'Location',
+            data: {image_information_english: file, image_tonight_english: file2, image_jackdaniels_english: file3, name: 'Admin'}
+          });
         file.upload.then(function (response) {
           $timeout(function () {
             file.result = response.data;
+            if(file.result){
+              toastr.success('Upload Images with Exits');
+              vm.file   = {};
+              vm.picFile2  = {};
+              vm.picFile3  = {};
+            }
           });
         }, function (response) {
           if (response.status > 0)
@@ -28,42 +35,5 @@
           file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
         });
       }
-
-
-      $scope.uploadFiles = function(file, errFiles) {
-        $scope.f = file;
-        $scope.errFile = errFiles && errFiles[0];
-        if (file) {
-          file.upload = Upload.upload({
-            url: base_url+'Location',
-            method: 'POST',
-            file: file,
-            headers: {'Content-Type': undefined},
-            sendFieldsAs: 'form',
-            fields: {
-              contact: [
-                { name: 'John', email: 'john@example.org' },
-                { name: 'Linda', email: 'linda@example.org' }
-              ]
-            }
-          });
-
-          file.upload.then(function (response) {
-            $timeout(function () {
-              file.result = response.data;
-            });
-          }, function (response) {
-            if (response.status > 0)
-              $scope.errorMsg = response.status + ': ' + response.data;
-          }, function (evt) {
-            file.progress = Math.min(100, parseInt(100.0 *
-              evt.loaded / evt.total));
-          });
-        }
-      };
-
     });
-
-
-
 })();
