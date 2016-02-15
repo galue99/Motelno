@@ -14,6 +14,8 @@
           username: vm.username,
           password: vm.password
         };
+
+
         // Use Satellizer's $auth service to login
         $auth.login(credentials).then(function() {
           // If login is successful, redirect to the users state
