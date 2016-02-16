@@ -21,6 +21,7 @@
       vm.codeForm = false;
       vm.uploadForm = false;
       vm.code = {};
+      vm.listCode = true;
       $scope.status = true;
 
       vm.getDetailEvent = function() {
@@ -30,11 +31,6 @@
           vm.copyDetails = angular.copy(data);
         });
       };
-
-     // vm.details.details.count_members_activo
-      //vm.details.details.count_members_no_activo
-
-      //$log.info(vm.details.details.count_members_no_activo);
 
       vm.getDetailEvent();
 
@@ -47,6 +43,7 @@
       };
       vm.toogleDeleteForm = function () {
         vm.detailDelete = !vm.detailDelete;
+        vm.listCode = !vm.listCode;
 
         if(vm.detailForm === true){
           vm.detailForm = !vm.detailForm;
@@ -59,10 +56,28 @@
 
       vm.toogleCodeForm = function () {
         vm.codeForm = !vm.codeForm;
+
+        if(vm.uploadForm === true){
+          vm.uploadForm = !vm.uploadForm;
+        }
+
+        if(vm.detailForm === true){
+          vm.detailForm = !vm.detailForm;
+        }
+
       };
 
       vm.toogleUpload = function () {
         vm.uploadForm = !vm.uploadForm;
+        vm.listCode = !vm.listCode;
+
+        if(vm.detailForm === true){
+          vm.detailForm = !vm.detailForm;
+        }
+        if(vm.codeForm === true){
+          vm.codeForm = !vm.codeForm;
+        }
+
       };
 
       vm.showDate = function () {
@@ -141,38 +156,11 @@
       };
 
 
-      /* Switch Buttom */
-
-      vm.isSelected = 'No';
-      vm.onText = 'Y';
-      vm.offText = 'N';
-      vm.isActive = true;
-      vm.size = 'normal';
-      vm.animate = true;
-      vm.radioOff = true;
-      vm.handleWidth = "auto";
-      vm.labelWidth = "auto";
-      vm.inverse = true;
-
-      $scope.$watch('isSelected', function() {
-        $log.info(vm.isSelected);
-      });
-
-      vm.toggle = function() {
-        vm.isSelected = vm.isSelected === 'Yes' ? 'No' : 'Yes';
-      };
-
-      vm.setUndefined = function() {
-        vm.isSelected = undefined;
-      };
-
-      vm.toggleActivation = function() {
-        vm.isActive = !vm.isActive;
-      };
-
+    /* Download Excell */
       vm.downloadList = function() {
         location.href = base_url +'/Event/'+vm.param1+'/export_data';
       };
+    /* End Download */
 
       /* Switch Button */
        $scope.changeStatus = function(){

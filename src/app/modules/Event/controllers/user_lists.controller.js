@@ -11,6 +11,7 @@
       var vm = this;
       vm.title = "User List";
       vm.param1 = $stateParams.id;
+      vm.list = false;
 
       $scope.currentPage = 1;
       $scope.pageSize = 10;
@@ -23,6 +24,11 @@
         EventService.Event.get({id: vm.param1}, function (data) {
           vm.users = data.members;
         });
+
+
+        vm.change = function(id){
+          $log.info(id);
+        }
 
 
     });
