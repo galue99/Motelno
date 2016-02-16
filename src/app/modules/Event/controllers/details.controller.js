@@ -21,6 +21,7 @@
       vm.codeForm = false;
       vm.uploadForm = false;
       vm.code = {};
+      $scope.status = true;
 
       vm.getDetailEvent = function() {
         EventService.Event.get({id: vm.param1}, function (data) {
@@ -172,6 +173,13 @@
       vm.downloadList = function() {
         location.href = base_url +'/Event/'+vm.param1+'/export_data';
       };
+
+      /* Switch Button */
+       $scope.changeStatus = function(){
+        $scope.status = !$scope.status;
+         console.log('asd');
+      };
+      /* End Button*/
 
 
       /* Upload Image */

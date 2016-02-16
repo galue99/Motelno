@@ -205,28 +205,9 @@
             <p><b>Location:</b> Sunt aliquid sed ducimus quam. Dignissimos in atque dolor ad dolorum natus. Illo nostrum et ut dignissimos minus quis. Dolor animi fuga qui molestias. Culpa fuga omnis repellendus et in ratione ipsa.</p>
             <p><b>Code Generate:</b> {{detailEvent.create.code}}</p>
             <p><b>Activated:</b>
-              <input
-                bs-switch
-                ng-model="detailEvent.isSelected"
-                type="radio"
-                switch-active="{{ detailEvent.isActive }}"
-                switch-on-text="{{ detailEvent.onText }}"
-                switch-off-text="{{ detailEvent.offText }}"
-                switch-on-color="{{ detailEvent.onColor }}"
-                switch-off-color="{{ 'danger' }}"
-                switch-animate="{{ detailEvent.animate }}"
-                switch-size="{{ detailEvent.size }}"
-                switch-label="{{ label }}"
-                switch-icon="{{ icon }}"
-                switch-radio-off="{{ detailEvent.radioOff }}"
-                switch-label-width="{{ detailEvent.labelWidth }}"
-                switch-handle-width="{{ detailEvent.handleWidth }}"
-                switch-wrapper="{{ wrapper }}"
-                ng-value="'uno'"
-                ng-true-value="'yep'"
-                ng-false-value="'nope'"
-                switch-inverse="{{ false }}"
-                switch-readonly="{{ readonly }}">
+
+              <i class="fa fa-toggle-on active1" ng-if="status == true" ng-click="changeStatus();"></i>
+              <i class="fa fa-toggle-on fa-rotate-180 inactive1" ng-if="status == false" ng-click="changeStatus();"></i>
             </p>
           </div><!-- /.box-body -->
           <div class="box-footer clearfix no-border">

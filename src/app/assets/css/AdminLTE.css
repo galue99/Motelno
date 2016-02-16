@@ -4728,6 +4728,10 @@ table.text-center th {
   }
 }
 
-.img-max{
-  max-height: 186px;
-}
+.img-max{max-height: 186px;}
+
+
+.active1, .inactive1 {font-size:40px;cursor:pointer;}
+.active1, .inactive1 {font-size:40px;cursor:pointer;}
+i.active1 {color:#5cb85c;left:85px;margin-top:-7px;position: absolute;}
+i.inactive1 {color:#d9534f;left:85px;margin-top:-7px;position: absolute;}
