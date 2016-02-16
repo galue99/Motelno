@@ -6,7 +6,7 @@
 
   angular
     .module('motelNo')
-    .controller('FileController', function($scope, Upload, $timeout , base_url, toastr){
+    .controller('FileController', function($scope, Upload, $timeout, base_url, toastr){
 
       var vm = this;
       vm.title = "Admin Images";

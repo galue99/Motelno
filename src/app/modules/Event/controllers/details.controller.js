@@ -6,7 +6,7 @@
 
   angular
     .module('motelNo')
-    .controller('DetailController', function($scope, $rootScope, $stateParams, $log, EventService, $moment, $interval, $state, toastr){
+    .controller('DetailController', function($scope, $rootScope, $stateParams, Upload, $timeout, EventService, $moment, $interval, $state, toastr, base_url, $log){
 
       var vm = this;
       vm.labels = ["Users Confirmed", "Users Pending"];
@@ -19,6 +19,7 @@
       vm.detailForm = false;
       vm.detailDelete = false;
       vm.codeForm = false;
+      vm.uploadForm = false;
       vm.code = {};
 
       vm.getDetailEvent = function() {
@@ -35,7 +36,6 @@
       //$log.info(vm.details.details.count_members_no_activo);
 
       vm.getDetailEvent();
-      $log.info(vm.details);
 
       vm.toogleDetailForm = function () {
         vm.detailForm = !vm.detailForm;
@@ -58,6 +58,10 @@
 
       vm.toogleCodeForm = function () {
         vm.codeForm = !vm.codeForm;
+      };
+
+      vm.toogleUpload = function () {
+        vm.uploadForm = !vm.uploadForm;
       };
 
       vm.showDate = function () {
@@ -164,6 +168,39 @@
       vm.toggleActivation = function() {
         vm.isActive = !vm.isActive;
       };
+
+      vm.downloadList = function() {
+        location.href = base_url +'/Event/'+vm.param1+'/export_data';
+      };
+
+
+      /* Upload Image */
+      $scope.uploadPic = function(file, file2) {
+        file.upload = Upload.upload({
+          url: base_url + 'Event/' + vm.param1,
+          data: {is_activate: vm.details.is_activate, date: vm.details.date, location:vm.details.location, description:vm.details.description, name:vm.details.name, max_participant: vm.details.max_participant, image_information: file, image_principal: file2},
+          method: 'PUT'
+        });
+
+        file.upload.then(function (response) {
+          $timeout(function () {
+            file.result = response.data;
+            if(file.result){
+              toastr.success('Upload Images with Exits');
+              vm.file   = {};
+              vm.picFile2  = {};
+            }
+          });
+        }, function (response) {
+          if (response.status > 0)
+            $scope.errorMsg = response.status + ': ' + response.data;
+        }, function (evt) {
+          // Math.min is to fix IE which reports 200% sometimes
+          file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+        });
+      };
+
+      /*End Upload */
 
     });
 })();

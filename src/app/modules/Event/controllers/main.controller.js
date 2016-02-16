@@ -7,10 +7,14 @@
 
       var vm = this;
       vm.title = "Events";
+      vm.tab = 1;
 
       $scope.totalPages = 0;
       $scope.currentPage = 1;
 
+      vm.selectTab = function (tab) {
+        vm.tab = tab;
+      };
 
       EventService.Event.get({is_activate: 'True'}, function (data) {
         vm.events_active = data.results;
