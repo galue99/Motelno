@@ -50,13 +50,6 @@
       })
       .state('main', {
         url: '/',
-        templateUrl: 'app/modules/Main/views/main.html',
-        resolve: {
-          loginRequired: loginRequired
-        }
-      })
-      .state('event', {
-        url: '/event',
         templateUrl: 'app/modules/Event/views/event.html',
         controller: 'MainController',
         controllerAs: 'main',
