@@ -71,6 +71,28 @@
                     </div>
                   </div>
                   <div class="form-group"
+                       ng-class="{ 'has-error' : eventForm.date.$invalid && !main.eventForm.date.$pristine && main.submitted  }">
+                    <div class="col-xs-6">
+                      <label>Date:</label>
+                      <p class="input-group">
+                        <input type="text" class="form-control" name="date" uib-datepicker-popup ng-model="main.event.date" is-open="popup2.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+                      </p>
+                      <p ng-show="eventForm.date.$error.required && main.submitted" class="help-block">You Date is required.</p>
+                    </div>
+                  </div>
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : eventForm.description.$invalid && !main.eventForm.description.$pristine && main.submitted  }">
+                    <div class="col-xs-6">
+                      <label>Location:</label>
+                    <input type="text" class="form-control" placeholder="Location:" id="location"
+                              data-ng-model="main.event.location" name="location" required />
+                      <p ng-show="eventForm.description.$error.required && main.submitted" class="help-block">You Location is required.</p>
+                    </div>
+                  </div>
+                  <div class="form-group"
                        ng-class="{ 'has-error' : eventForm.description.$invalid && !main.eventForm.description.$pristine && main.submitted  }">
                     <div class="col-xs-12">
                       <label>Description:</label>
