@@ -254,7 +254,7 @@
           </div><!-- /.footer -->
         </div><!-- /.box --><!-- /.box -->
       </section><!-- /.Left col -->
-      <div class="content" data-ng-show="detailEvent.uploadForm">
+      <div class="" data-ng-show="detailEvent.uploadForm">
         <form name="myForm">
           <div class="row">
             <div class="col-md-12">
@@ -272,9 +272,9 @@
                                accept="image/*" ngf-max-size="2MB" required
                                ngf-model-invalid="errorFiles">
                       </div>
-                      <div class="col-lg-12">
+                      <div class="col-lg-12 text-center">
                         <br>
-                        <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile1" class="img-responsive img-max">
+                        <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile1" class="img-responsive img-max center-block">
                       </div>
                       <div class="col-lg-12">
                         <br>
@@ -300,9 +300,9 @@
                                accept="image/*" ngf-max-size="2MB" required
                                ngf-model-invalid="errorFiles">
                       </div>
-                      <div class="col-lg-12">
+                      <div class="col-lg-12 text-center">
                         <br>
-                        <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile2" class="img-responsive img-max">
+                        <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile2" class="img-responsive img-max center-block">
                       </div>
                       <div class="col-lg-12">
                         <br>
@@ -314,20 +314,21 @@
                   </div><!-- /.box-footer -->
                 </div><!--/.box -->
               </div><!-- /.col -->
-            </div>
-            <div class="col-lg-12">
-              <button ng-disabled="!myForm.$valid"  ng-click="uploadPic(picFile1, picFile2)" class="btn btn-primary">Submit</button>
+              <div class="col-md-12">
+                <button ng-disabled="!myForm.$valid"  ng-click="uploadPic(picFile1, picFile2)" class="btn btn-primary">Submit</button>
       <span class="progress" ng-show="picFile.progress >= 0">
         <div style="width:{{picFile1.progress}}%"
              ng-bind="picFile1.progress + '%'"></div>
       </span>
-              <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+
+              </div>
             </div>
           </div>
         </form>
       </div>
-
-      <section class="col-lg-12 col-xs-12 connectedSortable" data-ng-show="!detailEvent.codeForm">
+      <br>
+      <section class="col-lg-12 col-xs-12 connectedSortable" data-ng-show="detailEvent.listCode">
         <!-- TO DO List -->
         <form name="formCode" novalidate>
           <div class="box box-primary">
@@ -338,20 +339,20 @@
             <div class="box-body">
               <div class="row">
                 <div class="col-lg-12">
-                <div class="table-responsive">
-                  <table class="table">
-                    <tr>
-                      <th>#Id</th>
-                      <th>Code</th>
-                      <th>Description</th>
-                    </tr>
-                    <tr data-ng-repeat="code in detailEvent.details.Codes">
-                      <td>{{code.id}}</td>
-                      <td>{{code.code}}</td>
-                      <td>{{code.description}}</td>
-                    </tr>
-                  </table>
-                </div>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <tr>
+                        <th>#Id</th>
+                        <th>Code</th>
+                        <th>Description</th>
+                      </tr>
+                      <tr data-ng-repeat="code in detailEvent.details.Codes">
+                        <td>{{code.id}}</td>
+                        <td>{{code.code}}</td>
+                        <td>{{code.description}}</td>
+                      </tr>
+                    </table>
+                  </div>
                 </div>
               </div><!-- /.row -->
             </div><!-- /.box-body -->
@@ -388,12 +389,12 @@
                 <div>
                   <div class="form-group"
                        ng-class="{ 'has-error' : formCode.description.$invalid && !detailEvent.formCode.description.$pristine && detailEvent.submitted }">                    <div class="col-lg-12">
-                      <label>Description:</label>
+                    <label>Description:</label>
                     <textarea class="form-control" placeholder="Description:"
                               data-ng-model="detailEvent.create.description" name="description" required>
                                             </textarea>
                     <p class="help-block error-message" ng-show="formCode.description.$error.required && detailEvent.submitted" class="help-block">You Description is required.</p>
-                    </div>
+                  </div>
                   </div>
                 </div>
               </div><!-- /.row -->
