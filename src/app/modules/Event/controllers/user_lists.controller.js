@@ -11,7 +11,8 @@
       var vm = this;
       vm.title = "User List";
       vm.param1 = $stateParams.id;
-      vm.list = false;
+      vm.list = {};
+      vm.listEmail = [];
 
       $scope.currentPage = 1;
       $scope.pageSize = 10;
@@ -27,8 +28,22 @@
 
 
         vm.change = function(id){
-          $log.info(id);
-        }
+          if (vm.listEmail.indexOf(id) === -1){
+            vm.listEmail.push({ids:id});
+            _.each(vm.listEmail, function (obj) {
+              $log.info(obj);
+              if(obj !== {ids:id}){
+                $log.info(obj);
+
+              }
+            });
+          }else{
+            var index = vm.listEmail.indexOf(id);
+            vm.listEmail.splice(index, 1);
+          }
+
+          $log.info(vm.listEmail);
+        };
 
 
     });
