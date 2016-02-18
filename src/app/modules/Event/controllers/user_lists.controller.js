@@ -29,12 +29,11 @@
 
         vm.change = function(id){
           if (vm.listEmail.indexOf(id) === -1){
-            vm.listEmail.push({ids:id});
+            vm.listEmail.push(id);
             _.each(vm.listEmail, function (obj) {
               $log.info(obj);
-              if(obj !== {ids:id}){
+              if(obj !== id){
                 $log.info(obj);
-
               }
             });
           }else{
