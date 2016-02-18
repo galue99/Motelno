@@ -6,11 +6,11 @@
       .config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig, $authProvider) {
+  function config($logProvider, toastrConfig, $authProvider, base_url) {
     // Enable log
     $logProvider.debugEnabled(true);
-    $authProvider.loginUrl = 'http://motelo7qab.herokuapp.com/token-auth';
-    $authProvider.loginUrl = 'http://motelo7qab.herokuapp.com/token-auth';
+    $authProvider.loginUrl = base_url + 'token-auth';
+    //$authProvider.loginUrl = 'http://motelo7qab.herokuapp.com/token-auth';
     $authProvider.tokenName = 'token';
     $authProvider.tokenPrefix = 'motel7';
     $authProvider.authToken= "Token";

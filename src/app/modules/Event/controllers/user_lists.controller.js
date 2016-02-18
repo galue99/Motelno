@@ -6,7 +6,7 @@
 
   angular
     .module('motelNo')
-    .controller('UserListController', function(EventService, $stateParams, $log, $rootScope, $scope){
+    .controller('UserListController', function(EventService, $stateParams, $log, $rootScope, $scope, $http){
 
       var vm = this;
       vm.title = "User List";
@@ -42,6 +42,31 @@
           }
 
           $log.info(vm.listEmail);
+        };
+
+        vm.sendEmail = function(){
+          var obj = "";
+
+           for(var i=0; i<vm.listEmail.length; i++){
+             if(i > 0){
+               obj = obj.concat('&user_ids=' + vm.listEmail[i]);
+             }else {
+               obj = obj.concat('user_ids=' + vm.listEmail[i]);
+             }
+
+          };
+
+          $http({
+            method: 'GET',
+            url: 'http://motelo7qab.herokuapp.com/Event/2/send_mass_email?'+obj
+          }).then(function successCallback(response) {
+            // this callback will be called asynchronously
+            // when the response is available
+          }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+          });
+
         };
 
 
