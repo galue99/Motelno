@@ -15,20 +15,23 @@
 
       vm.param1 = $stateParams.id;
       vm.module = 'Event';
-      vm.title = 'Details';
+      vm.title = 'Event Details';
       vm.detailForm = false;
       vm.detailDelete = false;
       vm.codeForm = false;
       vm.uploadForm = false;
       vm.code = {};
       vm.listCode = true;
-      $scope.status = true;
+      //vm.copyDetails1 = {};
 
       vm.getDetailEvent = function() {
         EventService.Event.get({id: vm.param1}, function (data) {
           vm.details = (data);
           vm.data = [data.count_members_activo, data.count_members_no_activo];
           vm.copyDetails = angular.copy(data);
+          vm.copyDetails1 = angular.copy(data);
+          $scope.status = vm.copyDetails1.is_activate;
+          $log.info(vm.copyDetails1.is_activate);
         });
       };
 
@@ -53,6 +56,93 @@
         }
 
       };
+
+
+      /* Date Picker */
+/*      $scope.today = function() {
+        vm.copyDetails.date = new Date();
+      };
+
+      $scope.today();*/
+
+      $scope.clear = function() {
+        vm.event.date = null;
+      };
+
+      // Disable weekend selection
+      $scope.disabled = function(date, mode) {
+        return mode === 'day' && (date.getDay() === -1 || date.getDay() === 7);
+      };
+
+      $scope.toggleMin = function() {
+        $scope.minDate = $scope.minDate ? null : new Date();
+      };
+
+      $scope.toggleMin();
+      $scope.maxDate = new Date(2020, 5, 22);
+
+      $scope.open1 = function() {
+        $scope.popup1.opened = true;
+      };
+
+      $scope.open2 = function() {
+        $scope.popup2.opened = true;
+      };
+
+      $scope.setDate = function(year, month, day) {
+        $scope.dt = new Date(year, month, day);
+      };
+
+      $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+      };
+
+      $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+      $scope.format = $scope.formats[0];
+      $scope.altInputFormats = ['M!/d!/yyyy'];
+
+      $scope.popup1 = {
+        opened: false
+      };
+
+      $scope.popup2 = {
+        opened: false
+      };
+
+      var tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      var afterTomorrow = new Date();
+      afterTomorrow.setDate(tomorrow.getDate() + 1);
+      $scope.events =
+        [
+          {
+            date: tomorrow,
+            status: 'full'
+          },
+          {
+            date: afterTomorrow,
+            status: 'partially'
+          }
+        ];
+
+      $scope.getDayClass = function(date, mode) {
+        if (mode === 'day') {
+          var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+          for (var i = 0; i < $scope.events.length; i++) {
+            var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+
+            if (dayToCheck === currentDay) {
+              return $scope.events[i].status;
+            }
+          }
+        }
+
+        return '';
+      };
+
+      /* End Date*/
 
       vm.toogleCodeForm = function () {
         vm.codeForm = !vm.codeForm;
@@ -89,7 +179,6 @@
       /**/
 
       vm.cancelDelete = function(){
-
         if(vm.detailDelete === true){
           vm.detailDelete = !vm.detailDelete;
         }
@@ -135,7 +224,8 @@
           vm.code.code = vm.create.code;
           vm.code.event = vm.details.url;
 
-          EventService.CodeEvent.save(vm.code,function(data) {
+
+          EventService.CodeEvent.put(vm.code,function(data) {
             vm.result = data.$resolved;
             if(vm.result === true){
               vm.getDetailEvent();
@@ -164,8 +254,22 @@
 
       /* Switch Button */
        $scope.changeStatus = function(){
-        $scope.status = !$scope.status;
-         console.log('asd');
+
+      // $scope.status = vm.copyDetails1.is_activate;
+         $scope.status = !$scope.status;
+         $log.info($scope.status);
+         //$log.info(vm.copyDetails1);
+         vm.copyDetails1.is_activate = $scope.status;
+         EventService.Event.update({id:vm.param1},vm.copyDetails1,function(data) {
+           vm.details = (data);
+           $log.info(data);
+           vm.result = data.$resolved;
+           toastr.success('The update of the event was a success');
+           //vm.getDetailEvent();
+
+         });
+
+
       };
       /* End Button*/
 

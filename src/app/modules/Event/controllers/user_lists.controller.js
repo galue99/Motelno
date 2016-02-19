@@ -10,6 +10,8 @@
 
       var vm = this;
       vm.title = "User List";
+      vm.breadcumbs = "Events > Details > User List";
+
       vm.param1 = $stateParams.id;
       vm.list = {};
       vm.listEmail = [];
@@ -40,8 +42,6 @@
             var index = vm.listEmail.indexOf(id);
             vm.listEmail.splice(index, 1);
           }
-
-          $log.info(vm.listEmail);
         };
 
         vm.sendEmail = function(){
@@ -53,7 +53,6 @@
              }else {
                obj = obj.concat('user_ids=' + vm.listEmail[i]);
              }
-
           };
 
           $http({

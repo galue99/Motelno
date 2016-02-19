@@ -17,12 +17,11 @@
         vm.tab = tab;
       };
 
-
       /* Date Picker */
-
       $scope.today = function() {
         vm.event.date = new Date();
       };
+
       $scope.today();
 
       $scope.clear = function() {
@@ -31,7 +30,7 @@
 
       // Disable weekend selection
       $scope.disabled = function(date, mode) {
-        return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+        return mode === 'day' && (date.getDay() === -1 || date.getDay() === 7);
       };
 
       $scope.toggleMin = function() {

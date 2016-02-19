@@ -112,15 +112,35 @@
                     </div>
                   </div>
                   <div class="form-group"
+                       ng-class="{ 'has-error' : eventForm.date.$invalid && !detailEvent.eventForm.date.$pristine && detailEvent.submitted  }">
+                    <div class="col-xs-6">
+                      <label>Date:</label>
+                      <p class="input-group">
+                        <input type="text" class="form-control" name="date" uib-datepicker-popup ng-model="detailEvent.copyDetails.date" is-open="popup2.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+                      </p>
+                      <p ng-show="eventForm.date.$error.required && detailEvent.submitted" class="help-block">You Date is required.</p>
+                    </div>
+                  </div>
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : eventForm.location.$invalid && !detailEvent.eventForm.location.$pristine && detailEvent.submitted  }">
+                    <div class="col-xs-6">
+                      <label>Location:</label>
+                      <input type="text" class="form-control" placeholder="Location:"  id="location"
+                             data-ng-model="detailEvent.copyDetails.location" name="location" required />
+                      <p ng-show="eventForm.location.$error.required && detailEvent.submitted" class="help-block">You Location is required.</p>
+                    </div>
+                  </div>
+                  <div class="form-group"
                        ng-class="{ 'has-error' : eventForm.description.$invalid && !detailEvent.eventForm.description.$pristine && detailEvent.submitted  }">
                     <div class="col-xs-12">
                       <label>Description:</label>
-                    <textarea class="form-control" placeholder="Descripción:" id="description"
-                              data-ng-model="detailEvent.copyDetails.description"  data-ng-maxlength="200" name="description" required>
+                    <textarea class="form-control" placeholder="Description:" id="description"
+                              data-ng-model="detailEvent.copyDetails.description" name="description" required>
                                             </textarea>
                       <p ng-show="eventForm.description.$error.required && detailEvent.submitted" class="help-block">You Description is required.</p>
-                      <p class="help-block error-message" ng-show="eventForm.description.$error.maxlength">* Solo es permitido 200 caracteres</p>
-
                     </div>
                   </div>
                 </div>
@@ -201,8 +221,8 @@
             <p><b>Number of Guest:</b> <span class="badge bg-green">{{detailEvent.details.max_participant}}</span></p>
             <p><b>Confirmed Guests:</b> <span class="badge bg-green">{{detailEvent.details.count_members_activo}}</span></p>
             <p><b>Pending Guests (Waiting List):</b> <span class="badge bg-red">{{detailEvent.details.count_members_no_activo}}</span></p>
-            <p><b>Date:</b> Lorem Ipsum</p>
-            <p><b>Location:</b> Sunt aliquid sed ducimus quam. Dignissimos in atque dolor ad dolorum natus. Illo nostrum et ut dignissimos minus quis. Dolor animi fuga qui molestias. Culpa fuga omnis repellendus et in ratione ipsa.</p>
+            <p><b>Date:</b> {{detailEvent.details.date  | date:"MM/dd/yyyy 'at' h:mma"}}.</p>
+            <p><b>Location:</b> {{detailEvent.details.location}}.</p>
             <p><b>Code Generate:</b> {{detailEvent.create.code}}</p>
             <p><b>Activated:</b>
 
