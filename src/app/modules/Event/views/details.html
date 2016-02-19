@@ -137,9 +137,11 @@
                        ng-class="{ 'has-error' : eventForm.description.$invalid && !detailEvent.eventForm.description.$pristine && detailEvent.submitted  }">
                     <div class="col-xs-12">
                       <label>Description:</label>
-                    <textarea class="form-control" placeholder="Description:" id="description"
+                    <textarea class="form-control" placeholder="Description:" id="description" data-ng-maxlength="200"
                               data-ng-model="detailEvent.copyDetails.description" name="description" required>
                                             </textarea>
+                      <div class="pull-right"><em style="color:gray">Only 200 Characters</em></div>
+                      <p class="help-block error-message" ng-show="eventForm.description.$error.maxlength">* Only 200 Characters</p>
                       <p ng-show="eventForm.description.$error.required && detailEvent.submitted" class="help-block">You Description is required.</p>
                     </div>
                   </div>
