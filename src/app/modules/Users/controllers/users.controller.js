@@ -7,11 +7,13 @@
 
   angular
     .module('motelNo')
-    .controller('UserController', function(EventService, $log, $rootScope, $scope, $moment, $interval, toastr){
+    .controller('UserController', function(EventService, $log, $rootScope, $scope, $moment, $interval, toastr, $window){
 
       var vm = this;
       vm.title = "Users";
       vm.userForm = false;
+
+      vm.hgt = $window.innerHeight - 52;
 
 
       $scope.totalPages  = 0;

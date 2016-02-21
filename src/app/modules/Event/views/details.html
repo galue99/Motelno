@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div class="content-wrapper" style="min-height: {{detailEvent.hgt}}px;">
   <section class="content-header">
     <h1>
       Admin Motelno7
@@ -338,16 +338,48 @@
               </div><!-- /.col -->
               <div class="col-md-12">
                 <button ng-disabled="!myForm.$valid"  ng-click="uploadPic(picFile1, picFile2)" class="btn btn-primary">Submit</button>
-      <span class="progress" ng-show="picFile.progress >= 0">
-        <div style="width:{{picFile1.progress}}%"
-             ng-bind="picFile1.progress + '%'"></div>
-      </span>
+                <span class="progress" ng-show="picFile.progress >= 0">
+                  <div style="width:{{picFile1.progress}}%"
+                       ng-bind="picFile1.progress + '%'"></div>
+                </span>
                 <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
 
               </div>
             </div>
           </div>
         </form>
+        <br>
+        <div class="col-lg-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Images</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="table-responsive">
+                <table class="table">
+                  <tr style="align-content: center">
+                    <th>Principal Image</th>
+                    <td>{{detailEvent.details.image_principal}}</td>
+                    <td>
+                      <img ngf-thumbnail="detailEvent.details.image_principal" class="img-responsive img-max1 center-block">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Information Image</th>
+                    <td>{{detailEvent.details.image_information}}</td>
+                    <td>
+                      <img ngf-thumbnail="detailEvent.details.image_information" class="img-responsive img-max1 center-block">
+                    </td>
+
+                  </tr>
+                  <tr>
+
+                  </tr>
+                </table>
+              </div>
+            </div>
+            </div>
+        </div>
       </div>
       <br>
       <section class="col-lg-12 col-xs-12 connectedSortable" data-ng-show="detailEvent.listCode">

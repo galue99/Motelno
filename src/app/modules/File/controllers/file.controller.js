@@ -6,10 +6,12 @@
 
   angular
     .module('motelNo')
-    .controller('FileController', function($scope, Upload, $timeout, base_url, toastr){
+    .controller('FileController', function($scope, Upload, $timeout, base_url, toastr, $window){
 
       var vm = this;
       vm.title = "Admin Images";
+
+      vm.hgt = $window.innerHeight - 55;
 
       $scope.uploadPic = function(file, file2, file3) {
         file.upload = Upload.upload({

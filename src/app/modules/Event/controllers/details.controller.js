@@ -6,7 +6,7 @@
 
   angular
     .module('motelNo')
-    .controller('DetailController', function($scope, $rootScope, $stateParams, Upload, $timeout, EventService, $moment, $interval, $state, toastr, base_url, $log){
+    .controller('DetailController', function($scope, $rootScope, $stateParams, Upload, $timeout, EventService, $moment, $interval, $state, toastr, base_url, $log, $window){
 
       var vm = this;
       vm.labels = ["Users Confirmed", "Users Pending"];
@@ -24,12 +24,15 @@
       vm.listCode = true;
       //vm.copyDetails1 = {};
 
+      vm.hgt = $window.innerHeight - 52;
+
       vm.getDetailEvent = function() {
         EventService.Event.get({id: vm.param1}, function (data) {
           vm.details = (data);
           vm.data = [data.count_members_activo, data.count_members_no_activo];
           vm.copyDetails = angular.copy(data);
           vm.copyDetails1 = angular.copy(data);
+          $log.info(vm.copyDetails1);
           $scope.status = vm.copyDetails1.is_activate;
           $log.info(vm.copyDetails1.is_activate);
         });

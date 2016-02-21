@@ -6,7 +6,7 @@
 
   angular
     .module('motelNo')
-    .controller('UserListController', function(EventService, $stateParams, $log, $rootScope, $scope, $http){
+    .controller('UserListController', function(EventService, $stateParams, $log, $rootScope, $scope, $http, $window){
 
       var vm = this;
       vm.title = "User List";
@@ -15,6 +15,7 @@
       vm.param1 = $stateParams.id;
       vm.list = {};
       vm.listEmail = [];
+      vm.hgt = $window.innerHeight - 52;
 
       $scope.currentPage = 1;
       $scope.pageSize = 10;

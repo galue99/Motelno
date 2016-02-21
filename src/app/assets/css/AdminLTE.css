@@ -4729,6 +4729,7 @@ table.text-center th {
 }
 
 .img-max{max-height: 186px;}
+.img-max1{max-height: 86px; align-content: center}
 
 
 .active1, .inactive1 {font-size:40px;cursor:pointer;}

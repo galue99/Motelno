@@ -3,12 +3,14 @@
 
   angular
     .module('motelNo')
-    .controller('MainController', function($rootScope, EventService, $log, $scope, $moment, $interval, toastr){
+    .controller('MainController', function($rootScope, EventService, $log, $scope, $moment, $interval, toastr, $window){
 
       var vm = this;
       vm.title = "Events";
       vm.tab = 1;
       vm.event = {};
+
+      vm.hgt = $window.innerHeight - 52;
 
       $scope.totalPages = 0;
       $scope.currentPage = 1;
