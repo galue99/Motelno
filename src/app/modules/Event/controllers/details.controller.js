@@ -32,9 +32,7 @@
           vm.data = [data.count_members_activo, data.count_members_no_activo];
           vm.copyDetails = angular.copy(data);
           vm.copyDetails1 = angular.copy(data);
-          $log.info(vm.copyDetails1);
           $scope.status = vm.copyDetails1.is_activate;
-          $log.info(vm.copyDetails1.is_activate);
         });
       };
 
@@ -228,7 +226,7 @@
           vm.code.event = vm.details.url;
 
 
-          EventService.CodeEvent.put(vm.code,function(data) {
+          EventService.CodeEvent.save(vm.code,function(data) {
             vm.result = data.$resolved;
             if(vm.result === true){
               vm.getDetailEvent();

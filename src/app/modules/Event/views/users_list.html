@@ -39,14 +39,25 @@
             <h3 class="box-title">Users List Event No. {{mainUserList.param1}}</h3>
             <div class="col-xs-12">
               <div class="box-tools pull-right">
-                <a href="">Uncheck All</a>  |
-                <a href="">Check All</a>
+                <label for="redRadio">Check All:</label>
+                <input id="redRadio" type="radio" ng-model="selectedAll" value="red" ng-change="checkAll()" /><br />
+
+                <label for="greenRadio">Uncheck All:</label>
+                <input id="greenRadio" type="radio" ng-model="selectedAll" value="green" ng-change="uncheckAll()" /><br />
+
               </div>
             </div>
           </div><!-- /.box-header -->
           <div class="box-body">
             <div class="table-responsive">
-                <div class="col-lg-4 col-xs-12 pull-right spacing-search">
+              <div class="col-lg-4 col-xs-6 pull-left spacing-search">
+                <label for="search">Select a Code:</label>
+                <select ng-model="myCode" ng-options="code.code for code in mainUserList.codes" class="form-control">
+                  <option value="">-- Choose Code --</option>
+                </select>
+
+              </div>
+                <div class="col-lg-4 col-xs-6 pull-right spacing-search">
                   <label for="search">Search:</label>
                   <input ng-model="q" id="search" class="form-control" placeholder="Search: Email">
                 </div>
@@ -58,9 +69,9 @@
                   <th>Code</th>
                   <th>Confirmed</th>
                 </tr>
-                  <tr dir-paginate="user in mainUserList.users | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="userPagination">
-                  <td>{{user.id}}</td>
-                  <td>{{user.email}}</td>
+                  <tr dir-paginate="user in mainUserList.members | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="userPagination">
+                  <td>{{user.participant.id}}</td>
+                  <td>{{user.participant.email}}</td>
                   <td>
                     <p>{{user.code}}.</p>
                   </td>
@@ -68,8 +79,12 @@
                     <div class="form-group">
                       <div class="radio">
                         <label>
-                          <input type="checkbox" ng-model="list.user" data-ng-change="mainUserList.change(user.id)" id="optionsRadios1" value="user" checked="" />
-                          Confirmed
+
+                          <div>
+                            <input type="checkbox" ng-model="user.Selected" data-ng-change="mainUserList.change(user.participant.id)" id="optionsRadios1" ng-value="user.participant.id" />
+                            Confirmed
+                          </div>
+
                         </label>
                       </div>
                     </div>
