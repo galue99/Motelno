@@ -16,6 +16,7 @@
       vm.list = {};
       vm.listEmail = [];
       vm.user = {};
+      vm.myCode = "";
       vm.hgt = $window.innerHeight - 52;
 
       $scope.currentPage = 1;
@@ -30,9 +31,12 @@
           vm.members = data.results;
           $scope.Items = vm.members;
           vm.user.Selected = vm.members;
-          vm.codes = data.results[0].event.Codes;
-          $log.info(vm.codes);
         });
+
+      EventService.Event.get({id: vm.param1}, function (data) {
+        vm.codes = data.Codes;
+        //$log.info(data.Codes);
+      });
 
       /* Check All */
 
@@ -80,15 +84,16 @@
           }
         };
 
-        vm.sendEmail = function(){
+        vm.sendEmail = function(myCode){
           var obj = "";
+          vm.codeSendEmail = myCode.code;
 
           $http({
             method: 'POST',
             url: base_url+'CodeEvent/'+vm.param1+'/send_mass_email',
             data: {
               "description": "",
-              "code": "",
+              "code": vm.codeSendEmail,
               "event": null,
               "participant_ids":vm.listEmail
             }
@@ -98,6 +103,7 @@
               "event": null,
               "partipant_ids": vm.listEmail
             },*/
+
           }).then(function successCallback(response) {
             // this callback will be called asynchronously
             // when the response is available

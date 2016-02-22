@@ -255,22 +255,16 @@
 
       /* Switch Button */
        $scope.changeStatus = function(){
-
-      // $scope.status = vm.copyDetails1.is_activate;
          $scope.status = !$scope.status;
-         $log.info($scope.status);
-         //$log.info(vm.copyDetails1);
          vm.copyDetails1.is_activate = $scope.status;
+         delete vm.copyDetails1['image_principal'];
+         delete vm.copyDetails1['image_information'];
+
          EventService.Event.update({id:vm.param1},vm.copyDetails1,function(data) {
            vm.details = (data);
-           $log.info(data);
            vm.result = data.$resolved;
            toastr.success('The update of the event was a success');
-           //vm.getDetailEvent();
-
          });
-
-
       };
       /* End Button*/
 
