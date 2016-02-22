@@ -6,7 +6,7 @@
 
   angular
     .module('motelNo')
-    .controller('UserListController', function(EventService, $stateParams, $log, $rootScope, $scope, $http, $window){
+    .controller('UserListController', function(EventService, $stateParams, $log, $rootScope, $scope, $http, $window, base_url){
 
       var vm = this;
       vm.title = "User List";
@@ -31,6 +31,7 @@
           $scope.Items = vm.members;
           vm.user.Selected = vm.members;
           vm.codes = data.results[0].event.Codes;
+          $log.info(vm.codes);
         });
 
       /* Check All */
@@ -84,8 +85,19 @@
 
           $http({
             method: 'POST',
-            url: 'http://motelo7qab.herokuapp.com/CodeEvent/'+vm.param1+'/send_mass_email',
-            data: {partipant_ids: vm.listEmail},
+            url: base_url+'CodeEvent/'+vm.param1+'/send_mass_email',
+            data: {
+              "description": "",
+              "code": "",
+              "event": null,
+              "participant_ids":vm.listEmail
+            }
+            /*data: {
+              "description": "",
+              "code": "",
+              "event": null,
+              "partipant_ids": vm.listEmail
+            },*/
           }).then(function successCallback(response) {
             // this callback will be called asynchronously
             // when the response is available
