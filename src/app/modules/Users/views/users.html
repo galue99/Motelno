@@ -15,7 +15,7 @@
       <div class="col-lg-12 col-xs-12">
         <!-- small box -->
         <div class="pull-left">
-          <button class="btn btn-block btn-primary btn-flat" data-ng-click="mainUser.toogleUserForm()"><i class="fa fa-user-plus"></i> Add User</button>
+          <!--<button class="btn btn-block btn-primary btn-flat" data-ng-click="mainUser.toogleUserForm()"><i class="fa fa-user-plus"></i> Add User</button>-->
         </div>
         <div class="pull-right">
           <span class="badge bg-blue"><b>Date: {{ mainUser.showDate() | date : 'MM/dd/yyyy'}}</b></span>
@@ -28,14 +28,8 @@
     <!-- Main row -->
     <div class="row">
       <!-- Left col -->
-      <div data-ng-if="mainUser.result">
-        <alert-message element="mainUser.result"></alert-message>
-      </div>
-      <div data-ng-if="mainUser.resultError">
-        <alert-message-error element="mainUser.resultError"></alert-message-error>
-      </div>
-      <section class="col-lg-12 connectedSortable" data-ng-show="mainUser.userForm">
-        <!-- TO DO List -->
+      <!--<section class="col-lg-12 connectedSortable" data-ng-show="mainUser.userForm">
+        &lt;!&ndash; TO DO List &ndash;&gt;
         <div class="box box-primary">
           <div class="box-header">
             <i class="fa fa-user-plus"></i>
@@ -43,10 +37,10 @@
             <div class="box-tools pull-right">
             </div>
           </div>
-          <!-- /.box-header -->
+          &lt;!&ndash; /.box-header &ndash;&gt;
           <form name="userForm" novalidate>
             <div class="box-body">
-              <!-- text input -->
+              &lt;!&ndash; text input &ndash;&gt;
               <div class="row">
                 <div>
                   <div class="form-group"
@@ -75,7 +69,7 @@
                 </div>
               </div>
             </div>
-            <!-- /.box-body -->
+            &lt;!&ndash; /.box-body &ndash;&gt;
             <div class="box-footer clearfix no-border">
               <div class="pull-right">
                 <button data-ng-click="mainUser.toogleUserForm()" class="btn btn-danger">Cancel</button>
@@ -84,8 +78,8 @@
             </div>
           </form>
         </div>
-        <!-- /.box -->
-      </section>
+        &lt;!&ndash; /.box &ndash;&gt;
+      </section>-->
       <!-- /.Left col -->
     </div>
 
