@@ -75,7 +75,6 @@
           if (vm.listEmail.indexOf(id) === -1){
             vm.listEmail.push(id);
             _.each(vm.listEmail, function (obj) {
-              $log.info(vm.listEmail);
             });
           }else{
             var index = vm.listEmail.indexOf(id);
@@ -92,8 +91,6 @@
             return;
           }
 
-          $log.info(vm.codeSendEmail);
-/*
            $http({
             method: 'POST',
             url: base_url+'CodeEvent/'+vm.codeSendEmail+'/send_mass_email',
@@ -104,7 +101,6 @@
               "participant_ids":vm.listEmail
             }
           }).then(function successCallback(response) {
-
             toastr.success('The emails were sent successfully');
             // this callback will be called asynchronously
             // when the response is available
@@ -114,7 +110,7 @@
             // or server returns response with an error status.
           });
 
-          */
+
 
         };
 
