@@ -51,8 +51,9 @@
       };
 
       vm.getUsers = function(){
-        EventService.Participant.get({fileName: 'services.json'}, function (data) {
+        EventService.Participant.get({}, function (data) {
           vm.participants = data.results;
+          $log.info(vm.participants);
         });
       };
 

@@ -6,12 +6,56 @@
 
   angular
     .module('motelNo')
-    .controller('FileController', function($scope, Upload, $timeout, base_url, toastr, $window){
+    .controller('FileController', function($scope, Upload, $timeout, base_url, toastr, $window, EventService, $log){
 
       var vm = this;
       vm.title = "Admin Images";
 
       vm.hgt = $window.innerHeight - 55;
+
+      $scope.totalPages  = 0;
+      $scope.currentPage = 1;
+
+      /*EventService.Location.get(function (data) {
+        vm.location = data.results;
+        $log.info(vm.location);
+      });
+*/
+
+      /* Start Pagination Range  */
+      /* Services for obtein all Events */
+      $scope.getPosts = function(pageNumber) {
+
+        if(pageNumber===undefined){
+          pageNumber = '1';
+        }
+
+        $log.info('post');
+
+        EventService.Location.get({page: pageNumber}, function (data) {
+
+          vm.location = data.results;
+          $log.info(vm.location);
+
+          if( (data.count/10) % 1 != 0){
+            $scope.totalPages = Math.floor(data.count/10) + 1;
+          }else{
+            $scope.totalPages = Math.floor(data.count/10);
+          }
+
+          $scope.currentPage = pageNumber;
+
+          var pages = [];
+
+          for (var i = 1; i <= $scope.totalPages; i++) {
+            pages.push(i);
+          }
+
+          $scope.range = pages;
+
+        });
+      };
+      /* End Pagination */
 
       $scope.uploadPic = function(file, file2, file3) {
         file.upload = Upload.upload({

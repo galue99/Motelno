@@ -35,7 +35,6 @@
 
       EventService.Event.get({id: vm.param1}, function (data) {
         vm.codes = data.Codes;
-        //$log.info(data.Codes);
       });
 
       /* Check All */

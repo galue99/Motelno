@@ -13,6 +13,7 @@
         User: $resource(base_url + 'User/:id', {id: '@id'},{'update':{ method:'PUT'}}),
         CodeEvent: $resource(base_url + 'CodeEvent/:id', {id: '@id'},{'update':{ method:'PUT'}}),
         DownloadExcell: $resource(base_url + 'Event/:id/export_data', {id: '@id'},{'update':{ method:'PUT'}}),
+        Location: $resource(base_url + 'Location/:id', {id: '@id'},{'update':{ method:'PUT'}}),
         Membership: $resource(base_url + 'Membership?event=:id/', {id: '@id'},{'update':{ method:'PUT'}})
       };
     });

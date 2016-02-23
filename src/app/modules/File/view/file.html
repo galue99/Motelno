@@ -111,4 +111,49 @@
     </form>
   </div>
 
+  <section class="content">
+  <div class="row">
+  <section class="col-lg-12 connectedSortable">
+    <!-- TO DO List -->
+    <div class="box box-primary">
+      <div class="box-header">
+        <i class="fa fa-file-picture-o"></i>
+        <h3 class="box-title">List Images</h3>
+      </div><!-- /.box-header -->
+      <div class="box-body">
+        <div class="table-responsive">
+          <table class="table" data-ng-init="getPosts()">
+            <tbody>
+              <tr>
+                <th style="width: 10px">#id</th>
+                <th class="text-center">Image Information English</th>
+                <th class="text-center">Image Tonight English</th>
+                <th class="text-center">Image Tonight English</th>
+              </tr>
+              <tr ng-repeat="pic in mainUser.location">
+                <td>{{pic.id}}</td>
+                <td>
+                  <img ngf-thumbnail="pic.image_information_english" class="img-responsive img-max1 center-block">
+                </td>
+                <td>
+                  <img ngf-thumbnail="pic.image_tonight_english" class="img-responsive img-max1 center-block">
+                </td>
+                <td>
+                  <img ngf-thumbnail="pic.image_jackdaniels_english" class="img-responsive img-max1 center-block">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div><!-- /.box-body -->
+      <div class="box-footer clearfix no-border">
+        <div class="text-center">
+          <posts-pagination></posts-pagination>
+        </div>
+      </div><!-- /.box -->
+    </div>
+  </section><!-- /.Left col -->
+  </div>
+  </section>
+
 </div>
