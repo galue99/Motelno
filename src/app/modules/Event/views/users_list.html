@@ -52,7 +52,7 @@
             <div class="table-responsive">
               <div class="col-lg-4 col-xs-6 pull-left spacing-search">
                 <label for="search">Select a Code:</label>
-                <select ng-model="myCode" ng-options="code.code for code in mainUserList.codes" class="form-control">
+                <select ng-model="myCode" ng-options="code as code.code for code in mainUserList.codes" class="form-control">
                   <option value="">-- Choose Code --</option>
                 </select>
 

@@ -85,16 +85,18 @@
 
         vm.sendEmail = function(myCode){
           var obj = "";
-          vm.codeSendEmail = myCode.code;
+          vm.codeSendEmail = myCode.id;
 
           if(vm.listEmail.length == 0){
             toastr.error('There was an error be sure to select a user from the list');
             return;
           }
 
+          $log.info(vm.codeSendEmail);
+/*
            $http({
             method: 'POST',
-            url: base_url+'CodeEvent/'+vm.param1+'/send_mass_email',
+            url: base_url+'CodeEvent/'+vm.codeSendEmail+'/send_mass_email',
             data: {
               "description": "",
               "code": vm.codeSendEmail,
@@ -111,6 +113,8 @@
             // called asynchronously if an error occurs
             // or server returns response with an error status.
           });
+
+          */
 
         };
 
