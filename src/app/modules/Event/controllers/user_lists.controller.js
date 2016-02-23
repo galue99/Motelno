@@ -6,7 +6,7 @@
 
   angular
     .module('motelNo')
-    .controller('UserListController', function(EventService, $stateParams, $log, $rootScope, $scope, $http, $window, base_url){
+    .controller('UserListController', function(EventService, $stateParams, $log, $rootScope, $scope, $http, $window, base_url, toastr){
 
       var vm = this;
       vm.title = "User List";
@@ -87,7 +87,12 @@
           var obj = "";
           vm.codeSendEmail = myCode.code;
 
-          $http({
+          if(vm.listEmail.length == 0){
+            toastr.error('There was an error be sure to select a user from the list');
+            return;
+          }
+
+           $http({
             method: 'POST',
             url: base_url+'CodeEvent/'+vm.param1+'/send_mass_email',
             data: {
@@ -96,39 +101,16 @@
               "event": null,
               "participant_ids":vm.listEmail
             }
-            /*data: {
-              "description": "",
-              "code": "",
-              "event": null,
-              "partipant_ids": vm.listEmail
-            },*/
-
           }).then(function successCallback(response) {
+
+            toastr.success('The emails were sent successfully');
             // this callback will be called asynchronously
             // when the response is available
           }, function errorCallback(response) {
+            toastr.error('An error occured please intented again');
             // called asynchronously if an error occurs
             // or server returns response with an error status.
           });
-
-        /*   for(var i=0; i<vm.listEmail.length; i++){
-             if(i > 0){
-               obj = obj.concat('&user_ids=' + vm.listEmail[i]);
-             }else {
-               obj = obj.concat('user_ids=' + vm.listEmail[i]);
-             }
-          }*/
-
-      /*    $http({
-            method: 'GET',
-            url: 'http://motelo7qab.herokuapp.com/Event/2/send_mass_email?'+obj
-          }).then(function successCallback(response) {
-            // this callback will be called asynchronously
-            // when the response is available
-          }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-          });*/
 
         };
 
