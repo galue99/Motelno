@@ -239,6 +239,9 @@
             vm.result = data.$resolved;
             if(vm.result === true){
               vm.isbusy3 = false;
+              vm.create.code = '';
+              vm.create.description = '';
+              vm.submitted = false;
               vm.getDetailEvent();
               toastr.success('The Code was successfully saved');
             }
