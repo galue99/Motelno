@@ -111,7 +111,7 @@
             <div class="box-footer clearfix no-border">
               <div class="pull-right">
                 <a role="button" data-ng-click="main.cancel()" class="btn btn-danger"><i class="fa fa-remove"></i> Cancel</a>
-                <a type="submit" role="button" class="btn btn-success" ng-click="main.submitForm(eventForm)"><i class="fa fa-check"></i> Submit</a>
+                <a type="submit" role="button" class="btn btn-success" ng-click="main.submitForm(eventForm)"><i class="fa fa-cog fa-spin ng-hide" ng-show="main.isBusy"></i> <i class="fa fa-check"></i> Submit</a>
               </div>
             </div>
           </form>

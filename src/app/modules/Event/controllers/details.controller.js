@@ -22,6 +22,9 @@
       vm.uploadForm = false;
       vm.code = {};
       vm.listCode = true;
+      vm.isBusy = false;
+      vm.isBusy1 = false;
+      vm.isBusy2 = false;
       //vm.copyDetails1 = {};
 
       vm.hgt = $window.innerHeight - 52;
@@ -207,10 +210,14 @@
 
       vm.submitForm = function (form) {
         vm.submitted = true;
+        vm.isbusy2 = true;
+        delete vm.copyDetails['image_principal'];
+        delete vm.copyDetails['image_information'];
         if (form.$valid) {
           EventService.Event.update({id:vm.param1},vm.copyDetails,function(data) {
             vm.details = (data);
             vm.result = data.$resolved;
+            vm.isbusy2 = false;
             toastr.success('The update of the event was a success');
             vm.submitted = false;
             vm.detailForm = !vm.detailForm;
@@ -220,6 +227,7 @@
 
       vm.submitFormCode = function(form){
         vm.submitted = true;
+        vm.isbusy1 = true;
         if(form.$valid){
           vm.code.description = vm.create.description;
           vm.code.code = vm.create.code;
@@ -229,6 +237,7 @@
           EventService.CodeEvent.save(vm.code,function(data) {
             vm.result = data.$resolved;
             if(vm.result === true){
+              vm.isbusy1 = false;
               vm.getDetailEvent();
               toastr.success('The Code was successfully saved');
             }
@@ -271,6 +280,7 @@
 
       /* Upload Image */
       $scope.uploadPic = function(file, file2) {
+        vm.isBusy = true;
         file.upload = Upload.upload({
           url: base_url + 'Event/' + vm.param1,
           data: {is_activate: vm.details.is_activate, date: vm.details.date, location:vm.details.location, description:vm.details.description, name:vm.details.name, max_participant: vm.details.max_participant, image_information: file, image_principal: file2},
@@ -281,9 +291,11 @@
           $timeout(function () {
             file.result = response.data;
             if(file.result){
+              vm.isBusy = false;
+              vm.getDetailEvent();
               toastr.success('Upload Images with Exits');
-              vm.file   = {};
-              vm.picFile2  = {};
+              vm.picFile1  = '';
+              vm.picFile2  = '';
             }
           });
         }, function (response) {

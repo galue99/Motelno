@@ -53,7 +53,6 @@
       vm.getUsers = function(){
         EventService.Participant.get({}, function (data) {
           vm.participants = data.results;
-          $log.info(vm.participants);
         });
       };
 
@@ -83,7 +82,6 @@
             vm.getUsers();
           }, function (error) {
             toastr.error('Error with Save User');
-            vm.resultError = true;
           });
         }
       };
@@ -108,6 +106,9 @@
           vm.details = (data);
           vm.result = data.$resolved;
           toastr.success('The User Update with Exits');
+        }, function (error) {
+          vm.getUsers();
+          toastr.error('Error with Save User');
         });
         vm.reset();
       };

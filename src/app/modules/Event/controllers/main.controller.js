@@ -3,12 +3,13 @@
 
   angular
     .module('motelNo')
-    .controller('MainController', function($rootScope, EventService, $log, $scope, $moment, $interval, toastr, $window){
+    .controller('MainController', function($rootScope, EventService, $log, $scope, $moment, $interval, toastr, $window, $state){
 
       var vm = this;
       vm.title = "Events";
       vm.tab = 1;
       vm.event = {};
+      vm.isBusy = false;
 
       vm.hgt = $window.innerHeight - 52;
 
@@ -163,6 +164,7 @@
       /* Form Submit Event */
       vm.submitForm = function (form) {
         vm.submitted = true;
+        vm.isBusy = true;
         if (form.$valid) {
           vm.event.is_activate = false;
           EventService.Event.save(vm.event,function(data) {
@@ -173,6 +175,8 @@
               vm.event = {};
               vm.submitted = false;
               vm.eventForm = false;
+              vm.isBusy = true;
+              $state.go('eventDetails' ,{id:data.id});
               vm.getEvent();
             }
 

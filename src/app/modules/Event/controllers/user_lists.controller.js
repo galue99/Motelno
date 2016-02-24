@@ -109,10 +109,13 @@
             // called asynchronously if an error occurs
             // or server returns response with an error status.
           });
-
-
-
         };
+
+        /* Download Excell */
+        vm.downloadList = function() {
+          location.href = base_url +'/Event/'+vm.param1+'/export_data';
+        };
+        /* End Download */
 
 
     });
