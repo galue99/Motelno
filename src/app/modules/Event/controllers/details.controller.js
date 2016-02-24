@@ -25,6 +25,7 @@
       vm.isBusy = false;
       vm.isBusy1 = false;
       vm.isBusy2 = false;
+      vm.isBusy3 = false;
       //vm.copyDetails1 = {};
 
       vm.hgt = $window.innerHeight - 52;
@@ -227,7 +228,7 @@
 
       vm.submitFormCode = function(form){
         vm.submitted = true;
-        vm.isbusy1 = true;
+        vm.isBusy3 = true;
         if(form.$valid){
           vm.code.description = vm.create.description;
           vm.code.code = vm.create.code;
@@ -237,7 +238,7 @@
           EventService.CodeEvent.save(vm.code,function(data) {
             vm.result = data.$resolved;
             if(vm.result === true){
-              vm.isbusy1 = false;
+              vm.isbusy3 = false;
               vm.getDetailEvent();
               toastr.success('The Code was successfully saved');
             }

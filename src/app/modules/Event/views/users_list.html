@@ -26,7 +26,7 @@
         </div>
         <!-- small box -->
         <div class="pull-right">
-          <button class="btn btn-block btn-primary btn-flat" data-ng-click="mainUserList.sendEmail(myCode)" data-ng-disabled="!myCode"><i class="fa fa-envelope"></i> Send Invitation</button>
+          <button class="btn btn-block btn-primary btn-flat" data-ng-click="mainUserList.sendEmail(myCode)" data-ng-disabled="!myCode"><i class="fa fa-cog fa-spin ng-hide" ng-show="mainUserList.isBusy"></i> <i class="fa fa-envelope"></i> Send Invitation</button>
           <br>
         </div>
       </div><!-- ./col -->

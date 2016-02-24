@@ -18,6 +18,7 @@
       vm.user = {};
       vm.myCode = "";
       vm.hgt = $window.innerHeight - 52;
+      vm.isBusy = false;
 
       $scope.currentPage = 1;
       $scope.pageSize = 10;
@@ -85,8 +86,10 @@
         vm.sendEmail = function(myCode){
           var obj = "";
           vm.codeSendEmail = myCode.id;
+          vm.isBusy = true;
 
           if(vm.listEmail.length == 0){
+            vm.isBusy = false;
             toastr.error('There was an error be sure to select a user from the list');
             return;
           }
@@ -102,10 +105,12 @@
             }
           }).then(function successCallback(response) {
             toastr.success('The emails were sent successfully');
+             vm.isBusy = false;
             // this callback will be called asynchronously
             // when the response is available
           }, function errorCallback(response) {
             toastr.error('An error occured please intented again');
+             vm.isBusy = false;
             // called asynchronously if an error occurs
             // or server returns response with an error status.
           });

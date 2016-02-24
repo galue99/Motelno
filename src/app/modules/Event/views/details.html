@@ -129,7 +129,8 @@
                     <div class="col-xs-6">
                       <label>Location:</label>
                       <input type="text" class="form-control" placeholder="Location:"  id="location"
-                             data-ng-model="detailEvent.copyDetails.location" name="location" required />
+                             data-ng-model="detailEvent.copyDetails.location" name="location" data-ng-maxlength="100" reuired />
+                      <p class="help-block error-message" ng-show="eventForm.location.$error.maxlength">* Only 100 Characters</p>
                       <p ng-show="eventForm.location.$error.required && detailEvent.submitted" class="help-block">You Location is required.</p>
                     </div>
                   </div>
@@ -455,7 +456,7 @@
             <div class="box-footer clearfix no-border">
               <div class="pull-right">
                 <a data-ng-click="detailEvent.toogleCodeForm()" class="btn btn-danger"> <i class="fa fa-remove"></i> Cancel</a>
-                <a type="submit" role="button" class="btn btn-success" ng-click="detailEvent.submitFormCode(formCode)"><i class="fa fa-cog fa-spin ng-hide" ng-show="detailEvent.isBusy1"></i> <i class="fa  fa-check"></i> Submit</a>
+                <a type="submit" role="button" class="btn btn-success" ng-click="detailEvent.submitFormCode(formCode)"><i class="fa fa-cog fa-spin ng-hide" ng-show="detailEvent.isBusy3"></i> <i class="fa  fa-check"></i> Submit</a>
               </div>
             </div><!-- /.footer -->
           </div><!-- /.box --><!-- /.box -->
