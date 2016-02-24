@@ -84,7 +84,12 @@
                         <label>
                           <div>
                             <input type="checkbox" ng-model="user.Selected" data-ng-change="mainUserList.change(user.participant.id)" id="optionsRadios1" ng-value="user.participant.id" />
-                            Confirmed
+                            <div data-ng-if="user.status == 1">
+                              Pending
+                            </div>
+                            <div data-ng-if="user.status == 2">
+                              Confirmed
+                            </div>
                           </div>
 
                         </label>
